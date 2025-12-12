@@ -1,5 +1,6 @@
 import './globals.css';
 import { RootProvider } from 'fumadocs-ui/provider';
+import { SearchProvider } from '@/components/search/SearchProvider';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -36,7 +37,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="font-sans antialiased">
-        <RootProvider>{children}</RootProvider>
+        <RootProvider
+          search={{
+            SearchDialog: SearchProvider,
+          }}
+        >
+          {children}
+        </RootProvider>
       </body>
     </html>
   );
