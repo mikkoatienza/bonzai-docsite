@@ -28,7 +28,7 @@ export default function ImportantMessagesWebPart() {
           {/* QUICK START */}
           <QuickStart
             title="Get Important Messages Working in 3 Steps"
-            time="5 minutes"
+            time="15-30 minutes"
             prerequisites={[
               'Bonzai 2 package installed on your site',
               'Important Messages SharePoint list created (see schema below)',
@@ -36,7 +36,7 @@ export default function ImportantMessagesWebPart() {
             steps={[
               {
                 title: 'Create the Important Messages list',
-                description: 'Create a SharePoint list with the required columns: Title, Body, MessageType, StartDate, EndDate.',
+                description: 'Create a SharePoint list with the required columns: Title, Body, Category, StartDate, EndDate.',
               },
               {
                 title: 'Add the web part to your page',
@@ -44,7 +44,7 @@ export default function ImportantMessagesWebPart() {
               },
               {
                 title: 'Select your list and configure',
-                description: 'Open the property pane, select your list, enable dismissal options if desired, and publish.',
+                description: 'Open the property pane, select your list from the dropdown, optionally select a view, and publish.',
               },
             ]}
           />
@@ -76,14 +76,14 @@ export default function ImportantMessagesWebPart() {
           />
 
           {/* MESSAGE TYPES VISUAL */}
-          <h2>Message Types</h2>
-          <p>Important Messages supports four visual styles to convey urgency:</p>
+          <h2>Message Categories</h2>
+          <p>Important Messages supports four visual styles based on the <code>Category</code> field:</p>
 
           <div className="not-prose my-6 space-y-3">
             <div className="flex items-center gap-3 rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-950">
               <Info className="h-5 w-5 shrink-0 text-blue-600 dark:text-blue-400" />
               <div>
-                <span className="font-semibold text-blue-900 dark:text-blue-100">Informational</span>
+                <span className="font-semibold text-blue-900 dark:text-blue-100">Info</span>
                 <span className="ml-2 text-sm text-blue-700 dark:text-blue-300">General announcements and updates</span>
               </div>
             </div>
@@ -99,7 +99,7 @@ export default function ImportantMessagesWebPart() {
             <div className="flex items-center gap-3 rounded-lg border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-950">
               <AlertCircle className="h-5 w-5 shrink-0 text-red-600 dark:text-red-400" />
               <div>
-                <span className="font-semibold text-red-900 dark:text-red-100">Critical</span>
+                <span className="font-semibold text-red-900 dark:text-red-100">Error</span>
                 <span className="ml-2 text-sm text-red-700 dark:text-red-300">Urgent alerts and emergencies</span>
               </div>
             </div>
@@ -124,7 +124,7 @@ export default function ImportantMessagesWebPart() {
               },
               {
                 title: 'Add your first message to the list',
-                description: 'Open the list, click "New", fill in the Title, Body (rich text), MessageType, StartDate, and EndDate fields.',
+                description: 'Open the list, click "New", fill in the Title, Body (rich text), Category, StartDate, and EndDate fields.',
               },
               {
                 title: 'Edit the page and add the web part',
@@ -132,11 +132,11 @@ export default function ImportantMessagesWebPart() {
               },
               {
                 title: 'Select your list in the property pane',
-                description: 'Click the pencil icon on the web part, then select "Important Messages" from the List dropdown.',
+                description: 'Click the pencil icon on the web part, then select your list from the List dropdown picker.',
               },
               {
                 title: 'Configure display options',
-                description: 'Set the title (optional), enable "Allow Dismissal" if you want users to close messages, and configure max items.',
+                description: 'Set the title (optional), adjust "Max Messages to Show" slider (1-10), and optionally set a fixed height.',
               },
               {
                 title: 'Enable content targeting (optional)',
@@ -144,7 +144,7 @@ export default function ImportantMessagesWebPart() {
               },
               {
                 title: 'Publish and test',
-                description: 'Save and publish the page. Verify messages appear with correct styling and that dismissal works if enabled.',
+                description: 'Save and publish the page. Verify messages appear with correct styling based on Category.',
               },
             ]}
           />
@@ -161,9 +161,9 @@ export default function ImportantMessagesWebPart() {
               icon={<Bell className="h-5 w-5" />}
               config={[
                 { property: 'Title', value: 'Announcements' },
-                { property: 'Max Items', value: '3' },
-                { property: 'Allow Dismissal', value: 'Yes' },
-                { property: 'Chrome Type', value: 'None' },
+                { property: 'Max Messages to Show', value: '3' },
+                { property: 'Content Targeting', value: 'Off' },
+                { property: 'Fixed Height', value: '0 (auto)' },
               ]}
             />
             <RecipeCard
@@ -174,20 +174,20 @@ export default function ImportantMessagesWebPart() {
               config={[
                 { property: 'Title', value: 'HR Updates' },
                 { property: 'Content Targeting', value: 'Enabled' },
-                { property: 'View Filter', value: 'HR Messages' },
-                { property: 'Allow Dismissal', value: 'Yes' },
+                { property: 'View', value: 'HR Messages' },
+                { property: 'Max Messages to Show', value: '5' },
               ]}
             />
             <RecipeCard
               title="Emergency Broadcast"
-              description="Non-dismissable critical alerts"
+              description="High-visibility error alerts"
               useCase="Site-wide emergency communication"
               icon={<AlertCircle className="h-5 w-5" />}
               config={[
-                { property: 'Title', value: '' },
-                { property: 'View Filter', value: 'Critical Only' },
-                { property: 'Allow Dismissal', value: 'No' },
-                { property: 'Chrome Type', value: 'None' },
+                { property: 'Title', value: '⚠️ Alert' },
+                { property: 'View', value: 'Error Only' },
+                { property: 'Max Messages to Show', value: '1' },
+                { property: 'Fixed Height', value: '150' },
               ]}
             />
             <RecipeCard
@@ -197,9 +197,9 @@ export default function ImportantMessagesWebPart() {
               icon={<Globe className="h-5 w-5" />}
               config={[
                 { property: 'Title', value: 'Local News' },
-                { property: 'Content Targeting', value: 'By Location' },
-                { property: 'Max Items', value: '5' },
-                { property: 'Allow Dismissal', value: 'Yes' },
+                { property: 'Content Targeting', value: 'Enabled' },
+                { property: 'Max Messages to Show', value: '5' },
+                { property: 'Site URL', value: '(current site)' },
               ]}
             />
           </RecipeGrid>
@@ -212,13 +212,13 @@ export default function ImportantMessagesWebPart() {
             This eliminates the need to manually manage active messages.
           </Callout>
 
-          <Callout type="tip" title="Reserve Critical for true emergencies">
-            Using Critical type too often trains users to ignore it. 
-            Save red/critical styling for genuine urgent situations only.
+          <Callout type="tip" title="Reserve Error category for true emergencies">
+            Using the Error category too often trains users to ignore it. 
+            Save red styling for genuine urgent situations only.
           </Callout>
 
           <Callout type="pro" title="Create views for different contexts">
-            Create SharePoint views like "Homepage Messages", "HR Only", "IT Alerts" and use View Filter 
+            Create SharePoint views like "Homepage Messages", "HR Only", "IT Alerts" and use the View picker 
             in the property pane to display context-appropriate messages on different pages.
           </Callout>
 
@@ -227,12 +227,18 @@ export default function ImportantMessagesWebPart() {
             Set realistic end dates to keep content fresh and relevant.
           </Callout>
 
+          <Callout type="info" title="AllowDismissal is a list field">
+            The ability to dismiss individual messages is controlled per-message via the <code>AllowDismissal</code> 
+            field in the SharePoint list, not a web part property. Set this to "No" for critical messages that 
+            should always be visible.
+          </Callout>
+
           {/* TROUBLESHOOTING */}
           <Troubleshooting
             items={[
               {
                 problem: 'Messages not appearing on the page',
-                solution: 'Check that the message StartDate is today or earlier, EndDate is today or later, and Active is set to Yes.',
+                solution: 'Check that the message StartDate is today or earlier, EndDate is today or later, and MessageActive is set to Yes.',
                 details: 'Also verify the web part is pointing to the correct list and that you have permission to view list items.',
               },
               {
@@ -241,15 +247,19 @@ export default function ImportantMessagesWebPart() {
               },
               {
                 problem: 'Content targeting not working',
-                solution: 'Ensure Content Targeting is enabled both on the web part and that messages have targeting metadata. Verify user profiles have the required attributes in Azure AD.',
+                solution: 'Ensure Content Targeting is enabled on the web part and that messages have TargetAudience values. Verify user profiles have the required attributes in Azure AD.',
               },
               {
                 problem: 'Styling looks wrong or colors are off',
-                solution: 'Check that MessageType values match exactly: Info, Warning, Critical, or Success. Custom themes may override default colors via Theme Manager.',
+                solution: 'Check that Category values match exactly: Info, Warning, Error, or Success. Custom themes may override default colors via Theme Manager.',
               },
               {
                 problem: 'List not appearing in the dropdown',
-                solution: 'The list must be on the same site as the page. Lists from other sites are not shown in the picker.',
+                solution: 'The list must be on the same site as the page. Lists from other sites are not shown in the picker. Use the Site URL field to specify a different site.',
+              },
+              {
+                problem: 'AllowDismissal field not working',
+                solution: 'SharePoint encodes field names with special characters. The service auto-discovers the field name. Check browser console for field discovery logs.',
               },
             ]}
           />
@@ -277,37 +287,43 @@ export default function ImportantMessagesWebPart() {
                 <td><code>title</code></td>
                 <td>Text</td>
                 <td>No</td>
-                <td>Web part title displayed above messages</td>
+                <td>Web part title displayed above messages (default: "Important Messages")</td>
+              </tr>
+              <tr>
+                <td><code>siteUrl</code></td>
+                <td>Text</td>
+                <td>No</td>
+                <td>Site URL for cross-site queries. Leave empty for current site.</td>
               </tr>
               <tr>
                 <td><code>listId</code></td>
-                <td>Dropdown</td>
+                <td>List Picker</td>
                 <td>Yes</td>
                 <td>SharePoint list containing messages</td>
               </tr>
               <tr>
                 <td><code>viewId</code></td>
-                <td>Dropdown</td>
+                <td>View Picker</td>
                 <td>No</td>
-                <td>View to filter messages</td>
-              </tr>
-              <tr>
-                <td><code>allowDismissal</code></td>
-                <td>Toggle</td>
-                <td>No</td>
-                <td>Allow users to dismiss messages</td>
-              </tr>
-              <tr>
-                <td><code>maxItems</code></td>
-                <td>Number</td>
-                <td>No</td>
-                <td>Maximum messages to display</td>
+                <td>SharePoint view to filter messages</td>
               </tr>
               <tr>
                 <td><code>enableContentTargeting</code></td>
                 <td>Toggle</td>
                 <td>No</td>
-                <td>Filter by user profile attributes</td>
+                <td>Filter messages by user profile attributes (TargetAudience field)</td>
+              </tr>
+              <tr>
+                <td><code>maxMessagesToShow</code></td>
+                <td>Slider (1-10)</td>
+                <td>No</td>
+                <td>Maximum messages to display at once (default: 1)</td>
+              </tr>
+              <tr>
+                <td><code>fixedHeight</code></td>
+                <td>Slider (0-1000)</td>
+                <td>No</td>
+                <td>Fixed height in pixels. 0 = auto height based on content.</td>
               </tr>
             </tbody>
           </table>
@@ -320,6 +336,7 @@ export default function ImportantMessagesWebPart() {
             <thead>
               <tr>
                 <th>Column</th>
+                <th>Internal Name</th>
                 <th>Type</th>
                 <th>Required</th>
                 <th>Description</th>
@@ -328,45 +345,59 @@ export default function ImportantMessagesWebPart() {
             <tbody>
               <tr>
                 <td>Title</td>
+                <td><code>Title</code></td>
                 <td>Single line of text</td>
                 <td>Yes</td>
                 <td>Message title</td>
               </tr>
               <tr>
                 <td>Body</td>
+                <td><code>Body</code></td>
                 <td>Multiple lines (Rich text)</td>
                 <td>Yes</td>
-                <td>Message content</td>
+                <td>Message content (HTML)</td>
               </tr>
               <tr>
-                <td>MessageType</td>
+                <td>Category</td>
+                <td><code>Category</code></td>
                 <td>Choice</td>
                 <td>Yes</td>
-                <td>Info, Warning, Critical, Success</td>
+                <td>Values: Info, Warning, Error, Success</td>
               </tr>
               <tr>
-                <td>StartDate</td>
+                <td>Start Date</td>
+                <td><code>StartDate</code></td>
                 <td>Date and Time</td>
                 <td>Yes</td>
                 <td>When message becomes active</td>
               </tr>
               <tr>
-                <td>EndDate</td>
+                <td>End Date</td>
+                <td><code>EndDate</code></td>
                 <td>Date and Time</td>
                 <td>Yes</td>
                 <td>When message expires</td>
               </tr>
               <tr>
-                <td>Dismissable</td>
+                <td>Message Active?</td>
+                <td><code>MessageActive</code></td>
                 <td>Yes/No</td>
                 <td>No</td>
-                <td>Can users dismiss this message</td>
+                <td>Toggle to manually enable/disable message</td>
               </tr>
               <tr>
-                <td>Active</td>
+                <td>Allow Dismissal?</td>
+                <td><code>AllowDismissal</code></td>
                 <td>Yes/No</td>
                 <td>No</td>
-                <td>Is message currently active</td>
+                <td>Can users dismiss this message? (default: Yes)</td>
+              </tr>
+              <tr>
+                <td>Target Audience</td>
+                <td><code>TargetAudience</code></td>
+                <td>Single line of text</td>
+                <td>No</td>
+                <td>User group name for content targeting</td>
               </tr>
             </tbody>
           </table>
@@ -374,13 +405,17 @@ export default function ImportantMessagesWebPart() {
           <h3>Features Checklist</h3>
 
           <ul>
-            <li>✅ Four message types with distinct styling</li>
+            <li>✅ Four message categories with distinct styling (Info, Warning, Error, Success)</li>
             <li>✅ Date-based activation (StartDate/EndDate)</li>
-            <li>✅ Dismissable messages (stored in local storage)</li>
-            <li>✅ Content targeting by department, location, role</li>
-            <li>✅ Real-time configuration preview</li>
+            <li>✅ Per-message dismissal control (AllowDismissal field)</li>
+            <li>✅ Dismissal state stored in browser local storage</li>
+            <li>✅ Content targeting by user groups (TargetAudience field)</li>
+            <li>✅ Dynamic list and view pickers in property pane</li>
+            <li>✅ Configurable max messages (1-10)</li>
+            <li>✅ Fixed height option for consistent layouts</li>
             <li>✅ Theme Manager integration</li>
             <li>✅ Responsive design</li>
+            <li>✅ Cross-site data source support (siteUrl property)</li>
           </ul>
 
           <h3>Migration from Classic</h3>
@@ -402,17 +437,27 @@ export default function ImportantMessagesWebPart() {
               <tr>
                 <td>Message Colors</td>
                 <td>Brick Theme Editor</td>
-                <td>CSS Custom Properties</td>
+                <td>CSS Custom Properties via Theme Manager</td>
               </tr>
               <tr>
                 <td>Dismissal Storage</td>
                 <td>Property bags</td>
-                <td>Local Storage</td>
+                <td>Browser Local Storage</td>
               </tr>
               <tr>
                 <td>Date Filtering</td>
                 <td>CAML queries</td>
-                <td>Client-side date comparison</td>
+                <td>REST API + client-side date comparison</td>
+              </tr>
+              <tr>
+                <td>List Selection</td>
+                <td>Manual list name entry</td>
+                <td>Visual List Picker dropdown</td>
+              </tr>
+              <tr>
+                <td>View Selection</td>
+                <td>Manual view name entry</td>
+                <td>Visual View Picker dropdown</td>
               </tr>
             </tbody>
           </table>

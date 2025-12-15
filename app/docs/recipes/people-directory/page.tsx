@@ -20,7 +20,7 @@ export default function PeopleDirectoryRecipe() {
               4 Web Parts
             </span>
             <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
-              ~15 minutes
+              1-2 hours (first time)
             </span>
           </div>
 
@@ -219,6 +219,7 @@ export default function PeopleDirectoryRecipe() {
     </DocsPage>
   );
 }
+
 
 
 

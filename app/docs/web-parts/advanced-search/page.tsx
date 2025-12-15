@@ -41,7 +41,7 @@ export default function AdvancedSearchWebPart() {
           {/* QUICK START */}
           <QuickStart
             title="Get Advanced Search Working in 3 Steps"
-            time="2 minutes"
+            time="15-30 minutes"
             prerequisites={[
               'Bonzai 2 package installed on your site',
               'SharePoint Search configured and indexing content',
@@ -105,25 +105,21 @@ export default function AdvancedSearchWebPart() {
                 description: 'Click the + button, search for "Advanced Search", and add it to your section.',
               },
               {
-                title: 'Configure the search box placeholder',
-                description: 'Open the property pane and set a helpful placeholder text like "Search documents, people, and pages..."',
+                title: 'Configure the title and default query',
+                description: 'Open the property pane and set a title. Set "Default Query" to * to search all content.',
               },
               {
-                title: 'Enable the vertical dropdown (optional)',
-                description: 'Toggle "Show Vertical Dropdown" to let users switch between search categories (All, Documents, People, etc.).',
+                title: 'Configure refiners',
+                description: 'In "Refiners Config", enter refiners in format "Label:Property:DefaultValue;..." (e.g., "File Type:FileType:;Author:Author:").',
+                tip: 'Common managed properties: contentclass, FileType, Author, ModifiedDate, Path',
               },
               {
-                title: 'Configure refinement categories',
-                description: 'Enter comma-separated refiners in the Refinement Categories field: "FileType,Author,ModifiedDate,ContentType"',
-                tip: 'Common refiners: FileType, Author, ModifiedDate, ContentType, Site, Department',
+                title: 'Set items per page and default view',
+                description: 'Configure items per page (10-20 is typical) and choose a default view: List, Cards, or Table.',
               },
               {
-                title: 'Set items per page',
-                description: 'Configure how many results display per page. 10-15 is standard for search results.',
-              },
-              {
-                title: 'Choose a result template',
-                description: 'Select from List, Cards, or Compact templates depending on your content type.',
+                title: 'Configure display options',
+                description: 'Toggle "Show Search Box", "Show Refiners", and "Show View Switcher" based on your needs.',
               },
               {
                 title: 'Publish and test',
@@ -143,11 +139,12 @@ export default function AdvancedSearchWebPart() {
               useCase="Dedicated Search page"
               icon={<Search className="h-5 w-5" />}
               config={[
-                { property: 'Placeholder', value: 'Search the intranet...' },
-                { property: 'Show Vertical Dropdown', value: 'Yes' },
-                { property: 'Refinement Categories', value: 'FileType,Author,ModifiedDate' },
-                { property: 'Items Per Page', value: '15' },
-                { property: 'Result Template', value: 'List' },
+                { property: 'title', value: 'Search' },
+                { property: 'defaultQuery', value: '*' },
+                { property: 'refinersConfig', value: 'File Type:FileType:;Author:Author:' },
+                { property: 'itemsPerPage', value: '20' },
+                { property: 'defaultView', value: 'List' },
+                { property: 'showRefiners', value: 'On' },
               ]}
             />
             <RecipeCard
@@ -156,10 +153,10 @@ export default function AdvancedSearchWebPart() {
               useCase="Document center pages"
               icon={<Filter className="h-5 w-5" />}
               config={[
-                { property: 'Placeholder', value: 'Search documents...' },
-                { property: 'Show Vertical Dropdown', value: 'No' },
-                { property: 'Refinement Categories', value: 'FileType,Author,ModifiedDate' },
-                { property: 'Result Template', value: 'List' },
+                { property: 'title', value: 'Find Documents' },
+                { property: 'allowedContentTypes', value: 'STS_ListItem_DocumentLibrary' },
+                { property: 'refinersConfig', value: 'File Type:FileType:;Author:Author:' },
+                { property: 'defaultView', value: 'List' },
               ]}
             />
             <RecipeCard
@@ -168,10 +165,10 @@ export default function AdvancedSearchWebPart() {
               useCase="Homepage hero section"
               icon={<Layout className="h-5 w-5" />}
               config={[
-                { property: 'Placeholder', value: 'What are you looking for?' },
-                { property: 'Show Vertical Dropdown', value: 'Yes' },
-                { property: 'Items Per Page', value: '5' },
-                { property: 'Chrome Type', value: 'None' },
+                { property: 'showSearchBox', value: 'On' },
+                { property: 'showRefiners', value: 'Off' },
+                { property: 'itemsPerPage', value: '5' },
+                { property: 'chromeType', value: 'None' },
               ]}
             />
             <RecipeCard
@@ -180,10 +177,11 @@ export default function AdvancedSearchWebPart() {
               useCase="Navigation-linked search"
               icon={<Globe className="h-5 w-5" />}
               config={[
-                { property: 'Placeholder', value: 'Search...' },
-                { property: 'Refinement Categories', value: 'FileType,Author,Site,ContentType' },
-                { property: 'Items Per Page', value: '20' },
-                { property: 'Result Template', value: 'Cards' },
+                { property: 'title', value: 'Enterprise Search' },
+                { property: 'refinersConfig', value: 'Content Type:contentclass:;File Type:FileType:;Author:Author:' },
+                { property: 'itemsPerPage', value: '20' },
+                { property: 'defaultView', value: 'Cards' },
+                { property: 'showViewSwitcher', value: 'On' },
               ]}
             />
           </RecipeGrid>
@@ -283,6 +281,7 @@ export default function AdvancedSearchWebPart() {
 
           <h3>Property Pane Configuration</h3>
 
+          <h4>Title Settings</h4>
           <table>
             <thead>
               <tr>
@@ -292,31 +291,93 @@ export default function AdvancedSearchWebPart() {
               </tr>
             </thead>
             <tbody>
+              <tr><td><code>title</code></td><td>Text</td><td>Web part title</td></tr>
+              <tr><td><code>titleUrl</code></td><td>Text</td><td>Optional URL to make the title clickable</td></tr>
+              <tr><td><code>titleIconName</code></td><td>Text</td><td>Fluent UI icon name (default: Search)</td></tr>
+              <tr><td><code>titleIconUrl</code></td><td>Text</td><td>Custom icon URL (overrides icon name)</td></tr>
+              <tr><td><code>description</code></td><td>Text (Multiline)</td><td>Optional description below the title</td></tr>
+              <tr><td><code>showMoreUrl</code></td><td>Text</td><td>URL for footer link</td></tr>
+              <tr><td><code>showMoreText</code></td><td>Text</td><td>Text for footer link (default: View All Results)</td></tr>
+            </tbody>
+          </table>
+
+          <h4>Search Settings</h4>
+          <table>
+            <thead>
               <tr>
-                <td><code>searchBoxPlaceholder</code></td>
-                <td>Text</td>
-                <td>Placeholder text for search input</td>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
               </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>defaultQuery</code></td><td>Text</td><td>Default search query (use * for all content)</td></tr>
+              <tr><td><code>resultSourceId</code></td><td>Text</td><td>SharePoint Search result source ID or name</td></tr>
+              <tr><td><code>searchScope</code></td><td>Text</td><td>Limit search to a specific path (e.g., /sites/Intranet/Documents)</td></tr>
+            </tbody>
+          </table>
+
+          <h4>Refiners Configuration</h4>
+          <table>
+            <thead>
               <tr>
-                <td><code>showVerticalDropdown</code></td>
-                <td>Toggle</td>
-                <td>Show search vertical dropdown</td>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
               </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>refinersConfig</code></td><td>Text (Multiline)</td><td>Refiners in format &quot;Label:Property:DefaultValue;...&quot; (e.g., Content Type:contentclass:;File Type:FileType:)</td></tr>
+              <tr><td><code>refinersSortOrder</code></td><td>Dropdown</td><td>Sort refiners by count or alphabetically</td></tr>
+              <tr><td><code>maxValuesPerRefiner</code></td><td>Slider (5-50)</td><td>Maximum values to show per refiner (step: 5)</td></tr>
+            </tbody>
+          </table>
+
+          <h4>Filter Restrictions</h4>
+          <table>
+            <thead>
               <tr>
-                <td><code>refinementCategories</code></td>
-                <td>Text</td>
-                <td>Comma-separated list of refiners</td>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
               </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>allowedContentTypes</code></td><td>Text (Multiline)</td><td>Comma-separated allowed content types (e.g., STS_ListItem_DocumentLibrary)</td></tr>
+              <tr><td><code>allowedFileTypes</code></td><td>Text</td><td>Comma-separated allowed file types (e.g., docx,xlsx,pdf,pptx)</td></tr>
+            </tbody>
+          </table>
+
+          <h4>Display Settings</h4>
+          <table>
+            <thead>
               <tr>
-                <td><code>itemsPerPage</code></td>
-                <td>Number</td>
-                <td>Results per page</td>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
               </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>defaultView</code></td><td>Dropdown</td><td>Default result view: List, Cards, or Table</td></tr>
+              <tr><td><code>itemsPerPage</code></td><td>Slider (5-50)</td><td>Results per page (step: 5, default: 20)</td></tr>
+              <tr><td><code>showSearchBox</code></td><td>Toggle</td><td>Show search input box (default: On)</td></tr>
+              <tr><td><code>showRefiners</code></td><td>Toggle</td><td>Show refinement filters panel (default: On)</td></tr>
+              <tr><td><code>showViewSwitcher</code></td><td>Toggle</td><td>Show view switcher (List/Cards/Table) (default: On)</td></tr>
+            </tbody>
+          </table>
+
+          <h4>Appearance</h4>
+          <table>
+            <thead>
               <tr>
-                <td><code>resultTemplate</code></td>
-                <td>Dropdown</td>
-                <td>Result display template (List, Cards, Compact)</td>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
               </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>chromeType</code></td><td>Dropdown</td><td>Chrome type: None, Title Only, Border Only, Title and Border</td></tr>
+              <tr><td><code>fixedHeight</code></td><td>Slider (0-800)</td><td>Fixed height in pixels (0 = auto)</td></tr>
             </tbody>
           </table>
 

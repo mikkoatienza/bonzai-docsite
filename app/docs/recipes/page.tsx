@@ -75,7 +75,7 @@ export default function RecipesIndex() {
 
           <h2>Web Parts Summary</h2>
 
-          <p>These recipes use 23 Bonzai web parts across different categories:</p>
+          <p>These recipes use 21 Bonzai web parts across different categories:</p>
 
           <table>
             <thead>
@@ -120,6 +120,7 @@ export default function RecipesIndex() {
     </DocsPage>
   );
 }
+
 
 
 

@@ -12,23 +12,23 @@ export default function FeedbackWebPart() {
     <DocsPage>
       <DocsTitle>Feedback</DocsTitle>
       <DocsDescription>
-        Collect user feedback with customizable forms and rating options.
+        Collect user feedback with customizable forms, star ratings, categories, and submission history.
       </DocsDescription>
       <DocsBody>
         <div className="prose prose-gray dark:prose-invert max-w-none">
           <div className="not-prose mb-8 flex items-center gap-4">
             <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
-              Interactive
+              Communication
             </span>
             <span className="text-sm text-gray-500 dark:text-gray-400">
-              Feature Parity: 95%
+              Feature Parity: 90%
             </span>
           </div>
 
           {/* QUICK START */}
           <QuickStart
             title="Get Feedback Working in 3 Steps"
-            time="5 minutes"
+            time="15-30 minutes"
             prerequisites={[
               'Bonzai 2 package installed on your site',
               'Feedback list created with required columns',
@@ -36,7 +36,7 @@ export default function FeedbackWebPart() {
             steps={[
               {
                 title: 'Create the Feedback list',
-                description: 'Create a SharePoint list named "Feedback" with Title, Category, Rating, and Comments columns.',
+                description: 'Create a SharePoint list named "Feedback" with Title, Description, Category, Rating, and IsAnonymous columns.',
               },
               {
                 title: 'Add Feedback web part',
@@ -44,7 +44,7 @@ export default function FeedbackWebPart() {
               },
               {
                 title: 'Configure and publish',
-                description: 'Select your Feedback list, enable rating if desired, and publish the page.',
+                description: 'Select your Feedback list, configure categories and rating options, then publish.',
               },
             ]}
           />
@@ -57,6 +57,7 @@ export default function FeedbackWebPart() {
               'Enable quick contact with site administrators',
               'Capture ratings for content or services',
               'Create support request forms',
+              'Allow anonymous or identified feedback',
             ]}
             bestFor={[
               'Homepage footer — quick feedback access',
@@ -67,7 +68,7 @@ export default function FeedbackWebPart() {
             notFor={[
               'Complex multi-step forms — use PowerApps',
               'Survey with multiple questions — use Microsoft Forms',
-              'Anonymous voting — use separate polling tools',
+              'Event registration — use Events Rollup',
             ]}
             alternatives={[
               { name: 'Microsoft Forms', when: 'complex surveys' },
@@ -85,8 +86,8 @@ export default function FeedbackWebPart() {
               },
               {
                 title: 'Add required columns',
-                description: 'Add: Category (Choice), Rating (Number 1-5), Comments (Multiple lines), Email (Single line optional).',
-                tip: 'Include a Category column with options like "Bug Report", "Feature Request", "General Feedback".',
+                description: 'Add: Title, Description (Multiple lines), Category (Choice), Rating (Number), IsAnonymous (Yes/No), SubmittedBy (Text), SubmittedByName (Text).',
+                tip: 'Title is already a default column. Create a Choice column for Category with your feedback types.',
               },
               {
                 title: 'Add the web part to your page',
@@ -94,19 +95,23 @@ export default function FeedbackWebPart() {
               },
               {
                 title: 'Select the Feedback list',
-                description: 'In the property pane, select your Feedback list from the dropdown.',
+                description: 'In the property pane, select your Feedback list from the List Picker.',
               },
               {
-                title: 'Enable rating (optional)',
-                description: 'Toggle "Show Rating" to display a star rating component.',
+                title: 'Configure categories',
+                description: 'Enter comma-separated categories like "General,Bug Report,Feature Request,Other".',
               },
               {
-                title: 'Configure category filter',
-                description: 'Toggle "Show Category Filter" to let users categorize their feedback.',
+                title: 'Configure rating options',
+                description: 'Toggle "Show Rating" and set the maximum rating (3-10 stars).',
               },
               {
-                title: 'Set success message',
-                description: 'Customize the message shown after successful submission.',
+                title: 'Configure anonymous option',
+                description: 'Enable "Allow Anonymous" to let users submit feedback without their name.',
+              },
+              {
+                title: 'Set up submissions display',
+                description: 'Enable "Show My Submissions" to let users see their past feedback. Optionally enable "Show All Submissions" for transparency.',
               },
               {
                 title: 'Publish and test',
@@ -120,27 +125,29 @@ export default function FeedbackWebPart() {
 
           <RecipeGrid>
             <RecipeCard
-              title="Footer Feedback Widget"
-              description="Quick feedback in the page footer"
+              title="Quick Feedback Widget"
+              description="Compact feedback in the page footer"
               useCase="Site-wide feedback collection"
               icon={<MessageSquare className="h-5 w-5" />}
               config={[
                 { property: 'Title', value: 'Share Your Feedback' },
                 { property: 'Show Rating', value: 'Yes' },
-                { property: 'Show Category', value: 'No' },
-                { property: 'Chrome Type', value: 'Compact' },
+                { property: 'Max Rating', value: '5' },
+                { property: 'Categories', value: 'General,Suggestion' },
+                { property: 'Chrome Type', value: 'Title Only' },
               ]}
             />
             <RecipeCard
               title="Full Feedback Form"
-              description="Complete form with categories"
+              description="Complete form with all options"
               useCase="Dedicated feedback page"
               icon={<Send className="h-5 w-5" />}
               config={[
                 { property: 'Title', value: 'Feedback & Suggestions' },
                 { property: 'Show Rating', value: 'Yes' },
-                { property: 'Show Category', value: 'Yes' },
-                { property: 'Items Per Page', value: '5' },
+                { property: 'Allow Anonymous', value: 'Yes' },
+                { property: 'Show My Submissions', value: 'Yes' },
+                { property: 'Max Items', value: '10' },
               ]}
             />
             <RecipeCard
@@ -150,21 +157,23 @@ export default function FeedbackWebPart() {
               icon={<HelpCircle className="h-5 w-5" />}
               config={[
                 { property: 'Title', value: 'Submit a Request' },
-                { property: 'Show Category', value: 'Yes' },
+                { property: 'Categories', value: 'Hardware,Software,Access,Other' },
                 { property: 'Show Rating', value: 'No' },
-                { property: 'Required Fields', value: 'Category, Comments' },
+                { property: 'Allow Anonymous', value: 'No' },
+                { property: 'Chrome Type', value: 'Title and Border' },
               ]}
             />
             <RecipeCard
-              title="Rating Collection"
+              title="Content Rating"
               description="Star rating focused"
               useCase="Content rating pages"
               icon={<Star className="h-5 w-5" />}
               config={[
                 { property: 'Title', value: 'Rate This Page' },
                 { property: 'Show Rating', value: 'Yes' },
-                { property: 'Show Category', value: 'No' },
-                { property: 'Chrome Type', value: 'Compact' },
+                { property: 'Max Rating', value: '5' },
+                { property: 'Is Collapsible', value: 'Yes' },
+                { property: 'Default Collapsed', value: 'Yes' },
               ]}
             />
           </RecipeGrid>
@@ -187,6 +196,11 @@ export default function FeedbackWebPart() {
             different views in SharePoint for IT, HR, and Content teams.
           </Callout>
 
+          <Callout type="info" title="Anonymous vs. Identified feedback">
+            When "Allow Anonymous" is enabled, users can choose to hide their identity. 
+            Anonymous submissions store "(Anonymous)" instead of the user's name.
+          </Callout>
+
           {/* TROUBLESHOOTING */}
           <Troubleshooting
             items={[
@@ -207,8 +221,12 @@ export default function FeedbackWebPart() {
                 solution: 'Ensure "Show Rating" is enabled in the property pane.',
               },
               {
-                problem: 'Categories not showing',
-                solution: 'Check that the Category column exists in your list and has choice options matching your configured categories.',
+                problem: 'Categories not showing in dropdown',
+                solution: 'Check that the "Categories" text field in property pane has comma-separated values (e.g., "General,Bug Report,Feature Request").',
+              },
+              {
+                problem: 'My Submissions section empty',
+                solution: 'Enable "Show My Submissions" in property pane. Only feedback submitted by the current user will appear.',
               },
             ]}
           />
@@ -224,40 +242,72 @@ export default function FeedbackWebPart() {
           <table>
             <thead><tr><th>Column</th><th>Type</th><th>Required</th><th>Notes</th></tr></thead>
             <tbody>
-              <tr><td>Title</td><td>Single line of text</td><td>Yes</td><td>Default column</td></tr>
-              <tr><td>Description</td><td>Multiple lines of text</td><td>No</td><td>Plain text</td></tr>
-              <tr><td>Category</td><td>Choice</td><td>No</td><td>e.g., General, Bug, Feature</td></tr>
-              <tr><td>Rating</td><td>Number</td><td>No</td><td>Min: 1, Max: 5 or 10</td></tr>
-              <tr><td>IsAnonymous</td><td>Yes/No</td><td>No</td><td>Default: No</td></tr>
-              <tr><td>SubmittedBy</td><td>Single line of text</td><td>No</td><td>Auto-populated</td></tr>
-              <tr><td>SubmittedByName</td><td>Single line of text</td><td>No</td><td>Auto-populated</td></tr>
+              <tr><td>Title</td><td>Single line of text</td><td>Yes</td><td>Default column — feedback subject</td></tr>
+              <tr><td>Description</td><td>Multiple lines of text</td><td>No</td><td>Plain text feedback content</td></tr>
+              <tr><td>Category</td><td>Choice</td><td>No</td><td>e.g., General, Bug Report, Feature Request</td></tr>
+              <tr><td>Rating</td><td>Number</td><td>No</td><td>Stores star rating value</td></tr>
+              <tr><td>IsAnonymous</td><td>Yes/No</td><td>No</td><td>Whether user chose anonymous</td></tr>
+              <tr><td>SubmittedBy</td><td>Single line of text</td><td>No</td><td>User email (auto-populated)</td></tr>
+              <tr><td>SubmittedByName</td><td>Single line of text</td><td>No</td><td>User display name (auto-populated)</td></tr>
             </tbody>
           </table>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-            <strong>Note:</strong> The web part uses SharePoint&apos;s built-in <code>Created</code> column for timestamps.
-          </p>
 
           <h3>Property Pane Configuration</h3>
           <table>
-            <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
+            <thead><tr><th>Property</th><th>Type</th><th>Group</th><th>Description</th></tr></thead>
             <tbody>
-              <tr><td><code>title</code></td><td>Text</td><td>Web part title</td></tr>
-              <tr><td><code>listId</code></td><td>Dropdown</td><td>Feedback list</td></tr>
-              <tr><td><code>showRating</code></td><td>Toggle</td><td>Show star rating</td></tr>
-              <tr><td><code>showCategory</code></td><td>Toggle</td><td>Show category dropdown</td></tr>
-              <tr><td><code>successMessage</code></td><td>Text</td><td>Post-submit message</td></tr>
+              <tr><td><code>title</code></td><td>Text</td><td>Title & Navigation</td><td>Web part title</td></tr>
+              <tr><td><code>titleUrl</code></td><td>Text</td><td>Title & Navigation</td><td>Make title a link</td></tr>
+              <tr><td><code>titleIconName</code></td><td>Text</td><td>Title & Navigation</td><td>Fluent UI icon name</td></tr>
+              <tr><td><code>description</code></td><td>Text</td><td>Title & Navigation</td><td>Description below title</td></tr>
+              <tr><td><code>showMoreUrl</code></td><td>Text</td><td>Title & Navigation</td><td>"View All" link URL</td></tr>
+              <tr><td><code>showMoreText</code></td><td>Text</td><td>Title & Navigation</td><td>"View All" link text</td></tr>
+              <tr><td><code>siteUrl</code></td><td>Text</td><td>Data Source</td><td>Site where list is located</td></tr>
+              <tr><td><code>listName</code></td><td>List Picker</td><td>Data Source</td><td>Feedback list</td></tr>
+              <tr><td><code>categories</code></td><td>Text (multiline)</td><td>Form Config</td><td>Comma-separated categories</td></tr>
+              <tr><td><code>showRating</code></td><td>Toggle</td><td>Form Config</td><td>Show star rating (default: true)</td></tr>
+              <tr><td><code>maxRating</code></td><td>Slider (3-10)</td><td>Form Config</td><td>Maximum rating value (default: 5)</td></tr>
+              <tr><td><code>allowAnonymous</code></td><td>Toggle</td><td>Form Config</td><td>Allow anonymous submissions</td></tr>
+              <tr><td><code>showMySubmissions</code></td><td>Toggle</td><td>Submissions</td><td>Show user's past feedback</td></tr>
+              <tr><td><code>showAllSubmissions</code></td><td>Toggle</td><td>Submissions</td><td>Show all users' feedback</td></tr>
+              <tr><td><code>maxItems</code></td><td>Slider (1-50)</td><td>Submissions</td><td>Max submissions to display</td></tr>
+              <tr><td><code>chromeType</code></td><td>Dropdown</td><td>Appearance</td><td>None/Title Only/Border Only/Title and Border</td></tr>
+              <tr><td><code>fixedHeight</code></td><td>Slider (0-800)</td><td>Appearance</td><td>Fixed height in pixels</td></tr>
+              <tr><td><code>isCollapsible</code></td><td>Toggle</td><td>Appearance</td><td>Allow collapse/expand</td></tr>
+              <tr><td><code>defaultCollapsed</code></td><td>Toggle</td><td>Appearance</td><td>Start collapsed</td></tr>
+              <tr><td><code>successMessage</code></td><td>Text</td><td>Messages</td><td>Post-submit confirmation</td></tr>
+              <tr><td><code>enableAudienceTargeting</code></td><td>Toggle</td><td>Audience</td><td>Enable audience targeting</td></tr>
+              <tr><td><code>targetAudience</code></td><td>Text</td><td>Audience</td><td>Comma-separated groups/emails</td></tr>
             </tbody>
           </table>
 
           <h3>Features Checklist</h3>
           <ul>
             <li>✅ Feedback form submission</li>
-            <li>✅ Star rating (1-5)</li>
-            <li>✅ Category selection</li>
-            <li>✅ Rich text comments</li>
-            <li>✅ Success confirmation</li>
+            <li>✅ Configurable star rating (3-10 stars)</li>
+            <li>✅ Customizable categories</li>
+            <li>✅ Anonymous submission option</li>
+            <li>✅ View past submissions</li>
+            <li>✅ View all submissions (admin feature)</li>
+            <li>✅ Chrome type configuration</li>
+            <li>✅ Collapsible/expandable</li>
+            <li>✅ Custom success message</li>
+            <li>✅ Audience targeting</li>
+            <li>✅ "View More" link</li>
             <li>✅ Responsive design</li>
           </ul>
+
+          <h3>Migration from Classic Bonzai</h3>
+          <table>
+            <thead><tr><th>Classic Feature</th><th>Modern Equivalent</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Feedback form</td><td>Feedback component</td><td>Same functionality</td></tr>
+              <tr><td>Star rating</td><td><code>showRating</code> + <code>maxRating</code></td><td>Configurable 3-10 stars</td></tr>
+              <tr><td>Category dropdown</td><td><code>categories</code> property</td><td>Comma-separated text</td></tr>
+              <tr><td>Anonymous mode</td><td><code>allowAnonymous</code></td><td>Toggle in property pane</td></tr>
+              <tr><td>Chrome types</td><td><code>chromeType</code></td><td>4 options available</td></tr>
+            </tbody>
+          </table>
         </div>
       </DocsBody>
     </DocsPage>

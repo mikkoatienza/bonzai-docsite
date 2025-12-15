@@ -18,7 +18,7 @@ export default function ThemingGuide() {
           {/* QUICK START */}
           <QuickStart
             title="Set Up Theming in 3 Steps"
-            time="5 minutes"
+            time="15-30 minutes"
             steps={[
               {
                 title: 'Add Theme Manager to your homepage',
@@ -26,11 +26,11 @@ export default function ThemingGuide() {
               },
               {
                 title: 'Configure brand colors',
-                description: 'Use color pickers to set primary, secondary, background, and text colors.',
+                description: 'Use the interactive color pickers within the Theme Manager UI (in edit mode) to set primary, background, text, and accent colors.',
               },
               {
-                title: 'Enable dark mode and publish',
-                description: 'Toggle dark mode support if desired, then save and publish. Changes apply instantly!',
+                title: 'Test and publish',
+                description: 'Preview your changes, toggle dark mode if desired, then save and publish.',
               },
             ]}
           />
@@ -43,9 +43,9 @@ export default function ThemingGuide() {
             web part provides an intuitive interface for customization.
           </p>
 
-          <Callout type="success" title="Major improvement over Classic">
-            Unlike Classic Bonzai which required Brick access and 5-15 minute CDN 
-            propagation, Modern Bonzai applies theme changes instantly on-page.
+          <Callout type="info" title="Difference from Classic Bonzai">
+            Classic Bonzai used Brick for theming with CDN propagation delays. 
+            Bonzai 2 uses CSS Custom Properties, applying changes without CDN wait time.
           </Callout>
 
           <h2>Theme Manager vs Brick</h2>

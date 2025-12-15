@@ -1,5 +1,5 @@
 import { DocsPage, DocsBody, DocsTitle, DocsDescription } from 'fumadocs-ui/page';
-import { Check, X, ArrowRight, Users, Wrench, Code, BookOpen, Zap } from 'lucide-react';
+import { Check, X, ArrowRight, Users, Wrench, Code, BookOpen, Zap, AlertTriangle } from 'lucide-react';
 import { BeforeAfter, FeatureComparisonTable } from '@/components/docs';
 import { MigrationChecklist, MigrationChecklistSection } from '@/components/docs';
 import { Callout } from '@/components/docs';
@@ -9,11 +9,33 @@ export default function ClassicVsModern() {
     <DocsPage>
       <DocsTitle>Classic Bonzai vs Modern Bonzai 2</DocsTitle>
       <DocsDescription>
-        Your complete guide to understanding the differences, migrating successfully, and leveraging new capabilities.
+        A comprehensive guide to understanding the architectural differences and planning your migration from Classic SharePoint to Modern SharePoint with Bonzai 2.
       </DocsDescription>
       <DocsBody>
         <div className="prose prose-gray dark:prose-invert max-w-none">
           
+          {/* Migration Reality Check */}
+          <div className="not-prose mb-8 rounded-xl border border-amber-200 bg-amber-50 p-6 dark:border-amber-800 dark:bg-amber-950">
+            <div className="flex items-start gap-3">
+              <AlertTriangle className="mt-0.5 h-6 w-6 shrink-0 text-amber-600 dark:text-amber-400" />
+              <div>
+                <h3 className="text-lg font-semibold text-amber-900 dark:text-amber-100">Setting Realistic Expectations</h3>
+                <p className="mt-2 text-amber-800 dark:text-amber-200">
+                  Migrating from Classic Bonzai to Bonzai 2 is <strong>not a simple upgrade</strong>. It involves:
+                </p>
+                <ul className="mt-3 space-y-1 text-sm text-amber-700 dark:text-amber-300">
+                  <li>• <strong>Platform change:</strong> Classic SharePoint → Modern SharePoint (different page model)</li>
+                  <li>• <strong>Content recreation:</strong> Modern pages must be built fresh; classic pages cannot be converted</li>
+                  <li>• <strong>Configuration migration:</strong> Brick settings must be manually recreated in SharePoint</li>
+                  <li>• <strong>User training:</strong> Content authors need to learn the new editing experience</li>
+                </ul>
+                <p className="mt-3 text-sm font-medium text-amber-900 dark:text-amber-100">
+                  Plan for weeks to months of work, depending on your site complexity and number of pages.
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* Who This Guide Is For */}
           <div className="not-prose mb-12 rounded-2xl border border-gray-200 bg-gradient-to-br from-gray-50 to-white p-8 dark:border-gray-700 dark:from-gray-900 dark:to-gray-800">
             <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-white">
@@ -26,20 +48,20 @@ export default function ClassicVsModern() {
                 </div>
                 <h3 className="mb-2 font-semibold text-gray-900 dark:text-white">Site Administrators</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Learn about migration planning, infrastructure changes, and deployment steps.
+                  Migration planning, infrastructure decommissioning, and deployment coordination.
                 </p>
                 <ul className="mt-3 space-y-1 text-sm">
                   <li className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                     <ArrowRight className="h-3 w-3 text-bonzai-500" />
-                    Migration checklist
+                    Migration planning
                   </li>
                   <li className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                     <ArrowRight className="h-3 w-3 text-bonzai-500" />
-                    Theming migration
+                    List/data migration
                   </li>
                   <li className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                     <ArrowRight className="h-3 w-3 text-bonzai-500" />
-                    Deployment changes
+                    Deployment steps
                   </li>
                 </ul>
               </div>
@@ -49,12 +71,12 @@ export default function ClassicVsModern() {
                 </div>
                 <h3 className="mb-2 font-semibold text-gray-900 dark:text-white">Content Authors</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Understand how your day-to-day editing experience improves with Bonzai 2.
+                  Learn the new editing workflow and understand what changes in your daily work.
                 </p>
                 <ul className="mt-3 space-y-1 text-sm">
                   <li className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                     <ArrowRight className="h-3 w-3 text-bonzai-500" />
-                    Workflow comparisons
+                    Workflow differences
                   </li>
                   <li className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                     <ArrowRight className="h-3 w-3 text-bonzai-500" />
@@ -62,7 +84,7 @@ export default function ClassicVsModern() {
                   </li>
                   <li className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                     <ArrowRight className="h-3 w-3 text-bonzai-500" />
-                    What&apos;s easier now
+                    New capabilities
                   </li>
                 </ul>
               </div>
@@ -72,7 +94,7 @@ export default function ClassicVsModern() {
                 </div>
                 <h3 className="mb-2 font-semibold text-gray-900 dark:text-white">Developers</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Technical details on architecture changes, APIs, and customization.
+                  Technical details on architecture changes, APIs, and customization options.
                 </p>
                 <ul className="mt-3 space-y-1 text-sm">
                   <li className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
@@ -81,7 +103,7 @@ export default function ClassicVsModern() {
                   </li>
                   <li className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                     <ArrowRight className="h-3 w-3 text-bonzai-500" />
-                    API migration
+                    API differences
                   </li>
                   <li className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                     <ArrowRight className="h-3 w-3 text-bonzai-500" />
@@ -93,10 +115,12 @@ export default function ClassicVsModern() {
           </div>
 
           {/* Key Message */}
-          <Callout type="tip" title="The Big Picture">
+          <Callout type="info" title="What This Migration Actually Means">
             <p>
-              Bonzai 2 eliminates the need for Brick (AWS infrastructure), simplifies deployment to a single .sppkg upload, 
-              and gives you instant theming without CDN wait times. Everything is now native to SharePoint.
+              Bonzai 2 eliminates the need for Brick (AWS infrastructure) and simplifies deployment to a single .sppkg file. 
+              However, this is a <strong>platform migration</strong>, not an upgrade. You are moving from Classic SharePoint 
+              (publishing sites, master pages, JSOM) to Modern SharePoint (communication sites, SPFx, REST APIs). 
+              This requires rebuilding pages and reconfiguring web parts.
             </p>
           </Callout>
 
@@ -202,16 +226,17 @@ export default function ClassicVsModern() {
             ))}
           </div>
 
-          <h2>Before & After: Real Workflow Comparisons</h2>
+          <h2>Workflow Comparisons</h2>
 
           <p>
-            See exactly how common tasks differ between Classic and Modern Bonzai. 
-            These comparisons show the time savings and simplified workflows you&apos;ll enjoy.
+            These comparisons illustrate how common tasks differ between Classic and Modern SharePoint. 
+            Note that these are <strong>per-task</strong> comparisons—the overall migration effort involves 
+            many such tasks across your entire site.
           </p>
 
           <BeforeAfter
             title="Adding a Web Part to a Page"
-            description="One of the most common tasks for content authors"
+            description="Comparing the editing experience (not counting initial learning curve)"
             before={{
               steps: [
                 { step: 'Log in to SharePoint (Classic)', detail: 'Navigate to site' },
@@ -227,11 +252,11 @@ export default function ClassicVsModern() {
                 { step: 'Check in page' },
                 { step: 'Publish page' },
               ],
-              time: '10-15 minutes',
+              time: '5-10 minutes (experienced user)',
               painPoints: [
                 'Manual list/view name entry prone to typos',
                 'Fixed zones limit placement options',
-                'Check-in/check-out workflow slows editing',
+                'Check-in/check-out workflow adds steps',
               ],
             }}
             after={{
@@ -242,19 +267,19 @@ export default function ClassicVsModern() {
                 { step: 'Type "Bonzai" → Select web part' },
                 { step: 'Click pencil → Select list from dropdown → Publish' },
               ],
-              time: '2-3 minutes',
+              time: '3-5 minutes (experienced user)',
               benefits: [
-                'Dropdown pickers eliminate typos',
-                'Place web parts anywhere on the page',
+                'Dropdown pickers reduce errors',
+                'Flexible placement on the page',
                 'Real-time preview as you configure',
               ],
             }}
-            timeSaved="8-12 minutes per web part"
+            timeSaved="Fewer steps, but new learning required"
           />
 
           <BeforeAfter
             title="Changing Theme Colors"
-            description="Brand updates and color adjustments"
+            description="After Theme Manager is already set up"
             before={{
               steps: [
                 { step: 'Open new browser tab' },
@@ -269,29 +294,30 @@ export default function ClassicVsModern() {
                 { step: 'Wait 5-15 minutes for CDN propagation' },
                 { step: 'Hard refresh SharePoint page' },
               ],
-              time: '20-30 minutes',
+              time: '15-20 minutes (including wait time)',
               painPoints: [
                 'Separate login required',
                 'CDN propagation causes delays',
-                'Can\'t preview on actual page',
+                'Cannot preview on actual page before publishing',
               ],
             }}
             after={{
               steps: [
-                { step: 'Click Edit on page with Theme Manager' },
-                { step: 'Open Theme Manager property pane' },
-                { step: 'Pick color from color picker' },
-                { step: 'See instant preview → Publish' },
+                { step: 'Navigate to page with Theme Manager' },
+                { step: 'Click Edit on page' },
+                { step: 'Use Theme Manager color pickers' },
+                { step: 'See changes in real-time' },
+                { step: 'Click Save Theme, then Publish page' },
               ],
-              time: '1-2 minutes',
+              time: '5-10 minutes',
               benefits: [
                 'No separate login needed',
-                'Changes apply instantly',
+                'Changes visible immediately',
                 'Preview on the actual page',
                 'Dark mode toggle built-in',
               ],
             }}
-            timeSaved="18-28 minutes per change"
+            timeSaved="Faster iteration, no CDN wait"
           />
 
           <h2>Feature Migration Guide</h2>
@@ -315,49 +341,86 @@ export default function ClassicVsModern() {
 
           <h2>Migration Checklist</h2>
 
+          <div className="not-prose mb-6 rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950">
+            <p className="text-sm text-amber-800 dark:text-amber-200">
+              <strong>Time Estimates:</strong> These are rough estimates for a <strong>single site</strong> with moderate complexity 
+              (~20-50 pages, standard web parts). Large organizations with multiple sites, custom configurations, 
+              or complex content structures should expect significantly longer timelines. Plan for pilot testing 
+              before full rollout.
+            </p>
+          </div>
+
           <MigrationChecklist
             title="Your Migration Journey"
-            description="Work through these phases to successfully migrate from Classic to Modern Bonzai."
+            description="Work through these phases systematically. Do not rush—each phase builds on the previous."
           >
             <MigrationChecklistSection
-              title="Pre-Migration Preparation"
+              title="Phase 1: Discovery & Planning"
               phase="pre"
               icon={<BookOpen className="h-6 w-6 text-amber-600 dark:text-amber-400" />}
               items={[
-                { id: 'inventory', task: 'Inventory all Classic Bonzai sites', description: 'Document URLs and web parts in use', critical: true, estimatedTime: '2-4 hours' },
-                { id: 'export-themes', task: 'Export theme colors from Brick', description: 'Note primary, secondary, background colors', estimatedTime: '30 min' },
-                { id: 'document-ct', task: 'Document Content Targeting mappings', description: 'Export from Brick configuration', estimatedTime: '1 hour' },
-                { id: 'list-icons', task: 'Identify Font-Awesome icons in use', description: 'Map to Fluent UI equivalents', estimatedTime: '1 hour' },
-                { id: 'prepare-catalog', task: 'Prepare App Catalog', description: 'Ensure tenant App Catalog is configured', critical: true, estimatedTime: '30 min' },
+                { id: 'inventory', task: 'Inventory all Classic Bonzai sites and pages', description: 'Document every page URL, web parts used, and content owners. This is critical for planning.', critical: true, estimatedTime: '1-3 days' },
+                { id: 'audit-content', task: 'Audit content for migration priority', description: 'Identify which pages are actively used vs. outdated. Prioritize high-traffic pages.', estimatedTime: '1-2 days' },
+                { id: 'export-themes', task: 'Export theme colors and branding from Brick', description: 'Screenshot or document primary, secondary, background colors and any custom CSS.', estimatedTime: '2-4 hours' },
+                { id: 'document-ct', task: 'Document Content Targeting configuration', description: 'Export all targeting rules from Brick. Note which lists and web parts use targeting.', estimatedTime: '4-8 hours' },
+                { id: 'list-icons', task: 'Map Font-Awesome icons to Fluent UI', description: 'Identify all icons in use and find Fluent UI equivalents.', estimatedTime: '2-4 hours' },
+                { id: 'prepare-catalog', task: 'Prepare App Catalog', description: 'Ensure tenant App Catalog exists and you have deployment permissions.', critical: true, estimatedTime: '1-2 hours' },
+                { id: 'plan-training', task: 'Plan user training and change management', description: 'Content authors will need training on the new editing experience.', estimatedTime: '2-4 hours' },
               ]}
             />
             <MigrationChecklistSection
-              title="Migration Execution"
+              title="Phase 2: Infrastructure Setup"
               phase="during"
               icon={<Zap className="h-6 w-6 text-blue-600 dark:text-blue-400" />}
               items={[
-                { id: 'upload-package', task: 'Upload Bonzai2.sppkg to App Catalog', critical: true, estimatedTime: '5 min' },
-                { id: 'deploy-tenant', task: 'Enable tenant-wide deployment', estimatedTime: '5 min' },
-                { id: 'setup-theme', task: 'Add Theme Manager and configure brand colors', estimatedTime: '30 min' },
-                { id: 'create-lists', task: 'Create SharePoint lists for web parts', description: 'Important Messages, Advanced Links, etc.', estimatedTime: '2 hours' },
-                { id: 'add-columns', task: 'Add Content Targeting columns to lists', description: 'Department, Location, Role', estimatedTime: '1 hour' },
-                { id: 'create-pages', task: 'Create modern pages', estimatedTime: '4-8 hours' },
-                { id: 'add-webparts', task: 'Add and configure Bonzai 2 web parts', estimatedTime: '4-8 hours' },
+                { id: 'upload-package', task: 'Upload Bonzai2.sppkg to App Catalog', critical: true, estimatedTime: '30 min' },
+                { id: 'deploy-tenant', task: 'Enable tenant-wide deployment', estimatedTime: '30 min' },
+                { id: 'create-comm-site', task: 'Create new Modern Communication Site(s)', description: 'Modern pages require Communication Sites or Team Sites with modern experience.', estimatedTime: '1-2 hours' },
+                { id: 'setup-theme', task: 'Add Theme Manager and configure brand colors', description: 'Match your existing brand colors. Test on a few pages first.', estimatedTime: '2-4 hours' },
+                { id: 'create-lists', task: 'Create or migrate SharePoint lists for web parts', description: 'Important Messages, Advanced Links, Locations, etc. Some lists may be migrated, others created fresh.', estimatedTime: '1-2 days' },
+                { id: 'add-columns', task: 'Add Content Targeting columns to lists', description: 'Department, Location, Role columns for audience targeting.', estimatedTime: '4-8 hours' },
               ]}
             />
             <MigrationChecklistSection
-              title="Post-Migration Verification"
+              title="Phase 3: Content Recreation"
+              phase="during"
+              icon={<Wrench className="h-6 w-6 text-purple-600 dark:text-purple-400" />}
+              items={[
+                { id: 'pilot-pages', task: 'Create pilot pages (3-5 key pages)', description: 'Start with your most important pages to validate the approach.', critical: true, estimatedTime: '2-5 days' },
+                { id: 'pilot-review', task: 'Review pilot with stakeholders', description: 'Get feedback before proceeding with full migration.', estimatedTime: '1-2 days' },
+                { id: 'create-pages', task: 'Create remaining modern pages', description: 'Each page must be built from scratch. Batch by page type for efficiency.', estimatedTime: '1-4 weeks (varies greatly)' },
+                { id: 'add-webparts', task: 'Add and configure Bonzai 2 web parts on each page', description: 'Configure each web part, connect to lists, set up targeting.', estimatedTime: '1-3 weeks (varies greatly)' },
+                { id: 'migrate-content', task: 'Migrate page content (text, images, documents)', description: 'Copy/paste text, re-upload or link images, update document links.', estimatedTime: '1-2 weeks' },
+              ]}
+            />
+            <MigrationChecklistSection
+              title="Phase 4: Testing & Rollout"
               phase="post"
               icon={<Check className="h-6 w-6 text-green-600 dark:text-green-400" />}
               items={[
-                { id: 'verify-webparts', task: 'Test all web parts display correctly', critical: true, estimatedTime: '2 hours' },
-                { id: 'verify-theme', task: 'Verify theme colors match brand', estimatedTime: '30 min' },
-                { id: 'test-ct', task: 'Test content targeting with different users', estimatedTime: '1 hour' },
-                { id: 'test-mobile', task: 'Test on mobile devices', estimatedTime: '30 min' },
-                { id: 'train-users', task: 'Train content editors on new workflow', estimatedTime: '2-4 hours' },
+                { id: 'verify-webparts', task: 'Test all web parts on all pages', critical: true, estimatedTime: '2-5 days' },
+                { id: 'verify-theme', task: 'Verify theme consistency across pages', estimatedTime: '4-8 hours' },
+                { id: 'test-ct', task: 'Test content targeting with different user profiles', description: 'Log in as users from different departments/locations to verify targeting.', estimatedTime: '1-2 days' },
+                { id: 'test-mobile', task: 'Test on mobile devices and tablets', estimatedTime: '4-8 hours' },
+                { id: 'train-users', task: 'Train content editors on new editing workflow', description: 'Hands-on training sessions. Provide documentation and reference materials.', estimatedTime: '1-3 days' },
+                { id: 'soft-launch', task: 'Soft launch with limited user group', description: 'Roll out to a subset of users for feedback before full launch.', estimatedTime: '1-2 weeks' },
+                { id: 'full-launch', task: 'Full launch and communication', description: 'Announce the new intranet, redirect old URLs if possible.', estimatedTime: '1-2 days' },
               ]}
             />
           </MigrationChecklist>
+
+          <div className="not-prose mt-6 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-900">
+            <h4 className="font-semibold text-gray-900 dark:text-white">Realistic Total Timeline</h4>
+            <ul className="mt-3 space-y-2 text-sm text-gray-600 dark:text-gray-400">
+              <li><strong>Small site (10-20 pages):</strong> 2-4 weeks with dedicated resources</li>
+              <li><strong>Medium site (20-50 pages):</strong> 4-8 weeks with dedicated resources</li>
+              <li><strong>Large site (50-100+ pages):</strong> 2-4 months, often done in phases</li>
+              <li><strong>Enterprise (multiple sites):</strong> 6-12 months for full rollout</li>
+            </ul>
+            <p className="mt-3 text-sm text-gray-500 dark:text-gray-500">
+              These estimates assume dedicated migration resources. If migration is done alongside regular work, multiply by 2-3x.
+            </p>
+          </div>
 
           <h2>Cancelled Web Parts & Alternatives</h2>
 
@@ -444,8 +507,10 @@ export default function ClassicVsModern() {
           <h2>Web Part Mapping</h2>
 
           <p>
-            All 21 implemented web parts maintain 85-95% feature parity with their 
-            legacy counterparts:
+            The 21 Bonzai 2 web parts cover the same functional areas as their legacy counterparts, 
+            though some configuration options and behaviors differ due to the platform change. 
+            The &quot;Parity&quot; column indicates approximate feature coverage—not all legacy options 
+            are available, and some new options have been added:
           </p>
 
           <div className="not-prose my-6 overflow-x-auto">

@@ -6,10 +6,10 @@ import { Settings, Edit, Code, ArrowRight, Clock, BookOpen } from 'lucide-react'
 const paths = [
   {
     title: 'Site Administrator',
-    description: 'Learn to install, configure, and manage Bonzai 2 for your organization.',
+    description: 'Learn to deploy, configure, and manage Bonzai 2 for your organization.',
     icon: Settings,
     color: 'bg-blue-500',
-    time: '30 min',
+    time: '2-4 hours',
     steps: [
       { label: 'Installation Guide', href: '/docs/getting-started/installation' },
       { label: 'Theme Configuration', href: '/docs/administration/theming' },
@@ -18,10 +18,10 @@ const paths = [
   },
   {
     title: 'Content Author',
-    description: 'Master creating pages and configuring web parts for your intranet.',
+    description: 'Learn to create pages and configure web parts in Modern SharePoint.',
     icon: Edit,
     color: 'bg-green-500',
-    time: '20 min',
+    time: '1-2 hours',
     steps: [
       { label: 'Web Parts Overview', href: '/docs/web-parts' },
       { label: 'Home Page Recipe', href: '/docs/recipes/home-page' },
@@ -30,10 +30,10 @@ const paths = [
   },
   {
     title: 'Developer',
-    description: 'Understand the SPFx architecture and how to extend or customize.',
+    description: 'Understand the SPFx architecture and technical differences from Classic.',
     icon: Code,
     color: 'bg-purple-500',
-    time: '45 min',
+    time: '3-5 hours',
     steps: [
       { label: 'Classic vs Modern', href: '/docs/migration/classic-vs-modern' },
       { label: 'Advanced Search', href: '/docs/web-parts/advanced-search' },
@@ -50,13 +50,13 @@ export function LearningPaths() {
         <div className="mx-auto max-w-2xl text-center">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-bonzai-100 px-3 py-1 text-sm font-medium text-bonzai-700 dark:bg-bonzai-900/50 dark:text-bonzai-300">
             <BookOpen className="h-4 w-4" />
-            Start Here
+            Documentation
           </div>
           <h2 className="font-heading text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
             Choose Your Learning Path
           </h2>
           <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
-            Follow a guided path based on your role to get up and running quickly.
+            Select a path based on your role to find the most relevant documentation.
           </p>
         </div>
 
@@ -121,6 +121,7 @@ export function LearningPaths() {
     </section>
   );
 }
+
 
 
 

@@ -4,22 +4,22 @@ import { Check, X, ArrowRight } from 'lucide-react';
 
 const comparisons = [
   {
-    feature: 'Infrastructure Required',
+    feature: 'Infrastructure',
     classic: 'AWS (Cognito, DynamoDB, CloudFront, Lambda)',
-    modern: 'None - runs 100% in SharePoint Online',
-    classicBad: true,
+    modern: 'SharePoint Online only (no external services)',
+    classicBad: false,
   },
   {
     feature: 'Configuration',
-    classic: 'Brick (separate AWS-hosted app)',
-    modern: 'SharePoint native property panes',
-    classicBad: true,
+    classic: 'Brick (AWS-hosted admin app)',
+    modern: 'SharePoint property panes + Theme Manager',
+    classicBad: false,
   },
   {
-    feature: 'Theme Changes',
-    classic: 'Publish to CDN, wait 5-15 minutes',
-    modern: 'Instant via CSS Custom Properties',
-    classicBad: true,
+    feature: 'Theme Updates',
+    classic: 'CDN publish (5-15 min propagation)',
+    modern: 'CSS Custom Properties (instant)',
+    classicBad: false,
   },
   {
     feature: 'UI Framework',
@@ -36,32 +36,32 @@ const comparisons = [
   {
     feature: 'Dark Mode',
     classic: 'Not available',
-    modern: 'Built-in toggle support',
-    classicBad: true,
+    modern: 'Built-in toggle',
+    classicBad: false,
   },
   {
     feature: 'Mobile Support',
     classic: 'Separate mobile templates',
     modern: 'Responsive by default',
-    classicBad: true,
+    classicBad: false,
   },
   {
     feature: 'List/View Selection',
     classic: 'Type names manually',
     modern: 'Dropdown pickers',
-    classicBad: true,
+    classicBad: false,
   },
   {
     feature: 'Authentication',
     classic: 'SharePoint + AWS Cognito',
     modern: 'SharePoint only',
-    classicBad: true,
+    classicBad: false,
   },
   {
     feature: 'Deployment',
     classic: 'CDN + Brick provisioning',
-    modern: 'Single .sppkg upload',
-    classicBad: true,
+    modern: 'App Catalog .sppkg upload',
+    classicBad: false,
   },
 ];
 
@@ -71,11 +71,11 @@ export function ComparisonTable() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-heading text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-            Classic Bonzai vs Modern Bonzai 2
+            Classic Bonzai vs Bonzai 2
           </h2>
           <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-            See what&apos;s changed and why Bonzai 2 is the better choice for 
-            your modern SharePoint intranet.
+            Key architectural differences between the legacy Classic SharePoint solution 
+            and the modern SPFx-based Bonzai 2.
           </p>
         </div>
 

@@ -20,7 +20,7 @@ export default function ContentShowcaseRecipe() {
               5 Web Parts
             </span>
             <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
-              ~20 minutes
+              45-90 min (first time)
             </span>
           </div>
 
@@ -193,6 +193,7 @@ export default function ContentShowcaseRecipe() {
     </DocsPage>
   );
 }
+
 
 
 

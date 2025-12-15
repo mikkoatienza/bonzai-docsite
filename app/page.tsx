@@ -58,10 +58,10 @@ export default function HomePage() {
       <section className="bg-bonzai-700 py-16">
         <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">
           <h2 className="font-heading text-3xl font-bold text-white sm:text-4xl">
-            Ready to transform your intranet?
+            Getting Started with Bonzai 2
           </h2>
           <p className="mt-4 text-lg text-bonzai-100">
-            Get started with Bonzai 2 today. No AWS infrastructure required.
+            Explore the documentation to understand installation, configuration, and migration.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
@@ -71,10 +71,10 @@ export default function HomePage() {
               Installation Guide
             </Link>
             <Link
-              href="/docs"
+              href="/docs/migration/classic-vs-modern"
               className="inline-flex items-center rounded-lg border border-white/30 px-6 py-3 text-base font-semibold text-white transition-all hover:bg-white/10"
             >
-              Read the Docs
+              Migration Guide
             </Link>
           </div>
         </div>

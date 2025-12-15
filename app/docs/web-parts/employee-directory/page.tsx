@@ -28,7 +28,7 @@ export default function EmployeeDirectoryWebPart() {
           {/* QUICK START */}
           <QuickStart
             title="Get Employee Directory Working in 3 Steps"
-            time="2 minutes"
+            time="10-20 minutes"
             prerequisites={[
               'Bonzai 2 package installed on your site',
               'User profiles configured in Azure AD / SharePoint',
@@ -97,24 +97,20 @@ export default function EmployeeDirectoryWebPart() {
                 tip: 'Leave blank for a cleaner look if the page title already indicates the purpose.',
               },
               {
-                title: 'Enable the search box',
-                description: 'Toggle "Show Search" to let users search by name, job title, department, or other profile attributes.',
+                title: 'Configure search placeholder',
+                description: 'Set the "Search Text" to customize the placeholder text in the search box (e.g., "Search employees...").',
               },
               {
-                title: 'Enable alphabetical filtering',
-                description: 'Toggle "Show A-Z Filter" to display an alphabetical bar. Users can click a letter to jump to employees whose names start with that letter.',
+                title: 'Configure alphabetical filter field',
+                description: 'Set "Alphabetical Filter Field" to the property to use for A-Z filtering (default: PreferredName).',
               },
               {
                 title: 'Set items per page',
-                description: 'Configure how many employees display per page. 12-20 is typical for a grid layout.',
+                description: 'Configure how many employees display per page using the slider. 20-28 is typical for a grid layout.',
               },
               {
-                title: 'Enable profile photos',
-                description: 'Toggle "Show Picture" to display user profile photos. Photos are pulled from Azure AD/Microsoft 365 profiles.',
-              },
-              {
-                title: 'Enable job title display',
-                description: 'Toggle "Show Role" to display each person\'s job title beneath their name.',
+                title: 'Configure display options',
+                description: 'Toggle "Show Picture", "Show Role", and "Show Location" to control what information is displayed for each employee.',
               },
               {
                 title: 'Publish and test',
@@ -134,12 +130,12 @@ export default function EmployeeDirectoryWebPart() {
               useCase="Dedicated People page"
               icon={<Users className="h-5 w-5" />}
               config={[
-                { property: 'Title', value: 'Employee Directory' },
-                { property: 'Show Search', value: 'Yes' },
-                { property: 'Show A-Z Filter', value: 'Yes' },
-                { property: 'Items Per Page', value: '16' },
-                { property: 'Show Picture', value: 'Yes' },
-                { property: 'Show Role', value: 'Yes' },
+                { property: 'title', value: 'Employee Directory' },
+                { property: 'itemsPerPage', value: '28' },
+                { property: 'showPicture', value: 'On' },
+                { property: 'showRole', value: 'On' },
+                { property: 'showLocationResult', value: 'On' },
+                { property: 'enableWildcardSearch', value: 'On' },
               ]}
             />
             <RecipeCard
@@ -148,11 +144,11 @@ export default function EmployeeDirectoryWebPart() {
               useCase="Department landing pages"
               icon={<Building2 className="h-5 w-5" />}
               config={[
-                { property: 'Title', value: 'Our Team' },
-                { property: 'Show Search', value: 'Yes' },
-                { property: 'Show A-Z Filter', value: 'No' },
-                { property: 'Items Per Page', value: '12' },
-                { property: 'Show Picture', value: 'Yes' },
+                { property: 'title', value: 'Our Team' },
+                { property: 'itemsPerPage', value: '12' },
+                { property: 'showPicture', value: 'On' },
+                { property: 'showRole', value: 'On' },
+                { property: 'showLocationResult', value: 'Off' },
               ]}
             />
             <RecipeCard
@@ -161,11 +157,11 @@ export default function EmployeeDirectoryWebPart() {
               useCase="Homepage sidebar widget"
               icon={<Search className="h-5 w-5" />}
               config={[
-                { property: 'Title', value: 'Find a Colleague' },
-                { property: 'Show Search', value: 'Yes' },
-                { property: 'Show A-Z Filter', value: 'No' },
-                { property: 'Items Per Page', value: '6' },
-                { property: 'Chrome Type', value: 'Title Only' },
+                { property: 'title', value: 'Find a Colleague' },
+                { property: 'searchText', value: 'Search employees...' },
+                { property: 'itemsPerPage', value: '8' },
+                { property: 'showPicture', value: 'On' },
+                { property: 'showRole', value: 'Off' },
               ]}
             />
             <RecipeCard
@@ -174,11 +170,11 @@ export default function EmployeeDirectoryWebPart() {
               useCase="Contact directory pages"
               icon={<UserCircle className="h-5 w-5" />}
               config={[
-                { property: 'Title', value: 'Staff Directory' },
-                { property: 'Show Search', value: 'Yes' },
-                { property: 'Show A-Z Filter', value: 'Yes' },
-                { property: 'Items Per Page', value: '20' },
-                { property: 'Show Role', value: 'Yes' },
+                { property: 'title', value: 'Staff Directory' },
+                { property: 'alphabeticalFilterField', value: 'PreferredName' },
+                { property: 'itemsPerPage', value: '20' },
+                { property: 'showRole', value: 'On' },
+                { property: 'showLocationResult', value: 'On' },
               ]}
             />
           </RecipeGrid>
@@ -241,6 +237,7 @@ export default function EmployeeDirectoryWebPart() {
 
           <h3>Property Pane Configuration</h3>
 
+          <h4>Basic Settings</h4>
           <table>
             <thead>
               <tr>
@@ -253,32 +250,111 @@ export default function EmployeeDirectoryWebPart() {
               <tr>
                 <td><code>title</code></td>
                 <td>Text</td>
-                <td>Web part title</td>
+                <td>Web part title (default: Employee Directory)</td>
               </tr>
               <tr>
-                <td><code>showSearch</code></td>
-                <td>Toggle</td>
-                <td>Show search input box</td>
+                <td><code>titleIconName</code></td>
+                <td>Text</td>
+                <td>Fluent UI icon name (default: ContactCard)</td>
               </tr>
               <tr>
-                <td><code>showAlphaFilter</code></td>
-                <td>Toggle</td>
-                <td>Show A-Z alphabetical filter</td>
+                <td><code>titleIconUrl</code></td>
+                <td>Text</td>
+                <td>Custom icon URL (overrides icon name)</td>
+              </tr>
+              <tr>
+                <td><code>resultSource</code></td>
+                <td>Text</td>
+                <td>SharePoint Search result source (default: Local People Results)</td>
+              </tr>
+              <tr>
+                <td><code>searchText</code></td>
+                <td>Text</td>
+                <td>Placeholder text for the search box (default: Search)</td>
+              </tr>
+              <tr>
+                <td><code>alphabeticalFilterField</code></td>
+                <td>Text</td>
+                <td>Field to use for A-Z filtering (default: PreferredName)</td>
               </tr>
               <tr>
                 <td><code>itemsPerPage</code></td>
-                <td>Number</td>
-                <td>Results displayed per page</td>
+                <td>Slider (4-100)</td>
+                <td>Results displayed per page (step: 4, default: 28)</td>
               </tr>
+            </tbody>
+          </table>
+
+          <h4>Search Options</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>enableWildcardSearch</code></td>
+                <td>Toggle</td>
+                <td>Enable wildcard search for partial matches (default: On)</td>
+              </tr>
+              <tr>
+                <td><code>trimDuplicates</code></td>
+                <td>Toggle</td>
+                <td>Remove duplicate results from search (default: Off)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Display Options</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
               <tr>
                 <td><code>showPicture</code></td>
                 <td>Toggle</td>
-                <td>Display user profile photos</td>
+                <td>Display user profile photos (default: On)</td>
               </tr>
               <tr>
                 <td><code>showRole</code></td>
                 <td>Toggle</td>
-                <td>Display job title</td>
+                <td>Display job title (default: On)</td>
+              </tr>
+              <tr>
+                <td><code>showLocationResult</code></td>
+                <td>Toggle</td>
+                <td>Display location/office in results (default: On)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Additional Link</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>additionalLinkText</code></td>
+                <td>Text</td>
+                <td>Text for an additional link in the footer</td>
+              </tr>
+              <tr>
+                <td><code>additionalLinkUrl</code></td>
+                <td>Text</td>
+                <td>URL for the additional link</td>
               </tr>
             </tbody>
           </table>

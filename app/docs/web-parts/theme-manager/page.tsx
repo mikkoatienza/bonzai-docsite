@@ -27,7 +27,7 @@ export default function ThemeManagerWebPart() {
           {/* QUICK START */}
           <QuickStart
             title="Get Theme Manager Working in 3 Steps"
-            time="2 minutes"
+            time="10-20 minutes"
             steps={[
               {
                 title: 'Add Theme Manager to your homepage',
@@ -87,35 +87,31 @@ export default function ThemeManagerWebPart() {
               {
                 title: 'Add the Theme Manager web part',
                 description: 'Edit the page, click +, and add "Bonzai Theme Manager". Place it at the bottom of the page.',
-                tip: 'Set "Show in Edit Mode Only" to hide it from regular users.',
+                tip: 'Enable "Show in Edit Mode Only" in the property pane to hide it from regular users.',
               },
               {
-                title: 'Open the property pane',
-                description: 'Click the pencil icon to access color pickers and theme settings.',
+                title: 'Choose a Quick Theme preset (optional)',
+                description: 'Select from preset themes: Bonzai Default, Corporate Blue, Warm Earth, Cool Mint, Dark Mode, or High Contrast.',
               },
               {
-                title: 'Set the primary color',
-                description: 'Use the color picker to select your brand\'s primary color. This affects buttons, links, and accents.',
+                title: 'Customize Core Colors',
+                description: 'Use the color pickers directly in the web part to set Primary (links, buttons), Background (pages), Text (headings), and Accent (highlights) colors.',
               },
               {
-                title: 'Set the secondary color',
-                description: 'Choose a complementary secondary color for highlights and secondary elements.',
+                title: 'Configure Style Options',
+                description: 'Toggle Dark Mode on/off and choose a Corner Style (Sharp, Rounded, or Pill).',
               },
               {
-                title: 'Configure background and text colors',
-                description: 'Set background and text colors. Ensure sufficient contrast for accessibility.',
+                title: 'Preview changes live',
+                description: 'The Live Preview section shows how your theme will look. All changes apply instantly.',
               },
               {
-                title: 'Enable dark mode toggle',
-                description: 'Toggle "Enable Dark Mode" to let users switch between light and dark themes.',
+                title: 'Save your theme',
+                description: 'Click "Save Theme" to persist your settings. Theme is stored in browser localStorage.',
               },
               {
-                title: 'Select a preset (optional)',
-                description: 'Choose from preset themes for quick application: Corporate Blue, Modern Purple, Warm Orange, etc.',
-              },
-              {
-                title: 'Publish',
-                description: 'Save and publish. Theme changes apply instantly to all Bonzai web parts.',
+                title: 'Publish the page',
+                description: 'Save and publish. The theme applies to all Bonzai web parts across the site.',
               },
             ]}
           />
@@ -201,19 +197,23 @@ export default function ThemeManagerWebPart() {
             items={[
               {
                 problem: 'Theme changes not appearing',
-                solution: 'Clear browser cache and refresh. Ensure the page with Theme Manager is published.',
+                solution: 'Clear browser cache and refresh. Ensure the page with Theme Manager is published. Click "Save Theme" to persist changes.',
               },
               {
-                problem: 'Dark mode toggle not visible',
-                solution: 'Enable "Show Dark Mode Toggle" in the property pane.',
+                problem: 'Theme not persisting after page reload',
+                solution: 'Click "Save Theme" to save to localStorage. Ensure browser local storage is enabled and not blocked.',
               },
               {
                 problem: 'Colors look wrong on some pages',
-                solution: 'Ensure at least one Bonzai web part is on each page to load theme CSS.',
+                solution: 'Ensure at least one Bonzai web part is on each page to load theme CSS. Theme uses CSS Custom Properties.',
               },
               {
                 problem: 'Theme Manager visible to all users',
-                solution: 'Enable "Show in Edit Mode Only" in the property pane.',
+                solution: 'Enable "Show in Edit Mode" toggle in the property pane. Regular users will see a message to edit the page.',
+              },
+              {
+                problem: 'Dark mode toggle not working as expected',
+                solution: 'When toggling dark mode, background and text colors are automatically adjusted. Customize them further using the color pickers.',
               },
             ]}
           />
@@ -223,26 +223,43 @@ export default function ThemeManagerWebPart() {
           <h2>Reference</h2>
 
           <h3>Property Pane Configuration</h3>
+          <p>The property pane has minimal settings — color customization is done directly in the web part UI.</p>
           <table>
             <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
             <tbody>
-              <tr><td><code>primaryColor</code></td><td>Color Picker</td><td>Main brand/accent color</td></tr>
-              <tr><td><code>secondaryColor</code></td><td>Color Picker</td><td>Secondary accent color</td></tr>
-              <tr><td><code>backgroundColor</code></td><td>Color Picker</td><td>Page background color</td></tr>
-              <tr><td><code>textColor</code></td><td>Color Picker</td><td>Primary text color</td></tr>
-              <tr><td><code>enableDarkMode</code></td><td>Toggle</td><td>Show dark mode toggle</td></tr>
-              <tr><td><code>preset</code></td><td>Dropdown</td><td>Apply a preset theme</td></tr>
-              <tr><td><code>showInEditModeOnly</code></td><td>Toggle</td><td>Hide from regular users</td></tr>
+              <tr><td><code>showInEditMode</code></td><td>Toggle</td><td>Only show Theme Manager when page is in edit mode (default: On)</td></tr>
+              <tr><td><code>persistToSite</code></td><td>Toggle</td><td>Save theme to site-level storage (future feature, currently disabled)</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Theme Colors (configured in web part UI)</h3>
+          <table>
+            <thead><tr><th>Color</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Primary</strong></td><td>Links, buttons, icons, accents</td></tr>
+              <tr><td><strong>Background</strong></td><td>Page and card backgrounds</td></tr>
+              <tr><td><strong>Text</strong></td><td>Headings and body text</td></tr>
+              <tr><td><strong>Accent</strong></td><td>Highlights, badges, notifications</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Style Options</h3>
+          <table>
+            <thead><tr><th>Option</th><th>Values</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Dark Mode</strong></td><td>On/Off</td><td>Toggle between light and dark themes</td></tr>
+              <tr><td><strong>Corner Style</strong></td><td>Sharp, Rounded, Pill</td><td>Border radius for cards and buttons</td></tr>
             </tbody>
           </table>
 
           <h3>Preset Themes</h3>
           <ul>
-            <li><strong>Default:</strong> Teal primary color (Bonzai brand)</li>
-            <li><strong>Corporate Blue:</strong> Professional blue theme</li>
-            <li><strong>Modern Purple:</strong> Contemporary purple accent</li>
-            <li><strong>Warm Orange:</strong> Energetic orange theme</li>
-            <li><strong>Forest Green:</strong> Natural green palette</li>
+            <li><strong>Bonzai Default:</strong> Teal primary (#70a7af), white background</li>
+            <li><strong>Corporate Blue:</strong> Professional Microsoft blue (#0078d4)</li>
+            <li><strong>Warm Earth:</strong> Earthy brown tones (#b4663f)</li>
+            <li><strong>Cool Mint:</strong> Fresh teal accent (#00a69c)</li>
+            <li><strong>Dark Mode:</strong> Dark background with light teal accent</li>
+            <li><strong>High Contrast:</strong> Yellow on black for accessibility</li>
           </ul>
 
           <h3>Comparison with Classic Theming</h3>

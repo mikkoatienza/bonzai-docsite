@@ -20,7 +20,7 @@ export default function NewsCommunicationRecipe() {
               2 Web Parts
             </span>
             <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
-              ~10 minutes
+              30-45 min (first time)
             </span>
           </div>
 
@@ -164,6 +164,7 @@ export default function NewsCommunicationRecipe() {
     </DocsPage>
   );
 }
+
 
 
 

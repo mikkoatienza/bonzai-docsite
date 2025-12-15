@@ -20,15 +20,25 @@ export default function HomePageRecipe() {
               5 Web Parts
             </span>
             <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
-              ~15 minutes
+              30-60 min (first time)
             </span>
           </div>
 
           <h2>Overview</h2>
           <p>
-            This recipe creates a complete intranet homepage with featured spotlight content, 
+            This recipe creates an intranet homepage with featured spotlight content, 
             favourite sites and documents for quick access, and a theme manager for customization.
           </p>
+
+          <Callout type="info" title="Prerequisites">
+            Before following this recipe, you need:
+            <ul style={{ marginBottom: 0 }}>
+              <li>Bonzai 2 deployed to your tenant (see <a href="/docs/getting-started/installation">Installation Guide</a>)</li>
+              <li>A Communication Site created</li>
+              <li>SharePoint lists created (Site Directory, Documents library)</li>
+              <li>Content ready (pages with Showcase column, sites in directory)</li>
+            </ul>
+          </Callout>
 
           <h2>Page Layout</h2>
           <p>Use this structure for your homepage:</p>
@@ -179,6 +189,7 @@ export default function HomePageRecipe() {
     </DocsPage>
   );
 }
+
 
 
 

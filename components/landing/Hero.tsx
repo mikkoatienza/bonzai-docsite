@@ -27,16 +27,15 @@ export function Hero() {
 
           {/* Main heading */}
           <h1 className="font-heading text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-5xl lg:text-6xl">
-            Build Beautiful Intranets with{' '}
-            <span className="gradient-text">Bonzai 2</span>
+            <span className="gradient-text">Bonzai 2</span> for Modern SharePoint
           </h1>
 
           {/* Subheading */}
           <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300 sm:text-xl">
-            A modern SharePoint Framework (SPFx) solution that transforms your 
-            SharePoint Online into a stunning, feature-rich intranet. 
+            A SharePoint Framework (SPFx) solution providing 21+ web parts for 
+            SharePoint Online intranets. Built with React and Fluent UI.
             <span className="font-semibold text-bonzai-700 dark:text-bonzai-400">
-              {' '}No AWS infrastructure required.
+              {' '}No external infrastructure required.
             </span>
           </p>
 

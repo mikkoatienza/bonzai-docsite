@@ -12,7 +12,7 @@ export default function DocumentPortalWebPart() {
     <DocsPage>
       <DocsTitle>Document Portal</DocsTitle>
       <DocsDescription>
-        Full-featured document search with typeahead, filtering, and refinement panels.
+        Full-featured document search with typeahead suggestions, popular searches, favourites, and multiple view modes.
       </DocsDescription>
       <DocsBody>
         <div className="prose prose-gray dark:prose-invert max-w-none">
@@ -28,7 +28,7 @@ export default function DocumentPortalWebPart() {
           {/* QUICK START */}
           <QuickStart
             title="Get Document Portal Working in 3 Steps"
-            time="3 minutes"
+            time="15-30 minutes"
             prerequisites={[
               'Bonzai 2 package installed on your site',
               'Documents in a SharePoint library (indexed by search)',
@@ -39,12 +39,12 @@ export default function DocumentPortalWebPart() {
                 description: 'Edit the page, add a full-width section, click + and search for "Document Portal".',
               },
               {
-                title: 'Configure search scope',
-                description: 'Open the property pane and set the search scope to your document library or site path.',
+                title: 'Configure result source (optional)',
+                description: 'Open the property pane and set the Result Source to a specific search result source, or leave empty for default.',
               },
               {
-                title: 'Enable refinement and favourites',
-                description: 'Toggle on "Show Refinement" and "Show Favourites" for the full experience, then publish.',
+                title: 'Enable favourites and previews',
+                description: 'Toggle on "Show Favourite Documents" and "Show Document Previews" for the full experience, then publish.',
               },
             ]}
           />
@@ -94,29 +94,29 @@ export default function DocumentPortalWebPart() {
                 description: 'Click the + button, search for "Document Portal", and add it to the full-width section.',
               },
               {
-                title: 'Set the search scope',
-                description: 'Open the property pane and configure the Search Scope. Use a site URL, library path, or leave empty for all content.',
-                tip: 'To limit to one library: /sites/intranet/Shared%20Documents',
+                title: 'Configure the Result Source (optional)',
+                description: 'Open the property pane and set the Result Source to a specific SharePoint search result source name or ID, or leave empty for the default search.',
+                tip: 'Result sources control which content is searched. Ask your admin for available result source names.',
               },
               {
-                title: 'Enable typeahead search',
-                description: 'Toggle "Show Typeahead" to enable search suggestions as users type.',
+                title: 'Configure typeahead display fields',
+                description: 'Set "Typeahead Display Fields" to configure what appears in search suggestions. Format: "Label:ManagedProperty;Label2:Property2".',
               },
               {
-                title: 'Configure the refinement panel',
-                description: 'Toggle "Show Refinement" to enable the filter sidebar. Users can filter by file type, author, date, and custom metadata.',
+                title: 'Choose the default view',
+                description: 'Select "Default View" as List or Grid to control how search results display.',
               },
               {
-                title: 'Enable the favourites panel',
-                description: 'Toggle "Show Favourites" to display a panel where users can see their bookmarked documents.',
+                title: 'Enable favourite documents',
+                description: 'Toggle "Show Favourite Documents" to display a favourites section where users can see their bookmarked documents.',
               },
               {
-                title: 'Set results per page',
-                description: 'Configure how many documents appear per page. 10-20 is typical for a comfortable browsing experience.',
+                title: 'Set items per page',
+                description: 'Configure how many documents appear per page using the "Items Per Page" slider (10-100).',
               },
               {
                 title: 'Publish and test search',
-                description: 'Save and publish. Test by searching for known documents and verifying refinement filters work.',
+                description: 'Save and publish. Test by searching for known documents and verifying results appear correctly.',
               },
             ]}
           />
@@ -132,37 +132,38 @@ export default function DocumentPortalWebPart() {
               useCase="Dedicated document search page"
               icon={<FileSearch className="h-5 w-5" />}
               config={[
-                { property: 'Title', value: 'Document Center' },
-                { property: 'Search Scope', value: '/sites/intranet' },
-                { property: 'Show Typeahead', value: 'Yes' },
-                { property: 'Show Refinement', value: 'Yes' },
-                { property: 'Show Favourites', value: 'Yes' },
-                { property: 'Results Per Page', value: '20' },
+                { property: 'title', value: 'Document Center' },
+                { property: 'defaultView', value: 'list' },
+                { property: 'showFavouriteDocuments', value: 'On' },
+                { property: 'showDocumentPreviews', value: 'On' },
+                { property: 'showPopularSearches', value: 'On' },
+                { property: 'itemsPerPage', value: '30' },
               ]}
             />
             <RecipeCard
               title="Department Documents"
-              description="Scoped to a specific team's library"
+              description="Using a specific result source for a team"
               useCase="Team or department page"
               icon={<FolderOpen className="h-5 w-5" />}
               config={[
-                { property: 'Title', value: 'HR Documents' },
-                { property: 'Search Scope', value: '/sites/HR/Documents' },
-                { property: 'Show Typeahead', value: 'Yes' },
-                { property: 'Show Refinement', value: 'Yes' },
-                { property: 'Results Per Page', value: '15' },
+                { property: 'title', value: 'HR Documents' },
+                { property: 'resultSource', value: 'HR Documents Result Source' },
+                { property: 'defaultView', value: 'grid' },
+                { property: 'showFavouriteDocuments', value: 'On' },
+                { property: 'itemsPerPage', value: '20' },
               ]}
             />
             <RecipeCard
               title="Policy Repository"
-              description="Filtered to policy documents only"
+              description="Filtered to policy documents with search filters"
               useCase="Compliance and policy pages"
               icon={<Filter className="h-5 w-5" />}
               config={[
-                { property: 'Title', value: 'Policies & Procedures' },
-                { property: 'Search Scope', value: '/sites/policies' },
-                { property: 'Show Refinement', value: 'Yes' },
-                { property: 'Show Favourites', value: 'Yes' },
+                { property: 'title', value: 'Policies & Procedures' },
+                { property: 'resultSource', value: 'Policies' },
+                { property: 'showFavouriteDocuments', value: 'On' },
+                { property: 'showDocumentPreviews', value: 'On' },
+                { property: 'sortOrder', value: 'name' },
               ]}
             />
             <RecipeCard
@@ -171,10 +172,10 @@ export default function DocumentPortalWebPart() {
               useCase="Personal dashboard pages"
               icon={<Star className="h-5 w-5" />}
               config={[
-                { property: 'Title', value: 'My Documents' },
-                { property: 'Show Favourites', value: 'Yes (Primary)' },
-                { property: 'Show Typeahead', value: 'Yes' },
-                { property: 'Results Per Page', value: '10' },
+                { property: 'title', value: 'My Documents' },
+                { property: 'showFavouriteDocuments', value: 'On' },
+                { property: 'enableWildcardSearch', value: 'On' },
+                { property: 'itemsPerPage', value: '15' },
               ]}
             />
           </RecipeGrid>
@@ -211,20 +212,20 @@ export default function DocumentPortalWebPart() {
                 details: 'You can request a re-crawl via Site Settings → Search and offline availability → Reindex site.',
               },
               {
-                problem: 'Refinement filters not showing expected values',
-                solution: 'Refinement is based on managed properties configured in SharePoint search schema. Contact your admin to verify custom properties are mapped.',
-              },
-              {
                 problem: 'Typeahead suggestions are slow or missing',
-                solution: 'Typeahead uses the SharePoint search suggest API. Ensure users have permission to the content and that search is functioning normally.',
+                solution: 'Typeahead uses the SharePoint search suggest API. Ensure users have permission to the content and that search is functioning normally. Check the typeaheadDisplayFields configuration.',
               },
               {
                 problem: 'Favourites not persisting',
                 solution: 'Favourites are stored per-user. Ensure users are signed in. Clearing browser data may reset favourites.',
               },
               {
-                problem: 'Results from wrong site or library',
-                solution: 'Check the Search Scope property. Ensure it points to the correct site or library path. Use full URLs for clarity.',
+                problem: 'Results not scoped correctly',
+                solution: 'Check the Result Source property. Ensure it points to the correct SharePoint search result source. Contact your admin to configure result sources.',
+              },
+              {
+                problem: 'Sort dropdown not appearing',
+                solution: 'Ensure "Show Sort Dropdown" toggle is enabled in the property pane Display Settings.',
               },
             ]}
           />
@@ -239,12 +240,138 @@ export default function DocumentPortalWebPart() {
           <h3>Related Components</h3>
           <p>Document Portal works with companion components:</p>
           <ul>
-            <li><strong>Favourite Documents:</strong> User bookmarks for documents</li>
-            <li><strong>Document Portal Refinement:</strong> Filtering/refinement panel (can be separate or embedded)</li>
+            <li><strong>Favourite Documents:</strong> User bookmarks for documents (integrated into Document Portal)</li>
+            <li><strong>Documents Rollup:</strong> For displaying a fixed list of documents without search</li>
+            <li><strong>Documents Table:</strong> For tabular document display</li>
           </ul>
 
           <h3>Property Pane Configuration</h3>
 
+          <h4>Search Settings</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>resultSource</code></td>
+                <td>Text</td>
+                <td>SharePoint Search result source name/ID</td>
+              </tr>
+              <tr>
+                <td><code>searchLabel</code></td>
+                <td>Text</td>
+                <td>Search box placeholder text</td>
+              </tr>
+              <tr>
+                <td><code>enableWildcardSearch</code></td>
+                <td>Toggle</td>
+                <td>Enable wildcard search (*term*)</td>
+              </tr>
+              <tr>
+                <td><code>typeaheadDisplayFields</code></td>
+                <td>Text (Multiline)</td>
+                <td>Fields for typeahead suggestions. Format: &quot;Label:ManagedProperty;Label2:Property2&quot;</td>
+              </tr>
+              <tr>
+                <td><code>searchFilters</code></td>
+                <td>Text (Multiline)</td>
+                <td>Additional search filters</td>
+              </tr>
+              <tr>
+                <td><code>itemsPerPage</code></td>
+                <td>Slider (10-100)</td>
+                <td>Number of results per page</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Display Settings</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>defaultView</code></td>
+                <td>Dropdown</td>
+                <td>Default view mode: List or Grid</td>
+              </tr>
+              <tr>
+                <td><code>listViewDisplayProperties</code></td>
+                <td>Text (Multiline)</td>
+                <td>Columns for list view. Format: &quot;Label:ManagedProperty;...&quot;</td>
+              </tr>
+              <tr>
+                <td><code>gridViewDisplayProperties</code></td>
+                <td>Text (Multiline)</td>
+                <td>Properties for grid view. Format: &quot;Label:ManagedProperty;...&quot;</td>
+              </tr>
+              <tr>
+                <td><code>showSortDropDown</code></td>
+                <td>Toggle</td>
+                <td>Show sort dropdown to users</td>
+              </tr>
+              <tr>
+                <td><code>sortOrder</code></td>
+                <td>Dropdown</td>
+                <td>Default sort: Relevance, Date, or Name</td>
+              </tr>
+              <tr>
+                <td><code>trimDuplicates</code></td>
+                <td>Toggle</td>
+                <td>Remove duplicate results from search</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Features</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>showResults</code></td>
+                <td>Toggle</td>
+                <td>Show search results section</td>
+              </tr>
+              <tr>
+                <td><code>showPopularSearches</code></td>
+                <td>Toggle</td>
+                <td>Show popular searches section</td>
+              </tr>
+              <tr>
+                <td><code>showFavouriteDocuments</code></td>
+                <td>Toggle</td>
+                <td>Show favourite documents section</td>
+              </tr>
+              <tr>
+                <td><code>favouriteDocumentsLabel</code></td>
+                <td>Text</td>
+                <td>Label for the favourites section</td>
+              </tr>
+              <tr>
+                <td><code>showDocumentPreviews</code></td>
+                <td>Toggle</td>
+                <td>Enable document preview functionality</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Title &amp; Navigation</h4>
           <table>
             <thead>
               <tr>
@@ -260,29 +387,65 @@ export default function DocumentPortalWebPart() {
                 <td>Web part title</td>
               </tr>
               <tr>
-                <td><code>searchScope</code></td>
+                <td><code>titleUrl</code></td>
                 <td>Text</td>
-                <td>Search scope/path (site or library URL)</td>
+                <td>URL to make the title clickable</td>
               </tr>
               <tr>
-                <td><code>showTypeahead</code></td>
-                <td>Toggle</td>
-                <td>Enable typeahead suggestions</td>
+                <td><code>titleIconName</code></td>
+                <td>Text</td>
+                <td>Fluent UI icon name (e.g., DocumentSearch)</td>
               </tr>
               <tr>
-                <td><code>showRefinement</code></td>
-                <td>Toggle</td>
-                <td>Show refinement filter panel</td>
+                <td><code>titleIconUrl</code></td>
+                <td>Text</td>
+                <td>Custom icon URL (overrides icon name)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Appearance</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>chromeType</code></td>
+                <td>Dropdown</td>
+                <td>Chrome type: None, Title Only, Border Only, Title and Border</td>
               </tr>
               <tr>
-                <td><code>showFavourites</code></td>
-                <td>Toggle</td>
-                <td>Show favourites panel</td>
+                <td><code>fixedHeight</code></td>
+                <td>Slider (200-800)</td>
+                <td>Fixed height in pixels</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Advanced</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>description</code></td>
+                <td>Text (Multiline)</td>
+                <td>Web part description</td>
               </tr>
               <tr>
-                <td><code>resultsPerPage</code></td>
-                <td>Number</td>
-                <td>Results displayed per page</td>
+                <td><code>helpUrl</code></td>
+                <td>Text</td>
+                <td>Help documentation URL</td>
               </tr>
             </tbody>
           </table>
@@ -291,14 +454,15 @@ export default function DocumentPortalWebPart() {
 
           <ul>
             <li>✅ Full-text document search</li>
-            <li>✅ Typeahead suggestions</li>
-            <li>✅ Result filtering</li>
-            <li>✅ Favourites integration</li>
-            <li>✅ Refinement panel</li>
+            <li>✅ Typeahead suggestions (configurable display fields)</li>
+            <li>✅ Popular searches section</li>
+            <li>✅ Favourite documents integration</li>
+            <li>✅ List and Grid view modes</li>
+            <li>✅ Configurable sort options</li>
+            <li>✅ Wildcard search support</li>
+            <li>✅ Document previews</li>
             <li>✅ Pagination</li>
-            <li>✅ File type icons</li>
-            <li>✅ Preview links</li>
-            <li>⚠️ Refinement may be embedded or separate component</li>
+            <li>✅ Duplicate result trimming</li>
           </ul>
 
           <h3>Migration from Classic</h3>
@@ -320,17 +484,22 @@ export default function DocumentPortalWebPart() {
               <tr>
                 <td>Typeahead</td>
                 <td>Brick configuration</td>
-                <td>Property pane toggle</td>
+                <td>Configured via typeaheadDisplayFields property</td>
               </tr>
               <tr>
-                <td>Refinement</td>
-                <td>Separate web part</td>
-                <td>Embedded or separate</td>
+                <td>View Modes</td>
+                <td>List only</td>
+                <td>List and Grid view options</td>
               </tr>
               <tr>
                 <td>Favourites</td>
                 <td>Separate web part</td>
-                <td>Integrated panel</td>
+                <td>Integrated section (toggle)</td>
+              </tr>
+              <tr>
+                <td>Popular Searches</td>
+                <td>Not available</td>
+                <td>Built-in section (toggle)</td>
               </tr>
             </tbody>
           </table>

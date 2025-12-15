@@ -216,9 +216,18 @@ export default function WebPartsOverview() {
         <div className="prose prose-gray dark:prose-invert max-w-none">
           <p>
             Bonzai 2 includes <strong>21 web parts</strong> plus the new Theme Manager, 
-            organized into 7 categories. Each web part is built with React and Fluent UI, 
-            providing a modern, responsive experience.
+            organized into 7 categories. Each web part is built with React and Fluent UI 
+            for Modern SharePoint.
           </p>
+
+          <div className="not-prose mb-6 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-900">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              <strong>About Feature Parity:</strong> The percentage shown indicates approximate 
+              coverage of legacy Bonzai functionality. Some configuration options differ due to 
+              platform changes. Not all legacy options are available, and some new options have 
+              been added. See individual web part documentation for details.
+            </p>
+          </div>
 
           <h2>All Web Parts</h2>
 

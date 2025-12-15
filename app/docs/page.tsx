@@ -5,17 +5,28 @@ import { ArrowRight, Sparkles, Zap, Shield, BookOpen, Layers, Settings } from 'l
 export default function DocsIndex() {
   return (
     <DocsPage>
-      <DocsTitle>Introduction to Bonzai 2</DocsTitle>
+      <DocsTitle>Bonzai 2 Documentation</DocsTitle>
       <DocsDescription>
-        Modern SharePoint Framework (SPFx) solution for building beautiful intranets.
+        SharePoint Framework (SPFx) solution for Modern SharePoint Online intranets.
       </DocsDescription>
       <DocsBody>
         <div className="prose prose-gray dark:prose-invert max-w-none">
           <p className="lead">
-            Bonzai 2 is a complete rebuild of the Bonzai Intranet Platform, now running 
-            entirely within SharePoint Online using the SharePoint Framework (SPFx). 
-            No external AWS infrastructure required.
+            Bonzai 2 is a SharePoint Framework (SPFx) solution that provides 21+ web parts 
+            for building intranets on Modern SharePoint Online. It replaces the legacy 
+            Classic SharePoint Bonzai solution, eliminating the need for external AWS infrastructure.
           </p>
+          
+          <div className="not-prose my-4 rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950">
+            <p className="text-sm text-amber-800 dark:text-amber-200">
+              <strong>Migrating from Classic Bonzai?</strong> This is a platform change, not an upgrade. 
+              Modern pages must be built from scratch. See the{' '}
+              <Link href="/docs/migration/classic-vs-modern" className="font-semibold underline">
+                Migration Guide
+              </Link>{' '}
+              for details.
+            </p>
+          </div>
 
           <div className="not-prose my-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link
