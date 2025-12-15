@@ -191,8 +191,16 @@ export default function FeedbackWebPart() {
           <Troubleshooting
             items={[
               {
-                problem: 'Feedback not saving',
-                solution: 'Verify users have Contribute permission on the Feedback list.',
+                problem: '"Failed to load submissions" error',
+                solution: 'The Feedback list may be on a different site. Check the Site URL in the property pane matches where your list is located. Leave empty for current site.',
+              },
+              {
+                problem: '"List not found" but list exists',
+                solution: 'Ensure the Site URL points to the correct site. The web part looks for the list on the configured site, not necessarily where the page is.',
+              },
+              {
+                problem: 'Feedback not saving / 400 error',
+                solution: 'Verify all required columns exist (Title, Description, Category, Rating, IsAnonymous, SubmittedBy, SubmittedByName). Users need Contribute permission.',
               },
               {
                 problem: 'Rating stars not appearing',
@@ -200,7 +208,7 @@ export default function FeedbackWebPart() {
               },
               {
                 problem: 'Categories not showing',
-                solution: 'Check that the Category column exists in your list and has choice options.',
+                solution: 'Check that the Category column exists in your list and has choice options matching your configured categories.',
               },
             ]}
           />
@@ -210,17 +218,24 @@ export default function FeedbackWebPart() {
           <h2>Reference</h2>
 
           <h3>Feedback List Schema</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            Create a SharePoint list named &quot;Feedback&quot; with these columns:
+          </p>
           <table>
-            <thead><tr><th>Column</th><th>Type</th><th>Required</th></tr></thead>
+            <thead><tr><th>Column</th><th>Type</th><th>Required</th><th>Notes</th></tr></thead>
             <tbody>
-              <tr><td>Title</td><td>Single line of text</td><td>Yes</td></tr>
-              <tr><td>Category</td><td>Choice</td><td>No</td></tr>
-              <tr><td>Rating</td><td>Number (1-5)</td><td>No</td></tr>
-              <tr><td>Comments</td><td>Multiple lines</td><td>Yes</td></tr>
-              <tr><td>Email</td><td>Single line</td><td>No</td></tr>
-              <tr><td>SubmittedBy</td><td>Person</td><td>Auto</td></tr>
+              <tr><td>Title</td><td>Single line of text</td><td>Yes</td><td>Default column</td></tr>
+              <tr><td>Description</td><td>Multiple lines of text</td><td>No</td><td>Plain text</td></tr>
+              <tr><td>Category</td><td>Choice</td><td>No</td><td>e.g., General, Bug, Feature</td></tr>
+              <tr><td>Rating</td><td>Number</td><td>No</td><td>Min: 1, Max: 5 or 10</td></tr>
+              <tr><td>IsAnonymous</td><td>Yes/No</td><td>No</td><td>Default: No</td></tr>
+              <tr><td>SubmittedBy</td><td>Single line of text</td><td>No</td><td>Auto-populated</td></tr>
+              <tr><td>SubmittedByName</td><td>Single line of text</td><td>No</td><td>Auto-populated</td></tr>
             </tbody>
           </table>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+            <strong>Note:</strong> The web part uses SharePoint&apos;s built-in <code>Created</code> column for timestamps.
+          </p>
 
           <h3>Property Pane Configuration</h3>
           <table>

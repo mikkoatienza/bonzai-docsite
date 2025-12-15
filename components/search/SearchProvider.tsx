@@ -225,3 +225,5 @@ export function SearchProvider({ open, onOpenChange }: SearchDialogProps) {
   );
 }
 
+
+
