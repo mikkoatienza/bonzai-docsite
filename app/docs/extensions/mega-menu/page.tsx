@@ -20,8 +20,8 @@ export default function MegaMenuExtension() {
             <span className="rounded-full bg-violet-100 px-3 py-1 text-sm font-medium text-violet-700 dark:bg-violet-900/30 dark:text-violet-400">
               Extension
             </span>
-            <span className="rounded-full bg-bonzai-500 px-3 py-1 text-sm font-medium text-white">
-              NEW in Bonzai 2
+            <span className="text-sm text-gray-500 dark:text-gray-400">
+              Application Customizer
             </span>
           </div>
 
@@ -548,12 +548,13 @@ export default function MegaMenuExtension() {
             <li>Responsive design</li>
           </ul>
 
-          <h3>New in Bonzai 2</h3>
+          <h3>Migration from Classic Bonzai</h3>
 
           <p>
-            Mega Menu is a new extension in Bonzai 2 with no Classic Bonzai equivalent. 
-            Classic Bonzai did not include site-wide navigation customization — this 
-            was typically handled by custom master pages or third-party solutions.
+            The Mega Menu in Bonzai 2 provides similar navigation functionality to 
+            Classic Bonzai, rebuilt as a modern SPFx Application Customizer. Key 
+            improvements include responsive mobile drawer, keyboard accessibility, 
+            and SharePoint list-based configuration instead of master page customization.
           </p>
         </div>
       </DocsBody>

@@ -200,8 +200,7 @@ const webParts = [
     description: 'Display any SharePoint list as a searchable, filterable catalog with grid or list layouts.',
     icon: ShoppingCart,
     category: 'Lists',
-    parity: 'N/A',
-    isNew: true,
+    parity: '85%',
   },
 ];
 

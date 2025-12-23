@@ -20,8 +20,8 @@ export default function MarketplaceWebPart() {
             <span className="rounded-full bg-amber-100 px-3 py-1 text-sm font-medium text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
               Lists
             </span>
-            <span className="rounded-full bg-bonzai-500 px-3 py-1 text-sm font-medium text-white">
-              NEW in Bonzai 2
+            <span className="text-sm text-gray-500 dark:text-gray-400">
+              Feature Parity: 85%
             </span>
           </div>
 
@@ -510,12 +510,13 @@ export default function MarketplaceWebPart() {
             with large lists. The web part caches list schema to reduce API calls.
           </p>
 
-          <h3>New in Bonzai 2</h3>
+          <h3>Migration from Classic Bonzai</h3>
 
           <p>
-            Marketplace is a new web part in Bonzai 2 with no Classic Bonzai equivalent. 
-            It was designed to provide a flexible, schema-agnostic way to display any 
-            SharePoint list data as a searchable catalog.
+            The Marketplace web part in Bonzai 2 provides similar functionality to the 
+            Classic Bonzai Marketplace, with modernized architecture using React and 
+            SPFx. Key improvements include dynamic schema discovery, SharePoint paging 
+            tokens for large lists, and automatic User field expansion.
           </p>
         </div>
       </DocsBody>

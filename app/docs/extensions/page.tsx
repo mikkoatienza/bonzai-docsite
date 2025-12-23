@@ -24,9 +24,6 @@ export default function ExtensionsOverview() {
             <span className="rounded-full bg-violet-100 px-3 py-1 text-sm font-medium text-violet-700 dark:bg-violet-900/30 dark:text-violet-400">
               Extensions
             </span>
-            <span className="rounded-full bg-bonzai-500 px-3 py-1 text-sm font-medium text-white">
-              NEW in Bonzai 2
-            </span>
           </div>
 
           <h2>What are Extensions?</h2>
