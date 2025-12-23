@@ -225,9 +225,8 @@ export default function WebPartsOverview() {
       <DocsBody>
         <div className="prose prose-gray dark:prose-invert max-w-none">
           <p>
-            Bonzai 2 includes <strong>22 web parts</strong> including the new Theme Manager 
-            and Marketplace, organized into 8 categories. Each web part is built with 
-            React and Fluent UI for Modern SharePoint.
+            Bonzai 2 includes <strong>22 web parts</strong> organized into 8 categories. 
+            Each web part is built with React and Fluent UI for Modern SharePoint.
           </p>
 
           <div className="not-prose mb-6 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-900">
@@ -331,7 +330,7 @@ export default function WebPartsOverview() {
 
           <h3>Lists</h3>
           <p>
-            Display SharePoint list data with flexible layouts. Includes the new 
+            Display SharePoint list data with flexible layouts. Includes the 
             Marketplace web part for searchable, filterable list catalogs.
           </p>
         </div>
