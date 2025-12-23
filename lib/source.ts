@@ -74,6 +74,19 @@ export const pageTree: PageTree.Root = {
           name: 'Utility',
         },
         { type: 'page', name: 'Theme Manager', url: '/docs/web-parts/theme-manager' },
+        {
+          type: 'separator',
+          name: 'Lists',
+        },
+        { type: 'page', name: 'Marketplace', url: '/docs/web-parts/marketplace' },
+      ],
+    },
+    {
+      type: 'folder',
+      name: 'Extensions',
+      children: [
+        { type: 'page', name: 'Overview', url: '/docs/extensions' },
+        { type: 'page', name: 'Mega Menu', url: '/docs/extensions/mega-menu' },
       ],
     },
     {

@@ -21,6 +21,7 @@ import {
   Globe,
   ThumbsUp,
   FileText,
+  ShoppingCart,
 } from 'lucide-react';
 
 const webParts = [
@@ -193,6 +194,15 @@ const webParts = [
     parity: 'N/A',
     isNew: true,
   },
+  {
+    name: 'Marketplace',
+    slug: 'marketplace',
+    description: 'Display any SharePoint list as a searchable, filterable catalog with grid or list layouts.',
+    icon: ShoppingCart,
+    category: 'Lists',
+    parity: 'N/A',
+    isNew: true,
+  },
 ];
 
 const categoryColors: Record<string, string> = {
@@ -203,6 +213,7 @@ const categoryColors: Record<string, string> = {
   Navigation: 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400',
   People: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400',
   Utility: 'bg-bonzai-100 text-bonzai-700 dark:bg-bonzai-900/30 dark:text-bonzai-400',
+  Lists: 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400',
 };
 
 export default function WebPartsOverview() {
@@ -210,14 +221,14 @@ export default function WebPartsOverview() {
     <DocsPage>
       <DocsTitle>Web Parts Reference</DocsTitle>
       <DocsDescription>
-        Complete reference for all 21+ Bonzai 2 web parts.
+        Complete reference for all 22+ Bonzai 2 web parts.
       </DocsDescription>
       <DocsBody>
         <div className="prose prose-gray dark:prose-invert max-w-none">
           <p>
-            Bonzai 2 includes <strong>21 web parts</strong> plus the new Theme Manager, 
-            organized into 7 categories. Each web part is built with React and Fluent UI 
-            for Modern SharePoint.
+            Bonzai 2 includes <strong>22 web parts</strong> including the new Theme Manager 
+            and Marketplace, organized into 8 categories. Each web part is built with 
+            React and Fluent UI for Modern SharePoint.
           </p>
 
           <div className="not-prose mb-6 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-900">
@@ -317,6 +328,12 @@ export default function WebPartsOverview() {
           <p>
             Theme and configuration tools. Includes the new Theme Manager web part 
             for on-page theming with dark mode support.
+          </p>
+
+          <h3>Lists</h3>
+          <p>
+            Display SharePoint list data with flexible layouts. Includes the new 
+            Marketplace web part for searchable, filterable list catalogs.
           </p>
         </div>
       </DocsBody>
