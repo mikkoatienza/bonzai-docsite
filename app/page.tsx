@@ -29,11 +29,19 @@ export default function HomePage() {
             >
               Web Parts
             </Link>
+            <a
+              href="https://support.bonzai.aurea.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-gray-600 hover:text-bonzai-600 dark:text-gray-300 dark:hover:text-bonzai-400"
+            >
+              Support
+            </a>
             <Link
-              href="/docs/getting-started/installation"
+              href="/docs/getting-started/download"
               className="rounded-lg bg-bonzai-700 px-4 py-2 text-sm font-medium text-white hover:bg-bonzai-600"
             >
-              Get Started
+              Download
             </Link>
           </div>
         </div>
@@ -58,24 +66,34 @@ export default function HomePage() {
       <section className="bg-bonzai-700 py-16">
         <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">
           <h2 className="font-heading text-3xl font-bold text-white sm:text-4xl">
-            Getting Started with Bonzai 2
+            Ready to Get Started?
           </h2>
           <p className="mt-4 text-lg text-bonzai-100">
-            Explore the documentation to understand installation, configuration, and migration.
+            Download the Bonzai 2 package and follow our installation guide to deploy to your SharePoint tenant.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
-              href="/docs/getting-started/installation"
+              href="/docs/getting-started/download"
               className="inline-flex items-center rounded-lg bg-white px-6 py-3 text-base font-semibold text-bonzai-700 shadow-lg transition-all hover:bg-bonzai-50"
+            >
+              Download Bonzai 2
+            </Link>
+            <Link
+              href="/docs/getting-started/installation"
+              className="inline-flex items-center rounded-lg border border-white/30 px-6 py-3 text-base font-semibold text-white transition-all hover:bg-white/10"
             >
               Installation Guide
             </Link>
-            <Link
-              href="/docs/migration/classic-vs-modern"
-              className="inline-flex items-center rounded-lg border border-white/30 px-6 py-3 text-base font-semibold text-white transition-all hover:bg-white/10"
+          </div>
+          <div className="mt-6">
+            <a
+              href="https://support.bonzai.aurea.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-medium text-bonzai-200 hover:text-white"
             >
-              Migration Guide
-            </Link>
+              Need help? Contact our support team →
+            </a>
           </div>
         </div>
       </section>

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, Sparkles, Zap, Shield } from 'lucide-react';
+import { ArrowRight, Sparkles, Zap, Shield, Download, Headphones } from 'lucide-react';
 
 export function Hero() {
   return (
@@ -42,11 +42,11 @@ export function Hero() {
           {/* CTA Buttons */}
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
-              href="/docs/getting-started/installation"
+              href="/docs/getting-started/download"
               className="inline-flex items-center gap-2 rounded-lg bg-bonzai-700 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-bonzai-700/25 transition-all hover:bg-bonzai-600 hover:shadow-xl hover:shadow-bonzai-700/30"
             >
-              Get Started
-              <ArrowRight className="h-4 w-4" />
+              <Download className="h-4 w-4" />
+              Download Bonzai 2
             </Link>
             <Link
               href="/docs"
@@ -54,6 +54,19 @@ export function Hero() {
             >
               Read Documentation
             </Link>
+          </div>
+
+          {/* Support Link */}
+          <div className="mt-6">
+            <a
+              href="https://support.bonzai.aurea.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-bonzai-600 dark:text-gray-400 dark:hover:text-bonzai-400"
+            >
+              <Headphones className="h-4 w-4" />
+              Need help? Contact Support
+            </a>
           </div>
 
           {/* Feature highlights */}

@@ -10,13 +10,15 @@ import {
   Palette,
   ChefHat,
   BookOpen,
-  ArrowRight
+  ArrowRight,
+  Download,
+  Headphones
 } from 'lucide-react';
 
 const popularLinks = [
+  { label: 'Download', href: '/docs/getting-started/download', icon: Download, highlight: true },
   { label: 'News Rollup', href: '/docs/web-parts/news-rollup', icon: Newspaper },
   { label: 'Important Messages', href: '/docs/web-parts/important-messages', icon: AlertCircle },
-  { label: 'Advanced Search', href: '/docs/web-parts/advanced-search', icon: Search },
   { label: 'Document Portal', href: '/docs/web-parts/document-portal', icon: FolderSearch },
   { label: 'Employee Directory', href: '/docs/web-parts/employee-directory', icon: Users },
   { label: 'Theme Manager', href: '/docs/web-parts/theme-manager', icon: Palette },
@@ -40,16 +42,29 @@ export function PopularLinks() {
         <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-8">
           {popularLinks.map((link) => {
             const Icon = link.icon;
+            const isHighlight = 'highlight' in link && link.highlight;
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className="group flex flex-col items-center gap-2 rounded-xl p-4 text-center transition-all hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={`group flex flex-col items-center gap-2 rounded-xl p-4 text-center transition-all ${
+                  isHighlight 
+                    ? 'bg-bonzai-50 ring-2 ring-bonzai-200 hover:bg-bonzai-100 dark:bg-bonzai-950 dark:ring-bonzai-800 dark:hover:bg-bonzai-900' 
+                    : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+                }`}
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 text-gray-600 transition-colors group-hover:bg-bonzai-100 group-hover:text-bonzai-700 dark:bg-gray-800 dark:text-gray-400 dark:group-hover:bg-bonzai-900 dark:group-hover:text-bonzai-400">
+                <div className={`flex h-12 w-12 items-center justify-center rounded-xl transition-colors ${
+                  isHighlight
+                    ? 'bg-bonzai-100 text-bonzai-700 group-hover:bg-bonzai-200 dark:bg-bonzai-900 dark:text-bonzai-400'
+                    : 'bg-gray-100 text-gray-600 group-hover:bg-bonzai-100 group-hover:text-bonzai-700 dark:bg-gray-800 dark:text-gray-400 dark:group-hover:bg-bonzai-900 dark:group-hover:text-bonzai-400'
+                }`}>
                   <Icon className="h-6 w-6" />
                 </div>
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                <span className={`text-sm font-medium ${
+                  isHighlight
+                    ? 'text-bonzai-700 dark:text-bonzai-400'
+                    : 'text-gray-700 dark:text-gray-300'
+                }`}>
                   {link.label}
                 </span>
               </Link>
