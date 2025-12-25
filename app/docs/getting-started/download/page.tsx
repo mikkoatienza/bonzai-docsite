@@ -5,7 +5,7 @@ import { Download, Package, Clock, CheckCircle, HelpCircle, ExternalLink, Shield
 export default function DownloadPage() {
   const currentVersion = '1.0.0';
   const releaseDate = 'December 2024';
-  const packageSize = '~2.5 MB';
+  const packageSize = '~42 MB';
   const githubReleasesUrl = 'https://github.com/mikkoatienza/bonzai-2/releases/latest';
 
   return (
