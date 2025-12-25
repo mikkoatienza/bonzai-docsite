@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useState } from 'react';
-import { ChevronDown, HelpCircle, CheckCircle } from 'lucide-react';
+import { ChevronDown, HelpCircle, CheckCircle, ExternalLink } from 'lucide-react';
 
 interface TroubleshootItem {
   problem: string;
@@ -63,6 +63,22 @@ export function Troubleshooting({ items }: TroubleshootingProps) {
             )}
           </div>
         ))}
+      </div>
+      
+      {/* Support Link */}
+      <div className="mt-4 rounded-lg border border-bonzai-200 bg-bonzai-50 p-4 dark:border-bonzai-800 dark:bg-bonzai-950">
+        <p className="text-sm text-gray-700 dark:text-gray-300">
+          <strong>Still need help?</strong>{' '}
+          <a
+            href="https://support.bonzai.aurea.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 font-medium text-bonzai-600 hover:text-bonzai-700 dark:text-bonzai-400 dark:hover:text-bonzai-300"
+          >
+            Contact Bonzai Support
+            <ExternalLink className="h-3 w-3" />
+          </a>
+        </p>
       </div>
     </div>
   );

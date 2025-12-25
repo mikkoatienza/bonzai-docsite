@@ -103,15 +103,26 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Community */}
+          {/* Support */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white">
-              Community
+              Support
             </h3>
             <ul className="mt-4 space-y-3">
               <li>
                 <a
-                  href="https://github.com/trilogy-group/bonzai-2"
+                  href="https://support.bonzai.aurea.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-bonzai-600 dark:text-gray-400 dark:hover:text-bonzai-400"
+                >
+                  Contact Support
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/mikkoatienza/bonzai-2"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-bonzai-600 dark:text-gray-400 dark:hover:text-bonzai-400"

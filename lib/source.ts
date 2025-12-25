@@ -9,6 +9,7 @@ export const pageTree: PageTree.Root = {
       name: 'Getting Started',
       children: [
         { type: 'page', name: 'Introduction', url: '/docs' },
+        { type: 'page', name: 'Download', url: '/docs/getting-started/download' },
         { type: 'page', name: 'What is Bonzai 2?', url: '/docs/getting-started/what-is-bonzai' },
         { type: 'page', name: 'Installation', url: '/docs/getting-started/installation' },
       ],

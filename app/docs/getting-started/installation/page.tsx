@@ -94,7 +94,7 @@ export default function InstallationGuide() {
               'SharePoint Online tenant active',
               'App Catalog exists and accessible',
               'Administrator permissions confirmed',
-              'Bonzai package file (.sppkg) downloaded',
+              'Bonzai package file (.sppkg) downloaded from the Download page',
               'Modern browser available',
             ].map((item) => (
               <label key={item} className="flex items-center gap-3 rounded-lg border border-gray-200 p-3 dark:border-gray-800">
@@ -108,8 +108,8 @@ export default function InstallationGuide() {
 
           <h3>Step 1: Download the Package</h3>
           <p>
-            Obtain the Bonzai SPFx package file (<code>Bonzai-2.0.sppkg</code>) from your 
-            Bonzai administrator or download portal.
+            Download the Bonzai SPFx package file (<code>Bonzai-2.0.sppkg</code>) from our{' '}
+            <a href="/docs/getting-started/download">Download page</a>.
           </p>
 
           <h3>Step 2: Access SharePoint Admin Center</h3>
@@ -238,6 +238,20 @@ export default function InstallationGuide() {
             <li>Ensure current user can access the configured list</li>
             <li>Try removing and re-adding the web part</li>
           </ul>
+
+          <div className="not-prose my-6 rounded-lg border border-bonzai-200 bg-bonzai-50 p-4 dark:border-bonzai-800 dark:bg-bonzai-950">
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              <strong>Still need help?</strong>{' '}
+              <a
+                href="https://support.bonzai.aurea.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-bonzai-600 hover:text-bonzai-700 dark:text-bonzai-400 dark:hover:text-bonzai-300"
+              >
+                Contact Bonzai Support →
+              </a>
+            </p>
+          </div>
 
           <h2>PowerShell Deployment (Alternative)</h2>
 
