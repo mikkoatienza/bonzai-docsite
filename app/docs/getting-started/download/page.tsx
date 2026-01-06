@@ -3,10 +3,10 @@ import Link from 'next/link';
 import { Download, Package, Clock, CheckCircle, HelpCircle, ExternalLink, Shield, Globe, Monitor, Headphones } from 'lucide-react';
 
 export default function DownloadPage() {
-  const currentVersion = '1.0.1';
+  const currentVersion = '1.0.153';
   const releaseDate = 'January 2025';
   const packageSize = '~42 MB';
-  const githubReleasesUrl = 'https://github.com/mikkoatienza/bonzai-2/releases/tag/1.0.1';
+  const githubReleasesUrl = 'https://github.com/mikkoatienza/bonzai-2/releases/tag/v1.0.153';
 
   return (
     <DocsPage>
@@ -107,6 +107,13 @@ export default function DownloadPage() {
                         Latest
                       </span>
                     </span>
+                  </td>
+                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Jan 2025</td>
+                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">People web parts fixes, Employee Directory and People Listing stability improvements</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-3">
+                    <span className="font-medium text-gray-700 dark:text-gray-300">1.0.1</span>
                   </td>
                   <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Jan 2025</td>
                   <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Bug fixes, performance improvements, licensing system integration</td>
