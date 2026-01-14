@@ -5,8 +5,8 @@ import { Download, Package, Clock, CheckCircle, HelpCircle, ExternalLink, Shield
 export default function DownloadPage() {
   const currentVersion = '1.0.153';
   const releaseDate = 'January 2025';
-  const packageSize = '~42 MB';
-  const githubReleasesUrl = 'https://github.com/mikkoatienza/bonzai-2/releases/tag/v1.0.153';
+  const packageSize = '~54 MB';
+  const downloadUrl = '/downloads/Bonzai-2.0.sppkg';
 
   return (
     <DocsPage>
@@ -33,14 +33,12 @@ export default function DownloadPage() {
                 Bonzai-2.0.sppkg
               </p>
               <a
-                href={githubReleasesUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={downloadUrl}
+                download="Bonzai-2.0.sppkg"
                 className="inline-flex items-center gap-2 rounded-lg bg-bonzai-600 px-6 py-3 text-lg font-semibold text-white shadow-lg transition-all hover:bg-bonzai-700 hover:shadow-xl"
               >
                 <Download className="h-5 w-5" />
-                Download from GitHub
-                <ExternalLink className="h-4 w-4 opacity-70" />
+                Download Bonzai 2
               </a>
               <p className="mt-4 text-xs text-gray-500 dark:text-gray-500">
                 Requires SharePoint Administrator permissions to install
@@ -83,9 +81,9 @@ export default function DownloadPage() {
           <h2>Version History</h2>
           
           <p>
-            Recent releases with key changes. For complete release notes, visit the{' '}
-            <a href={githubReleasesUrl} target="_blank" rel="noopener noreferrer">
-              GitHub Releases page
+            Recent releases with key changes. For questions about specific versions or to report issues, visit our{' '}
+            <a href="https://support.bonzai.aurea.com/" target="_blank" rel="noopener noreferrer">
+              support portal
             </a>.
           </p>
 
@@ -278,15 +276,15 @@ export default function DownloadPage() {
                 Report Issues
               </h4>
               <p className="mb-3 text-sm text-gray-600 dark:text-gray-400">
-                Found a bug or have a feature request? Let us know on GitHub.
+                Found a bug or have a feature request? Let us know through support.
               </p>
               <a
-                href="https://github.com/mikkoatienza/bonzai-2/issues"
+                href="https://support.bonzai.aurea.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm font-medium text-bonzai-600 hover:text-bonzai-700 dark:text-bonzai-400 dark:hover:text-bonzai-300"
               >
-                Open GitHub Issues →
+                Open Support Portal →
               </a>
             </div>
           </div>

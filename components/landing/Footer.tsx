@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Github, ExternalLink } from 'lucide-react';
+import { Download, ExternalLink } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -121,15 +121,13 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a
-                  href="https://github.com/mikkoatienza/bonzai-2"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/docs/getting-started/download"
                   className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-bonzai-600 dark:text-gray-400 dark:hover:text-bonzai-400"
                 >
-                  <Github className="h-4 w-4" />
-                  GitHub
-                </a>
+                  <Download className="h-4 w-4" />
+                  Download Package
+                </Link>
               </li>
             </ul>
           </div>

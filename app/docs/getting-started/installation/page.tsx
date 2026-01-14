@@ -210,7 +210,7 @@ export default function InstallationGuide() {
               <div className="text-sm text-amber-700 dark:text-amber-300">
                 <strong>Solutions:</strong>
                 <ul className="mt-2 space-y-1">
-                  <li>Check file size is under 50MB</li>
+                  <li>Check file size is reasonable (~54MB for current version)</li>
                   <li>Verify you have App Catalog admin rights</li>
                   <li>Re-download the package if corrupted</li>
                   <li>Try a different browser (Chrome/Edge recommended)</li>
