@@ -95,6 +95,7 @@ export default function InstallationGuide() {
               'App Catalog exists and accessible',
               'Administrator permissions confirmed',
               'Bonzai package file (.sppkg) downloaded from the Download page',
+              'Bonzai app ready to add to target sites (Mega Menu activation)',
               'Modern browser available',
             ].map((item) => (
               <label key={item} className="flex items-center gap-3 rounded-lg border border-gray-200 p-3 dark:border-gray-800">
@@ -142,7 +143,15 @@ export default function InstallationGuide() {
             <li>The package status should change to &quot;Deployed&quot; (green checkmark)</li>
           </ol>
 
-          <h3>Step 6: Wait for CDN Propagation</h3>
+          <h3>Step 6: Add the Bonzai App to Your Site (Mega Menu Activation)</h3>
+          <ol>
+            <li>Open the modern site where you want to use Bonzai</li>
+            <li>Go to <strong>Site Contents</strong> → <strong>New</strong> → <strong>App</strong></li>
+            <li>Find <strong>Bonzai 2</strong> and click <strong>Add</strong></li>
+            <li>This activates the Mega Menu on the site; you can fully configure it later</li>
+          </ol>
+
+          <h3>Step 7: Wait for CDN Propagation</h3>
 
           <table>
             <thead>
@@ -163,7 +172,7 @@ export default function InstallationGuide() {
             </tbody>
           </table>
 
-          <h3>Step 7: Verify Installation</h3>
+          <h3>Step 8: Verify Installation</h3>
           <ol>
             <li>Navigate to any modern SharePoint site in your tenant</li>
             <li>Edit a page (click <strong>Edit</strong> button)</li>
@@ -195,6 +204,7 @@ export default function InstallationGuide() {
 
           <h3>Web Part Verification</h3>
           <ul>
+            <li>Bonzai app added to the site (Mega Menu activated)</li>
             <li>Web parts appear in web part picker when searching &quot;Bonzai&quot;</li>
             <li>At least one web part can be added to a page</li>
             <li>Web part property pane opens when clicking pencil icon</li>
