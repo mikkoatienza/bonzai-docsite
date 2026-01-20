@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { Download, Package, Clock, CheckCircle, HelpCircle, ExternalLink, Shield, Globe, Monitor, Headphones } from 'lucide-react';
 
 export default function DownloadPage() {
-  const currentVersion = '1.0.153';
-  const releaseDate = 'January 2025';
-  const packageSize = '~54 MB';
+  const currentVersion = '1.0.189';
+  const releaseDate = 'January 2026';
+  const packageSize = '~60 MB';
   const downloadUrl = '/downloads/Bonzai-2.0.sppkg';
 
   return (
@@ -77,6 +77,7 @@ export default function DownloadPage() {
             </div>
           </div>
 
+
           {/* VERSION HISTORY */}
           <h2>Version History</h2>
           
@@ -106,8 +107,8 @@ export default function DownloadPage() {
                       </span>
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Jan 2025</td>
-                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">People web parts fixes, Employee Directory and People Listing stability improvements</td>
+                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Jan 2026</td>
+                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Mega Menu activation consolidated into Bonzai 2 package, plus stability improvements</td>
                 </tr>
                 <tr>
                   <td className="px-4 py-3">
@@ -220,7 +221,7 @@ export default function DownloadPage() {
                   3
                 </span>
                 <span className="text-gray-600 dark:text-gray-400">
-                  Add Bonzai web parts to your pages from the web part picker
+                  Add the Bonzai 2 app to each site to activate Mega Menu and place Bonzai web parts on pages
                 </span>
               </li>
             </ol>

@@ -150,8 +150,8 @@ export default function ExtensionsOverview() {
           <div className="not-prose my-4 rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950">
             <p className="text-sm text-amber-800 dark:text-amber-200">
               <strong>Important:</strong> Step 2 is often missed. The Mega Menu will not 
-              appear until you add the Bonzai app to your specific site, even if the 
-              package is already in the App Catalog.
+              appear until you add the Bonzai app to your 
+              specific site, even if the package is already in the App Catalog.
             </p>
           </div>
 

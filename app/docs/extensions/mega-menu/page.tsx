@@ -33,9 +33,15 @@ export default function MegaMenuExtension() {
           </Callout>
 
           <Callout type="warning" title="Two-step activation required">
-            After uploading the Bonzai 2 package to your App Catalog, you must also add 
-            the Bonzai app to each site where you want to use Mega Menu. Go to 
-            Site Contents → New → App → Bonzai 2.
+          After uploading the Bonzai 2 package to your App Catalog, you must also add 
+          the Bonzai app to each site where you want to use Mega Menu. Go to 
+          Site Contents → New → App → Bonzai 2.
+          </Callout>
+
+          <Callout type="info" title="Legacy package note">
+            If your tenant previously deployed the separate <strong>bonzai-mega-menu</strong> package,
+            remove that app from Site Contents after upgrading to the consolidated Bonzai 2 package
+            to avoid duplicate initialization.
           </Callout>
 
           {/* QUICK START */}

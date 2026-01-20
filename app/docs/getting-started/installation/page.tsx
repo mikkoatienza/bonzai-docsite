@@ -151,6 +151,14 @@ export default function InstallationGuide() {
             <li>This activates the Mega Menu on the site; you can fully configure it later</li>
           </ol>
 
+          <div className="not-prose my-4 rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950">
+            <p className="text-sm text-amber-800 dark:text-amber-200">
+              <strong>Legacy note:</strong> If your tenant previously installed the separate
+              <strong> bonzai-mega-menu</strong> app, remove it from Site Contents after upgrading
+              to the consolidated Bonzai 2 package to avoid duplicate initialization.
+            </p>
+          </div>
+
           <h3>Step 7: Wait for CDN Propagation</h3>
 
           <table>
@@ -220,7 +228,7 @@ export default function InstallationGuide() {
               <div className="text-sm text-amber-700 dark:text-amber-300">
                 <strong>Solutions:</strong>
                 <ul className="mt-2 space-y-1">
-                  <li>Check file size is reasonable (~54MB for current version)</li>
+                  <li>Check file size is reasonable (~60MB for current version)</li>
                   <li>Verify you have App Catalog admin rights</li>
                   <li>Re-download the package if corrupted</li>
                   <li>Try a different browser (Chrome/Edge recommended)</li>
