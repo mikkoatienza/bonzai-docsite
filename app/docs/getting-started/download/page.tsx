@@ -234,6 +234,14 @@ export default function DownloadPage() {
             </Link>
           </div>
 
+          <div className="not-prose mb-8 rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950">
+            <p className="text-sm text-amber-800 dark:text-amber-200">
+              <strong>Apps blocked by tenant policy?</strong> You can still activate Mega Menu using
+              the Tenant Wide Extensions list. See the installation guide for the exact steps and
+              Component ID.
+            </p>
+          </div>
+
           {/* SUPPORT SECTION */}
           <h2>Need Help?</h2>
 

@@ -44,6 +44,28 @@ export default function MegaMenuExtension() {
             to avoid duplicate initialization.
           </Callout>
 
+          <h2>Admin-Blocked Apps Workaround</h2>
+
+          <p>
+            If “Apps you can add” is empty due to tenant policy, you can still activate Mega Menu
+            by registering the Application Customizer in the Tenant Wide Extensions list.
+          </p>
+
+          <ol>
+            <li>Open the App Catalog site: <code>https://&lt;tenant&gt;.sharepoint.com/sites/appcatalog</code></li>
+            <li>Go to <strong>Site Contents</strong> → <strong>Tenant Wide Extensions</strong></li>
+            <li>Click <strong>New</strong> → <strong>Application Customizer</strong></li>
+            <li>Fill in the fields below and click <strong>Save</strong></li>
+          </ol>
+
+          <pre><code>{`Title: Bonzai Mega Menu
+Component Id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+Location: ClientSideExtension.ApplicationCustomizer
+Component Properties:
+{"navigationListName":"MegaMenuNavigation","hideNativeNavigation":true,"hideMobileAppBar":true,"licenseApiUrl":""}
+Sequence: 100 (optional)
+Web Template / List Template / Host Properties: leave blank`}</code></pre>
+
           {/* QUICK START */}
           <QuickStart
             title="Get Mega Menu Working in 4 Steps"
@@ -408,6 +430,11 @@ export default function MegaMenuExtension() {
           {/* TROUBLESHOOTING */}
           <Troubleshooting
             items={[
+              {
+                problem: 'Apps you can add is empty (Bonzai 2 not listed)',
+                solution: 'Register the Mega Menu using Tenant Wide Extensions instead of the app-add flow.',
+                details: 'Go to the App Catalog → Tenant Wide Extensions → New → Application Customizer. Use Component Id a1b2c3d4-e5f6-7890-abcd-ef1234567890 and Location ClientSideExtension.ApplicationCustomizer.',
+              },
               {
                 problem: 'Mega Menu not appearing on pages',
                 solution: 'Make sure you have added the Bonzai app to your specific site. Go to Site Contents → New → App and add "Bonzai 2".',

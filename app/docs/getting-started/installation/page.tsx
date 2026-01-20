@@ -159,6 +159,25 @@ export default function InstallationGuide() {
             </p>
           </div>
 
+          <h3>Alternate Activation (Apps Blocked by Tenant Policy)</h3>
+          <p>
+            If “Apps you can add” is empty and Bonzai 2 does not appear, you can still register
+            the Mega Menu via Tenant Wide Extensions.
+          </p>
+          <ol>
+            <li>Open the App Catalog site: <code>https://&lt;tenant&gt;.sharepoint.com/sites/appcatalog</code></li>
+            <li>Go to <strong>Site Contents</strong> → <strong>Tenant Wide Extensions</strong></li>
+            <li>Click <strong>New</strong> → <strong>Application Customizer</strong></li>
+            <li>Fill in the values below and click <strong>Save</strong></li>
+          </ol>
+          <pre><code>{`Title: Bonzai Mega Menu
+Component Id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+Location: ClientSideExtension.ApplicationCustomizer
+Component Properties:
+{"navigationListName":"MegaMenuNavigation","hideNativeNavigation":true,"hideMobileAppBar":true,"licenseApiUrl":""}
+Sequence: 100 (optional)
+Web Template / List Template / Host Properties: leave blank`}</code></pre>
+
           <h3>Step 7: Wait for CDN Propagation</h3>
 
           <table>
