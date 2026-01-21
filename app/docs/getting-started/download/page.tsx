@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { Download, Package, Clock, CheckCircle, HelpCircle, ExternalLink, Shield, Globe, Monitor, Headphones } from 'lucide-react';
 
 export default function DownloadPage() {
-  const currentVersion = '1.0.189';
-  const releaseDate = 'January 2026';
+  const currentVersion = '1.0.190';
+  const releaseDate = 'January 21, 2026';
   const packageSize = '~60 MB';
   const downloadUrl = '/downloads/Bonzai-2.0.sppkg';
 
@@ -108,7 +108,7 @@ export default function DownloadPage() {
                     </span>
                   </td>
                   <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Jan 2026</td>
-                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Mega Menu activation consolidated into Bonzai 2 package, plus stability improvements</td>
+                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Mega Menu navigation reliability: fixes Hyperlink URL fields (prevents “/sites/[object Object]”) and improves hierarchy parsing</td>
                 </tr>
                 <tr>
                   <td className="px-4 py-3">
