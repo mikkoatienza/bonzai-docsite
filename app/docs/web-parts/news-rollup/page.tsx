@@ -32,6 +32,8 @@ export default function NewsRollupWebPart() {
             prerequisites={[
               'Bonzai 2 package installed on your site',
               'Site Pages library with news articles',
+              'Site Pages library has a "Category" column (text or choice)',
+              'News pages tagged with Showcase = "News Rollup"',
             ]}
             steps={[
               {
@@ -137,6 +139,10 @@ export default function NewsRollupWebPart() {
                 description: 'By default, News Rollup reads from the current site\'s Site Pages library. To pull news from another site, enter that site\'s URL in the Site URL field.',
               },
               {
+                title: 'Tag pages for News Rollup',
+                description: 'In the Site Pages library, set the "Showcase" column to "News Rollup" for each page you want to display.',
+              },
+              {
                 title: 'Filter by category (optional)',
                 description: 'Use the Category dropdown to show only news from a specific category. Categories are auto-discovered from your pages.',
               },
@@ -238,9 +244,9 @@ export default function NewsRollupWebPart() {
             For example, show US office news only to US employees, or IT-specific news only to the IT department.
           </Callout>
 
-          <Callout type="info" title="Categories are auto-discovered">
-            The Category dropdown automatically discovers category values from your Site Pages library. 
-            You don't need to configure this manually — just add a "Category" column to your pages.
+          <Callout type="info" title="Category column is required">
+            News Rollup queries the Category field even if you don\'t filter. 
+            Add a "Category" column to your Site Pages library (text or choice) to avoid load errors.
           </Callout>
 
           {/* TROUBLESHOOTING */}
@@ -248,8 +254,13 @@ export default function NewsRollupWebPart() {
             items={[
               {
                 problem: 'News articles are not appearing',
-                solution: 'Check that the Site URL is correct and that you have permission to access the source site. Also verify that news pages exist in the Site Pages library.',
+                solution: 'Check that the Site URL is correct and that you have permission to access the source site. Verify that news pages exist in the Site Pages library and that Showcase is set to "News Rollup".',
                 details: 'If using a cross-site URL, ensure the news pages are published (not drafts) and that your account has at least Read permission on the source site.',
+              },
+              {
+                problem: 'Site Pages exists but the web part says "List not found"',
+                solution: 'Add a "Category" column to the Site Pages library (text or choice).',
+                details: 'News Rollup queries the Category field during load; if it\'s missing, SharePoint returns a 400 error that appears as "list not found."',
               },
               {
                 problem: 'Category dropdown is empty',
@@ -381,7 +392,8 @@ export default function NewsRollupWebPart() {
           <ul>
             <li><strong>Title:</strong> Article headline</li>
             <li><strong>Banner Image:</strong> Featured image for the article</li>
-            <li><strong>Category:</strong> News category for filtering</li>
+            <li><strong>Category:</strong> Required column for filtering and load stability</li>
+            <li><strong>Showcase:</strong> Set to <strong>News Rollup</strong> for items to appear</li>
             <li><strong>Author:</strong> Article author</li>
             <li><strong>First Published:</strong> Publication date</li>
             <li><strong>PromotedState:</strong> Mark as promoted/featured</li>

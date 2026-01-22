@@ -87,6 +87,11 @@ export default function NewsCommunicationRecipe() {
                 <tr><td>Chrome Type</td><td>Title and Border</td></tr>
               </tbody>
             </table>
+            <Callout type="info" title="Category column required">
+              News Rollup queries the <strong>Category</strong> field on Site Pages even when you 
+              are not filtering. Add a <strong>Category</strong> column (text or choice) to avoid 
+              load errors.
+            </Callout>
           </Step>
 
           <Step number={4} title="Add to Navigation and Publish">
@@ -115,6 +120,10 @@ export default function NewsCommunicationRecipe() {
               <tr><td>Site Pages</td><td>News articles (built-in library)</td></tr>
             </tbody>
           </table>
+          <p>
+            <strong>Site Pages requirements:</strong> Add a <strong>Category</strong> column (text or choice) 
+            and set <strong>Showcase</strong> to <strong>News Rollup</strong> for each news page you want displayed.
+          </p>
 
           <h2>Important Messages List Schema</h2>
 
@@ -140,7 +149,7 @@ export default function NewsCommunicationRecipe() {
               },
               {
                 problem: 'News articles not showing',
-                solution: 'Ensure news pages have Showcase column set to "News Rollup" and are published (not drafts).',
+                solution: 'Ensure news pages have Showcase column set to "News Rollup", the Category column exists, and pages are published (not drafts).',
               },
               {
                 problem: 'Content targeting not working',
