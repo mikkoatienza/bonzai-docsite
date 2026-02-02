@@ -12,7 +12,7 @@ export default function NewsRollupWebPart() {
     <DocsPage>
       <DocsTitle>News Rollup</DocsTitle>
       <DocsDescription>
-        Display news articles with multiple templates, category filtering, and content targeting.
+        Display news articles with list, tile, or card templates, responsive layout controls, and pagination.
       </DocsDescription>
       <DocsBody>
         <div className="prose prose-gray dark:prose-invert max-w-none">
@@ -45,8 +45,8 @@ export default function NewsRollupWebPart() {
                 description: 'Open the property pane and choose List, Tile, or Card layout.',
               },
               {
-                title: 'Set max items and publish',
-                description: 'Configure how many articles to display (1-20), then save and publish your page.',
+                title: 'Set items to show and publish',
+                description: 'Configure how many articles to show per page (1-20). Pagination appears automatically when more items exist.',
               },
             ]}
           />
@@ -63,7 +63,7 @@ export default function NewsRollupWebPart() {
             bestFor={[
               'Homepage — main news feed in prominent position',
               'Department landing pages — filtered by department category',
-              'News center page — full archive with "View More" link',
+              'News center page — full archive with pagination',
               'Sidebar widget — compact list for secondary placement',
             ]}
             notFor={[
@@ -108,6 +108,13 @@ export default function NewsRollupWebPart() {
             </div>
           </div>
 
+          <h2>Recent Updates</h2>
+          <ul>
+            <li>Pagination now appears automatically when total items exceed the Items to Show setting.</li>
+            <li>Tile and Card templates include size, max columns, and featured-first controls.</li>
+            <li>Image sourcing prefers higher-resolution page images to avoid low-res thumbnails.</li>
+          </ul>
+
           {/* STEP-BY-STEP CONFIGURATION */}
           <StepGuide
             title="Step-by-Step Configuration"
@@ -148,11 +155,7 @@ export default function NewsRollupWebPart() {
               },
               {
                 title: 'Configure display settings',
-                description: 'Set "Max News to Show" slider (1-20). Enable "Show Promoted Items" to highlight articles marked as promoted/featured.',
-              },
-              {
-                title: 'Set up "View More" link (optional)',
-                description: 'Configure "Show More Text" and "Show More URL" to add a link to your full news archive page.',
+                description: 'Set "Items to Show" (page size), then adjust tile/card size, max columns, and featured-first options for visual layouts.',
               },
               {
                 title: 'Enable content targeting (optional)',
@@ -180,7 +183,7 @@ export default function NewsRollupWebPart() {
               config={[
                 { property: 'Title', value: 'Company News' },
                 { property: 'Display Template', value: 'List' },
-                { property: 'Max News to Show', value: '5' },
+                { property: 'Items to Show', value: '5' },
                 { property: 'Show Promoted Items', value: 'Yes' },
                 { property: 'Show Comment Count', value: 'Yes' },
               ]}
@@ -194,7 +197,7 @@ export default function NewsRollupWebPart() {
                 { property: 'Title', value: 'HR News' },
                 { property: 'Display Template', value: 'Card' },
                 { property: 'Category', value: 'HR (from dropdown)' },
-                { property: 'Max News to Show', value: '6' },
+                { property: 'Items to Show', value: '6' },
                 { property: 'Content Targeting', value: 'Enabled' },
               ]}
             />
@@ -206,22 +209,20 @@ export default function NewsRollupWebPart() {
               config={[
                 { property: 'Title', value: 'Latest News' },
                 { property: 'Display Template', value: 'List' },
-                { property: 'Max News to Show', value: '3' },
+                { property: 'Items to Show', value: '3' },
                 { property: 'Fixed Height', value: '300' },
                 { property: 'Show Comment Count', value: 'No' },
               ]}
             />
             <RecipeCard
-              title="News Archive with View More"
-              description="Full news listing with link to archive"
+              title="News Archive (Paged)"
+              description="Full news listing with pagination"
               useCase="News center landing page"
               icon={<Star className="h-5 w-5" />}
               config={[
                 { property: 'Title', value: 'All News' },
                 { property: 'Display Template', value: 'Tile' },
-                { property: 'Max News to Show', value: '10' },
-                { property: 'Show More Text', value: 'View All News →' },
-                { property: 'Show More URL', value: '/sites/intranet/news' },
+                { property: 'Items to Show', value: '10' },
               ]}
             />
           </RecipeGrid>
@@ -337,10 +338,46 @@ export default function NewsRollupWebPart() {
                 <td>List, Tile, or Card (default: "List")</td>
               </tr>
               <tr>
+                <td><code>tileScale</code></td>
+                <td>Slider (60-140)</td>
+                <td>No</td>
+                <td>Tile size scale for Tile template (percent)</td>
+              </tr>
+              <tr>
+                <td><code>tileMaxColumns</code></td>
+                <td>Slider (1-4)</td>
+                <td>No</td>
+                <td>Max tiles per row for Tile template</td>
+              </tr>
+              <tr>
+                <td><code>enableFeaturedTile</code></td>
+                <td>Toggle</td>
+                <td>No</td>
+                <td>Make the first tile featured (Tile template)</td>
+              </tr>
+              <tr>
+                <td><code>cardScale</code></td>
+                <td>Slider (60-140)</td>
+                <td>No</td>
+                <td>Card size scale for Card template (percent)</td>
+              </tr>
+              <tr>
+                <td><code>cardMaxColumns</code></td>
+                <td>Slider (1-4)</td>
+                <td>No</td>
+                <td>Max cards per row for Card template</td>
+              </tr>
+              <tr>
+                <td><code>enableFeaturedCard</code></td>
+                <td>Toggle</td>
+                <td>No</td>
+                <td>Make the first card featured (Card template)</td>
+              </tr>
+              <tr>
                 <td><code>maxNewsToShow</code></td>
                 <td>Slider (1-20)</td>
                 <td>No</td>
-                <td>Maximum articles to display (default: 1)</td>
+                <td>Items to show per page (pagination appears when more exist)</td>
               </tr>
               <tr>
                 <td><code>fixedHeight</code></td>
@@ -365,18 +402,6 @@ export default function NewsRollupWebPart() {
                 <td>Toggle</td>
                 <td>No</td>
                 <td>Filter by user profile attributes</td>
-              </tr>
-              <tr>
-                <td><code>showMoreText</code></td>
-                <td>Text</td>
-                <td>No</td>
-                <td>"View More" link text (default: "More")</td>
-              </tr>
-              <tr>
-                <td><code>showMoreUrl</code></td>
-                <td>Text</td>
-                <td>No</td>
-                <td>"View More" link URL</td>
               </tr>
             </tbody>
           </table>
@@ -407,10 +432,11 @@ export default function NewsRollupWebPart() {
             <li>✅ Content targeting by user profile</li>
             <li>✅ Promoted/featured article highlighting</li>
             <li>✅ Comment count display</li>
-            <li>✅ "View More" link configuration</li>
+            <li>✅ Pagination based on Items to Show</li>
             <li>✅ Fixed height option</li>
             <li>✅ Cross-site news aggregation</li>
             <li>✅ Responsive design</li>
+            <li>✅ Tile and card layout controls (scale, max columns, featured first)</li>
             <li>✅ Theme Manager integration</li>
           </ul>
 

@@ -60,6 +60,11 @@ export default function PagesRollupWebPart() {
             ]}
           />
 
+          <h2>Recent Updates</h2>
+          <ul>
+            <li>Image selection prefers higher-resolution page images to avoid low-res thumbnails.</li>
+          </ul>
+
           {/* COMMON CONFIGURATIONS (RECIPES) */}
           <h2>Common Configurations</h2>
           <p>Copy these ready-to-use configurations:</p>

@@ -113,6 +113,14 @@ export default function ImportantMessagesWebPart() {
             </div>
           </div>
 
+          <h2>Styling and Theme</h2>
+          <ul>
+            <li>Message background uses the site accent color for a banner-style appearance.</li>
+            <li>Foreground text automatically switches between dark/light for contrast.</li>
+            <li>Icons are based on the selected Category (Info, Warning, Error, Success).</li>
+            <li>Dismiss action remains visible and styled to match the banner.</li>
+          </ul>
+
           {/* STEP-BY-STEP CONFIGURATION */}
           <StepGuide
             title="Step-by-Step Configuration"

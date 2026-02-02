@@ -68,6 +68,12 @@ export default function AdvancedLinksWebPart() {
             <li><strong>Text Only:</strong> Simple text links without icons</li>
           </ul>
 
+          <h2>Recent Updates</h2>
+          <ul>
+            <li>Items to Show now paginates when more links exist (all display styles).</li>
+            <li>Tile mode supports a tile height control for consistent layouts.</li>
+          </ul>
+
           {/* COMMON CONFIGURATIONS (RECIPES) */}
           <h2>Common Configurations</h2>
           <p>Copy these ready-to-use configurations:</p>
@@ -184,6 +190,7 @@ export default function AdvancedLinksWebPart() {
               <tr><td><code>displayStyle</code></td><td>Dropdown</td><td>Display style: List with Icons, Tiles, Links with Descriptions, Text Only</td></tr>
               <tr><td><code>iconSize</code></td><td>Dropdown</td><td>Icon size: Small, Medium, Large</td></tr>
               <tr><td><code>numberOfLinks</code></td><td>Dropdown</td><td>Items per row (1-6, for Tile and Description styles)</td></tr>
+              <tr><td><code>itemsToShow</code></td><td>Slider</td><td>Items to show per page (pagination appears when more exist)</td></tr>
               <tr><td><code>chromeType</code></td><td>Dropdown</td><td>Chrome type: None, Title Only, Border Only, Title and Border</td></tr>
               <tr><td><code>fixedHeight</code></td><td>Number</td><td>Fixed height in pixels (0 = auto)</td></tr>
             </tbody>
@@ -194,6 +201,7 @@ export default function AdvancedLinksWebPart() {
             <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
             <tbody>
               <tr><td><code>fontSize</code></td><td>Slider (10-24)</td><td>Font size for tile text</td></tr>
+              <tr><td><code>tileHeight</code></td><td>Slider</td><td>Tile height in pixels (0 = auto)</td></tr>
               <tr><td><code>iconColor</code></td><td>Text</td><td>Icon color (hex code)</td></tr>
               <tr><td><code>tileColor</code></td><td>Text</td><td>Tile background color (hex code)</td></tr>
             </tbody>

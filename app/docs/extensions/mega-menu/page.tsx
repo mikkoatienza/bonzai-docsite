@@ -134,6 +134,13 @@ Web Template / List Template / Host Properties: leave blank`}</code></pre>
             ]}
           />
 
+          <h2>Branding and Logo</h2>
+          <ul>
+            <li>Mega Menu reserves a logo slot on the left for desktop and mobile layouts.</li>
+            <li>Set Mega Menu background and text colors using the Theme Manager web part.</li>
+            <li>Provide an absolute PNG logo URL in Theme Manager to display the logo.</li>
+          </ul>
+
           {/* NAVIGATION HIERARCHY VISUAL */}
           <h2>Navigation Hierarchy</h2>
           <p>Mega Menu supports a 3-level navigation structure:</p>

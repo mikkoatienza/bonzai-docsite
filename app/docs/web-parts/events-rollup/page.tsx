@@ -97,6 +97,14 @@ export default function EventsRollupWebPart() {
             </div>
           </div>
 
+          <h2>Recent Updates</h2>
+          <ul>
+            <li>Event items resolve click URLs from Event URL fields or page FileRef fallback.</li>
+            <li>Like counts are pulled from linked pages; the heart icon hides when unavailable.</li>
+            <li>Tile images use page image extraction to improve quality and avoid broken previews.</li>
+            <li>List view styling aligned to a more compact legacy layout.</li>
+          </ul>
+
           {/* STEP-BY-STEP CONFIGURATION */}
           <StepGuide
             title="Step-by-Step Configuration"
@@ -241,6 +249,10 @@ export default function EventsRollupWebPart() {
                 problem: 'Comment count not showing',
                 solution: 'Enable "Show Comment Count" in the property pane. Comments must exist on the page.',
               },
+              {
+                problem: 'Like count not showing',
+                solution: 'Like counts are pulled from the linked event page; the heart icon hides when likes are unavailable.',
+              },
             ]}
           />
 
@@ -299,6 +311,9 @@ export default function EventsRollupWebPart() {
             <li>✅ Pagination with configurable page size</li>
             <li>✅ Promoted/featured item highlighting</li>
             <li>✅ Comment count display</li>
+            <li>✅ Like count display (when available from linked page)</li>
+            <li>✅ Event URL resolution from URL fields or page FileRef</li>
+            <li>✅ Tile image extraction from page content</li>
             <li>✅ "View More" link configuration</li>
             <li>✅ List and View pickers</li>
             <li>✅ Content targeting</li>

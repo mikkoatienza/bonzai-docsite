@@ -76,6 +76,13 @@ export default function ThemeManagerWebPart() {
             ]}
           />
 
+          <h2>Mega Menu Branding</h2>
+          <ul>
+            <li>Set Mega Menu background and text colors in the Mega Menu Branding section.</li>
+            <li>Provide a logo URL (absolute https URL, PNG format) to display in the Mega Menu logo slot.</li>
+            <li>Logo is applied via theme variables and updates immediately.</li>
+          </ul>
+
           {/* STEP-BY-STEP CONFIGURATION */}
           <StepGuide
             title="Step-by-Step Configuration"

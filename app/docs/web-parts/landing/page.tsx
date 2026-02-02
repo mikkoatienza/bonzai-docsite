@@ -76,6 +76,12 @@ export default function LandingWebPart() {
             <li><strong>Description:</strong> Image tiles with title and description overlay</li>
           </ul>
 
+          <h2>Recent Updates</h2>
+          <ul>
+            <li>Supports SharePoint Image column values (modern Image field format).</li>
+            <li>Improved image parsing to avoid broken tile thumbnails.</li>
+          </ul>
+
           {/* COMMON CONFIGURATIONS (RECIPES) */}
           <h2>Common Configurations</h2>
           <p>Copy these ready-to-use configurations:</p>
@@ -139,7 +145,7 @@ export default function LandingWebPart() {
 
           <Troubleshooting
             items={[
-              { problem: 'Tiles not showing images', solution: 'Ensure list items have image URLs in the appropriate column.' },
+              { problem: 'Tiles not showing images', solution: 'Use a SharePoint Image column (recommended) or a valid hyperlink URL column such as ImageUrl.' },
               { problem: 'Grid layout looks uneven', solution: 'Use images with similar aspect ratios across all items.' },
               { problem: 'View picker is disabled', solution: 'Select a list first. The view picker depends on the selected list.' },
             ]}
@@ -155,7 +161,8 @@ export default function LandingWebPart() {
             <tbody>
               <tr><td>Title</td><td>Single line of text</td><td>Tile title</td></tr>
               <tr><td>Description</td><td>Multiple lines of text</td><td>Tile description (for Description template)</td></tr>
-              <tr><td>ImageUrl</td><td>Hyperlink or URL</td><td>Tile background image</td></tr>
+              <tr><td>Image</td><td>Image (SharePoint Image column)</td><td>Tile background image (recommended)</td></tr>
+              <tr><td>ImageUrl</td><td>Hyperlink or URL</td><td>Alternative image URL column</td></tr>
               <tr><td>LinkUrl</td><td>Hyperlink or URL</td><td>Tile click destination</td></tr>
               <tr><td>SortOrder</td><td>Number</td><td>Display order (optional)</td></tr>
             </tbody>

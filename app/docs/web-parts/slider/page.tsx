@@ -78,6 +78,12 @@ export default function SliderWebPart() {
             <li><strong>Pause on hover:</strong> Automatically pauses when user hovers</li>
           </ul>
 
+          <h2>Recent Updates</h2>
+          <ul>
+            <li>Text overlay size can be scaled with the Text Scale setting.</li>
+            <li>Image sourcing prefers higher-resolution page images when available.</li>
+          </ul>
+
           {/* COMMON CONFIGURATIONS (RECIPES) */}
           <h2>Common Configurations</h2>
           <p>Copy these ready-to-use configurations:</p>
@@ -164,6 +170,7 @@ export default function SliderWebPart() {
               <tr><td><code>transitionAnimation</code></td><td>Dropdown</td><td>Animation: Fade, Slide, Flip X, Flip Y, Rotate</td></tr>
               <tr><td><code>transitionDuration</code></td><td>Text (Number)</td><td>Transition duration in seconds (1-10)</td></tr>
               <tr><td><code>fixedHeight</code></td><td>Slider (200-800)</td><td>Slider height in pixels (default: 500)</td></tr>
+              <tr><td><code>textScale</code></td><td>Slider</td><td>Scale the overlay text size (percent)</td></tr>
               <tr><td><code>autoPlay</code></td><td>Toggle</td><td>Enable auto-rotation (default: On)</td></tr>
               <tr><td><code>autoPlayInterval</code></td><td>Slider (2-30)</td><td>Seconds between slides (default: 5)</td></tr>
               <tr><td><code>showOverlay</code></td><td>Toggle</td><td>Show dark overlay for text readability (default: On)</td></tr>

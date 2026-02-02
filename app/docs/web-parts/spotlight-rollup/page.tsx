@@ -76,6 +76,11 @@ export default function SpotlightRollupWebPart() {
             ]}
           />
 
+          <h2>Recent Updates</h2>
+          <ul>
+            <li>Image selection prefers higher-resolution page images to avoid low-res thumbnails.</li>
+          </ul>
+
           {/* STEP-BY-STEP CONFIGURATION */}
           <StepGuide
             title="Step-by-Step Configuration"
