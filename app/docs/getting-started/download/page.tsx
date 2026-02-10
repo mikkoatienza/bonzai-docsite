@@ -112,6 +112,20 @@ export default function DownloadPage() {
                 </tr>
                 <tr>
                   <td className="px-4 py-3">
+                    <span className="font-medium text-gray-700 dark:text-gray-300">1.0.221</span>
+                  </td>
+                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Feb 2026</td>
+                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">News Rollup layout and pagination upgrades, Mega Menu branding + logo support, higher-res images across rollups, and Events Rollup UI/like count improvements</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-3">
+                    <span className="font-medium text-gray-700 dark:text-gray-300">1.0.190</span>
+                  </td>
+                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Jan 2026</td>
+                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Mega Menu navigation reliability: fixes Hyperlink URL fields (prevents /sites/[object Object]) and improves hierarchy parsing</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-3">
                     <span className="font-medium text-gray-700 dark:text-gray-300">1.0.1</span>
                   </td>
                   <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Jan 2025</td>

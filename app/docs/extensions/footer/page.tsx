@@ -38,6 +38,25 @@ export default function FooterExtension() {
             Footer colors and logo are controlled in Theme Manager → Footer Branding. Changes apply immediately.
           </Callout>
 
+          <h2>Required Step if Apps Are Blocked</h2>
+          <p>
+            If &quot;Apps you can add&quot; is empty due to tenant policy, you must register the Footer
+            Application Customizer in the Tenant Wide Extensions list to activate the footer.
+          </p>
+          <ol>
+            <li>Open the App Catalog site: <code>https://&lt;tenant&gt;.sharepoint.com/sites/appcatalog</code></li>
+            <li>Go to <strong>Site Contents</strong> → <strong>Tenant Wide Extensions</strong></li>
+            <li>Click <strong>New</strong> → <strong>Application Customizer</strong></li>
+            <li>Fill in the fields below and click <strong>Save</strong></li>
+          </ol>
+          <pre><code>{`Title: Bonzai Footer
+Component Id: b6c8c5d2-2a6d-4f44-9d67-2b9a9a3b9f42
+Location: ClientSideExtension.ApplicationCustomizer
+Component Properties:
+{"footerListName":"FooterNavigation"}
+Sequence: 110 (optional)
+Web Template / List Template / Host Properties: leave blank`}</code></pre>
+
           <QuickStart
             title="Get Footer Working in 4 Steps"
             time="30-45 minutes"
@@ -166,6 +185,11 @@ export default function FooterExtension() {
 
           <Troubleshooting
             items={[
+              {
+                problem: 'Apps you can add is empty (Bonzai 2 not listed)',
+                solution: 'Register the Footer using Tenant Wide Extensions instead of the app-add flow.',
+                details: 'Go to the App Catalog → Tenant Wide Extensions → New → Application Customizer. Use Component Id b6c8c5d2-2a6d-4f44-9d67-2b9a9a3b9f42 and Location ClientSideExtension.ApplicationCustomizer.',
+              },
               {
                 problem: 'Footer not appearing',
                 solution: 'Verify the Bonzai app is added to the site and the FooterNavigation list exists.',

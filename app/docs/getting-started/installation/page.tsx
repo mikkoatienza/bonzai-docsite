@@ -95,7 +95,7 @@ export default function InstallationGuide() {
               'App Catalog exists and accessible',
               'Administrator permissions confirmed',
               'Bonzai package file (.sppkg) downloaded from the Download page',
-              'Bonzai app ready to add to target sites (Mega Menu activation)',
+              'Bonzai app ready to add to target sites (Mega Menu + Footer activation)',
               'Modern browser available',
             ].map((item) => (
               <label key={item} className="flex items-center gap-3 rounded-lg border border-gray-200 p-3 dark:border-gray-800">
@@ -143,12 +143,12 @@ export default function InstallationGuide() {
             <li>The package status should change to &quot;Deployed&quot; (green checkmark)</li>
           </ol>
 
-          <h3>Step 6: Add the Bonzai App to Your Site (Mega Menu Activation)</h3>
+          <h3>Step 6: Add the Bonzai App to Your Site (Mega Menu + Footer Activation)</h3>
           <ol>
             <li>Open the modern site where you want to use Bonzai</li>
             <li>Go to <strong>Site Contents</strong> → <strong>New</strong> → <strong>App</strong></li>
             <li>Find <strong>Bonzai 2</strong> and click <strong>Add</strong></li>
-            <li>This activates the Mega Menu on the site; you can fully configure it later</li>
+            <li>This activates the Mega Menu and Footer extensions; you can fully configure them later</li>
           </ol>
 
           <div className="not-prose my-4 rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950">
@@ -159,10 +159,10 @@ export default function InstallationGuide() {
             </p>
           </div>
 
-          <h3>Alternate Activation (Apps Blocked by Tenant Policy)</h3>
+          <h3>Required Step if Apps Are Blocked by Tenant Policy</h3>
           <p>
-            If “Apps you can add” is empty and Bonzai 2 does not appear, you can still register
-            the Mega Menu via Tenant Wide Extensions.
+            If "Apps you can add" is empty and Bonzai 2 does not appear, you must register the
+            Mega Menu or Footer via Tenant Wide Extensions to activate those extensions.
           </p>
           <ol>
             <li>Open the App Catalog site: <code>https://&lt;tenant&gt;.sharepoint.com/sites/appcatalog</code></li>
@@ -170,12 +170,21 @@ export default function InstallationGuide() {
             <li>Click <strong>New</strong> → <strong>Application Customizer</strong></li>
             <li>Fill in the values below and click <strong>Save</strong></li>
           </ol>
+          <h4>Mega Menu registration</h4>
           <pre><code>{`Title: Bonzai Mega Menu
 Component Id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
 Location: ClientSideExtension.ApplicationCustomizer
 Component Properties:
 {"navigationListName":"MegaMenuNavigation","hideNativeNavigation":true,"hideMobileAppBar":true,"licenseApiUrl":""}
 Sequence: 100 (optional)
+Web Template / List Template / Host Properties: leave blank`}</code></pre>
+          <h4>Footer registration</h4>
+          <pre><code>{`Title: Bonzai Footer
+Component Id: b6c8c5d2-2a6d-4f44-9d67-2b9a9a3b9f42
+Location: ClientSideExtension.ApplicationCustomizer
+Component Properties:
+{"footerListName":"FooterNavigation"}
+Sequence: 110 (optional)
 Web Template / List Template / Host Properties: leave blank`}</code></pre>
 
           <h3>Step 7: Wait for CDN Propagation</h3>
@@ -231,7 +240,7 @@ Web Template / List Template / Host Properties: leave blank`}</code></pre>
 
           <h3>Web Part Verification</h3>
           <ul>
-            <li>Bonzai app added to the site (Mega Menu activated)</li>
+            <li>Bonzai app added to the site (Mega Menu and Footer activated)</li>
             <li>Web parts appear in web part picker when searching &quot;Bonzai&quot;</li>
             <li>At least one web part can be added to a page</li>
             <li>Web part property pane opens when clicking pencil icon</li>
