@@ -299,6 +299,30 @@ export default function NewsRollupWebPart() {
             Technical details for developers and advanced users.
           </p>
 
+          <h3>Site Pages Schema</h3>
+          <p>
+            News Rollup reads from the Site Pages library and tries list name variations (<code>Site Pages</code>, <code>SitePages</code>, <code>Pages</code>).
+            Use these columns to avoid REST errors and ensure news metadata displays correctly:
+          </p>
+          <ol>
+            <li>Create or use the Site Pages library on the source site.</li>
+            <li>Add a <strong>Category</strong> column (Choice) — this is required.</li>
+            <li>Add a <strong>Showcase</strong> column (Choice or Single line of text) and set value <strong>News Rollup</strong> on news pages.</li>
+            <li>Optional: add a Tags/Enterprise Keywords field for tag filters.</li>
+            <li>Create and publish news pages with a banner image.</li>
+          </ol>
+          <table>
+            <thead><tr><th>Column</th><th>Type</th><th>Required</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Title</td><td>Single line of text</td><td>Yes</td><td>Default Site Pages column</td></tr>
+              <tr><td>Banner Image</td><td>Image</td><td>No</td><td>BannerImageUrl/thumbnail for tiles and cards</td></tr>
+              <tr><td>Showcase</td><td>Choice or Text</td><td>Yes</td><td>Set to <strong>News Rollup</strong> (Featured/PromotedState also supported)</td></tr>
+              <tr><td>Category</td><td>Choice</td><td>Yes</td><td>Required to avoid REST 400 errors</td></tr>
+              <tr><td>Tags</td><td>Managed Metadata</td><td>No</td><td>Enterprise Keywords / Tags for filters</td></tr>
+              <tr><td>Description</td><td>Multiple lines</td><td>No</td><td>Used for excerpts in Card template</td></tr>
+            </tbody>
+          </table>
+
           <h3>Property Pane Configuration</h3>
 
           <table>

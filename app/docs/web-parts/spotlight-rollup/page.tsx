@@ -221,6 +221,28 @@ export default function SpotlightRollupWebPart() {
           <hr className="my-12" />
           <h2>Reference</h2>
 
+          <h3>Site Pages Schema</h3>
+          <p>
+            Spotlight Rollup reads from a selected list (commonly Site Pages). If no list is selected, it returns no items.
+            Use these columns to curate spotlight items:
+          </p>
+          <ol>
+            <li>Select Site Pages (or a custom list) in the property pane.</li>
+            <li>Add a <strong>Showcase</strong> column (Choice or Text) and set value <strong>Spotlight</strong> on spotlight items.</li>
+            <li>Add banner images to pages for best visuals.</li>
+            <li>Optional: add Category or Promoted fields if you use filtered views.</li>
+          </ol>
+          <table>
+            <thead><tr><th>Column</th><th>Type</th><th>Required</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Title</td><td>Single line of text</td><td>Yes</td><td>Default column</td></tr>
+              <tr><td>Banner Image</td><td>Image</td><td>No</td><td>Used for card/image layouts</td></tr>
+              <tr><td>Showcase</td><td>Choice or Text</td><td>Yes</td><td>Set to <strong>Spotlight</strong> (PromotedState also supported)</td></tr>
+              <tr><td>Category</td><td>Choice</td><td>No</td><td>Optional for filtered views</td></tr>
+              <tr><td>PromotedState</td><td>Number</td><td>No</td><td>Optional for promoted filtering</td></tr>
+            </tbody>
+          </table>
+
           <h3>Property Pane Configuration</h3>
 
           <h4>Title Settings</h4>
@@ -270,7 +292,6 @@ export default function SpotlightRollupWebPart() {
             <li>✅ View-based filtering</li>
             <li>✅ Promoted item filtering</li>
             <li>✅ Comments and likes display</li>
-            <li>✅ Content targeting</li>
             <li>✅ Multiple sort options</li>
             <li>✅ Configurable items per row (Card template)</li>
             <li>✅ Custom title with icon and link</li>

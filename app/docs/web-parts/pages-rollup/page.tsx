@@ -140,6 +140,28 @@ export default function PagesRollupWebPart() {
           <hr className="my-12" />
           <h2>Reference</h2>
 
+          <h3>Site Pages Schema</h3>
+          <p>
+            Pages Rollup reads from a selected list (commonly Site Pages). If no list is selected, it tries
+            <code>Pages</code>, <code>SitePages</code>, and <code>Site Pages</code>.
+          </p>
+          <ol>
+            <li>Select the Site Pages library (or a custom pages list).</li>
+            <li>Optional: add a Category column and use views for filtering.</li>
+            <li>Optional: use Promoted/Featured values if you enable promoted-only filtering.</li>
+            <li>Publish pages so they are visible in the rollup.</li>
+          </ol>
+          <table>
+            <thead><tr><th>Column</th><th>Type</th><th>Required</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Title</td><td>Single line of text</td><td>Yes</td><td>Default Site Pages column</td></tr>
+              <tr><td>Banner Image</td><td>Image</td><td>No</td><td>Used for card thumbnails</td></tr>
+              <tr><td>Description</td><td>Multiple lines</td><td>No</td><td>Optional excerpt/summary</td></tr>
+              <tr><td>Category</td><td>Choice</td><td>No</td><td>Optional category filtering via views</td></tr>
+              <tr><td>PromotedState</td><td>Number</td><td>No</td><td>Used when Show Promoted Only is enabled</td></tr>
+            </tbody>
+          </table>
+
           <h3>Property Pane Configuration</h3>
 
           <h4>Title Settings</h4>

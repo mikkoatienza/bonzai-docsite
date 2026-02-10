@@ -239,16 +239,21 @@ export default function FeedbackWebPart() {
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
             Create a SharePoint list named &quot;Feedback&quot; with these columns:
           </p>
+          <ol>
+            <li>Create a list named <strong>Feedback</strong>.</li>
+            <li>Add the required columns below (Title is already present).</li>
+            <li>Ensure users have Contribute permissions to submit feedback.</li>
+          </ol>
           <table>
             <thead><tr><th>Column</th><th>Type</th><th>Required</th><th>Notes</th></tr></thead>
             <tbody>
               <tr><td>Title</td><td>Single line of text</td><td>Yes</td><td>Default column — feedback subject</td></tr>
-              <tr><td>Description</td><td>Multiple lines of text</td><td>No</td><td>Plain text feedback content</td></tr>
-              <tr><td>Category</td><td>Choice</td><td>No</td><td>e.g., General, Bug Report, Feature Request</td></tr>
-              <tr><td>Rating</td><td>Number</td><td>No</td><td>Stores star rating value</td></tr>
-              <tr><td>IsAnonymous</td><td>Yes/No</td><td>No</td><td>Whether user chose anonymous</td></tr>
-              <tr><td>SubmittedBy</td><td>Single line of text</td><td>No</td><td>User email (auto-populated)</td></tr>
-              <tr><td>SubmittedByName</td><td>Single line of text</td><td>No</td><td>User display name (auto-populated)</td></tr>
+              <tr><td>Description</td><td>Multiple lines of text</td><td>Yes</td><td>Plain text feedback content</td></tr>
+              <tr><td>Category</td><td>Choice</td><td>Yes</td><td>e.g., General, Bug Report, Feature Request</td></tr>
+              <tr><td>Rating</td><td>Number</td><td>Yes</td><td>Stores star rating value</td></tr>
+              <tr><td>IsAnonymous</td><td>Yes/No</td><td>Yes</td><td>Whether user chose anonymous</td></tr>
+              <tr><td>SubmittedBy</td><td>Single line of text</td><td>Yes</td><td>User email (auto-populated)</td></tr>
+              <tr><td>SubmittedByName</td><td>Single line of text</td><td>Yes</td><td>User display name (auto-populated)</td></tr>
             </tbody>
           </table>
 

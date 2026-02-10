@@ -158,6 +158,29 @@ export default function SliderWebPart() {
           <hr className="my-12" />
           <h2>Reference</h2>
 
+          <h3>Site Pages Schema</h3>
+          <p>
+            Slider reads from Site Pages (fallbacks: <code>Site Pages</code>, <code>SitePages</code>, <code>Pages</code>).
+            Use these columns to curate slider items:
+          </p>
+          <ol>
+            <li>Create or use the Site Pages library on the source site.</li>
+            <li>Add a <strong>Showcase</strong> column (Choice or Text) and set value <strong>Slider</strong> on items.</li>
+            <li>Optional: add Tags and Category fields for filters.</li>
+            <li>Ensure each page has a banner image and is published.</li>
+          </ol>
+          <table>
+            <thead><tr><th>Column</th><th>Type</th><th>Required</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Title</td><td>Single line of text</td><td>Yes</td><td>Default Site Pages column</td></tr>
+              <tr><td>Banner Image</td><td>Image</td><td>No</td><td>Used for slide background</td></tr>
+              <tr><td>Showcase</td><td>Choice or Text</td><td>Yes</td><td>Set to <strong>Slider</strong> (Featured/PromotedState also supported)</td></tr>
+              <tr><td>Category</td><td>Choice</td><td>No</td><td>Optional category label</td></tr>
+              <tr><td>Tags</td><td>Managed Metadata</td><td>No</td><td>Enterprise Keywords / Tags for filters</td></tr>
+              <tr><td>Description</td><td>Multiple lines</td><td>No</td><td>Used for overlay excerpt if enabled</td></tr>
+            </tbody>
+          </table>
+
           <h3>Property Pane Configuration</h3>
 
           <h4>Main Settings</h4>

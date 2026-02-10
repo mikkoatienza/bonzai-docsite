@@ -273,6 +273,49 @@ export default function EventsRollupWebPart() {
           <hr className="my-12" />
           <h2>Reference</h2>
 
+          <h3>Event Pages Schema</h3>
+          <p>
+            Events Rollup reads event pages from Site Pages (fallbacks: <code>Pages</code>, <code>SitePages</code>, <code>Site Pages</code>).
+            The service discovers common field names, so you can use these recommended columns:
+          </p>
+          <ol>
+            <li>Create event pages in the Site Pages library.</li>
+            <li>Add a <strong>Start Date</strong> column (Date/Time) — required.</li>
+            <li>Optional: add End Date, Location, Address, Category, Tags, and RSVP fields.</li>
+            <li>Publish pages so they are visible to readers.</li>
+          </ol>
+          <table>
+            <thead><tr><th>Column</th><th>Type</th><th>Required</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Start Date</td><td>Date/Time</td><td>Yes</td><td>Maps to OwlEventPageStartDate or EventDate</td></tr>
+              <tr><td>End Date</td><td>Date/Time</td><td>No</td><td>Maps to OwlEventPageEndDate or EventEndDate</td></tr>
+              <tr><td>Location</td><td>Single line of text</td><td>No</td><td>Maps to OwlEventPageLocation / Location</td></tr>
+              <tr><td>Address</td><td>Multiple lines of text</td><td>No</td><td>Maps to OwlEventPageAddress / Address</td></tr>
+              <tr><td>Category</td><td>Choice</td><td>No</td><td>Maps to OwlEventPageCategory / Category</td></tr>
+              <tr><td>Tags</td><td>Managed Metadata</td><td>No</td><td>Enterprise Keywords / Tags for filters</td></tr>
+              <tr><td>Requires Attendance</td><td>Yes/No</td><td>No</td><td>Maps to OwlEventPageRequiresAttendance / RSVP</td></tr>
+              <tr><td>Max Attendees</td><td>Number</td><td>No</td><td>Maps to OwlEventPageMaxAttendees / MaximumAttendees</td></tr>
+              <tr><td>Event URL</td><td>Hyperlink</td><td>No</td><td>Preferred link target when present</td></tr>
+              <tr><td>Promoted</td><td>Yes/No or Number</td><td>No</td><td>OwlPromoteItem / PromotedState used for featured events</td></tr>
+            </tbody>
+          </table>
+
+          <h3>EventAttendees List Schema (for RSVP)</h3>
+          <p>RSVP requires a separate list to store attendance records.</p>
+          <ol>
+            <li>Create a list named <strong>EventAttendees</strong> (or <strong>Event Attendees</strong>).</li>
+            <li>Add the required columns below.</li>
+            <li>Ensure users have Contribute permissions to submit RSVP responses.</li>
+          </ol>
+          <table>
+            <thead><tr><th>Column</th><th>Type</th><th>Required</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>OwlEventPageItemId</td><td>Number</td><td>Yes</td><td>Event page item ID (variants supported: EventPageItemId, EventId)</td></tr>
+              <tr><td>OwlEventUserId</td><td>Number</td><td>Yes</td><td>Current user ID (variants supported: UserId, AttendeeUserId)</td></tr>
+              <tr><td>OwlEventIsAttending</td><td>Yes/No</td><td>Yes</td><td>RSVP state (variants supported: IsAttending, RSVP)</td></tr>
+            </tbody>
+          </table>
+
           <h3>Property Pane Configuration</h3>
 
           <h4>Page 1: Basic Settings</h4>

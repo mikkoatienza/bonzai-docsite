@@ -176,15 +176,22 @@ export default function AdvancedLinksWebPart() {
           <Callout type="info" title="Manual Links mode bypasses the list">
             If you choose Manual Links, you can skip list setup and define links directly in the web part.
           </Callout>
+          <ol>
+            <li>Create a list to store link items.</li>
+            <li>Add required Title and URL fields.</li>
+            <li>Optional: add Icon, Description, Category, Parent, and ordering fields for richer layouts.</li>
+          </ol>
           <table>
             <thead><tr><th>Column</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
             <tbody>
               <tr><td>Title</td><td>Single line of text</td><td>Yes</td><td>Link display text</td></tr>
-              <tr><td>URL</td><td>Hyperlink</td><td>Yes</td><td>Link destination URL</td></tr>
+              <tr><td>URL</td><td>Hyperlink</td><td>Yes</td><td>Link destination URL (URL/Link/Url fields supported)</td></tr>
               <tr><td>Icon</td><td>Single line of text</td><td>No</td><td>Fluent UI icon name</td></tr>
               <tr><td>Description</td><td>Multiple lines of text</td><td>No</td><td>Link description (for Description style)</td></tr>
               <tr><td>Category</td><td>Choice</td><td>No</td><td>Category for grouping</td></tr>
-              <tr><td>LinkOrder</td><td>Number</td><td>No</td><td>Sort order</td></tr>
+              <tr><td>Parent</td><td>Number or Text</td><td>No</td><td>Parent link reference for grouping</td></tr>
+              <tr><td>OpenInNewWindow</td><td>Yes/No</td><td>No</td><td>Open link in a new tab</td></tr>
+              <tr><td>LinkOrder</td><td>Number</td><td>No</td><td>Sort order (Order/ItemOrder also supported)</td></tr>
             </tbody>
           </table>
 

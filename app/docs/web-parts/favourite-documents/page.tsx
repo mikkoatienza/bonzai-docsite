@@ -142,11 +142,22 @@ export default function FavouriteDocumentsWebPart() {
           <h2>Reference</h2>
 
           <h3>Required Library Setup</h3>
-          <p>Create a column in your document library to mark favourites:</p>
+          <p>Favourite Documents uses a document library and filters items by a Showcase-style column.</p>
+          <ol>
+            <li>Select an existing document library with files.</li>
+            <li>Add a <strong>Showcase</strong> column (Choice or Text) if it does not exist.</li>
+            <li>Set the Showcase value (default: <strong>Favorite</strong>) on documents you want to feature.</li>
+          </ol>
           <table>
-            <thead><tr><th>Column</th><th>Type</th><th>Description</th></tr></thead>
+            <thead><tr><th>Column</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
             <tbody>
-              <tr><td>Showcase</td><td>Choice or Text</td><td>Column to filter by (default name). Add choice &quot;Favorite&quot; as an option.</td></tr>
+              <tr><td>Title</td><td>Single line of text</td><td>Yes</td><td>Document title (built-in)</td></tr>
+              <tr><td>FileLeafRef</td><td>Single line of text</td><td>Yes</td><td>File name (built-in)</td></tr>
+              <tr><td>FileRef</td><td>Hyperlink</td><td>Yes</td><td>Server-relative path (built-in)</td></tr>
+              <tr><td>Modified</td><td>Date/Time</td><td>Yes</td><td>Used for sorting (built-in)</td></tr>
+              <tr><td>Created</td><td>Date/Time</td><td>No</td><td>Fallback sort</td></tr>
+              <tr><td>Author</td><td>Person</td><td>No</td><td>Displayed when available</td></tr>
+              <tr><td>Showcase</td><td>Choice or Text</td><td>Yes</td><td>Column to filter by (default name). Add choice &quot;Favorite&quot; as an option.</td></tr>
             </tbody>
           </table>
 

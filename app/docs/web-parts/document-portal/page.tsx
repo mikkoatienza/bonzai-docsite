@@ -237,6 +237,27 @@ export default function DocumentPortalWebPart() {
             Technical details for developers and advanced users.
           </p>
 
+          <h3>FavouriteDocuments List Schema (optional)</h3>
+          <p>
+            The favourites section stores bookmarks in a SharePoint list named <strong>FavouriteDocuments</strong>.
+            Create this list only if you enable &quot;Show Favourite Documents&quot;.
+          </p>
+          <ol>
+            <li>Create a list named <strong>FavouriteDocuments</strong> in the same site.</li>
+            <li>Add the required columns below.</li>
+            <li>Ensure users have Contribute permissions to save favourites.</li>
+          </ol>
+          <table>
+            <thead><tr><th>Column</th><th>Type</th><th>Required</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Title</td><td>Single line of text</td><td>Yes</td><td>Document title</td></tr>
+              <tr><td>DocumentPath</td><td>Hyperlink</td><td>Yes</td><td>Document URL</td></tr>
+              <tr><td>DocumentId</td><td>Single line of text</td><td>Yes</td><td>Search DocId / UniqueId</td></tr>
+              <tr><td>FileExtension</td><td>Single line of text</td><td>Yes</td><td>File extension (e.g., pdf, docx)</td></tr>
+              <tr><td>AddedDate</td><td>Date/Time</td><td>Yes</td><td>Saved when favourite is added</td></tr>
+            </tbody>
+          </table>
+
           <h3>Related Components</h3>
           <p>Document Portal works with companion components:</p>
           <ul>

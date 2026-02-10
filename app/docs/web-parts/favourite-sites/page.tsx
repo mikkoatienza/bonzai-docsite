@@ -79,14 +79,20 @@ export default function FavouriteSitesWebPart() {
           </ol>
 
           <h2>Required List Schema</h2>
+          <ol>
+            <li>Create or select a SharePoint list that stores site details.</li>
+            <li>Add a <strong>Showcase</strong> column to mark favourites.</li>
+            <li>Set the Showcase value (default: <strong>Favorite</strong>) on sites you want to display.</li>
+          </ol>
           <table>
             <thead><tr><th>Column</th><th>Type</th><th>Required</th><th>Notes</th></tr></thead>
             <tbody>
               <tr><td>Title</td><td>Single line of text</td><td>Yes</td><td>Site display name</td></tr>
-              <tr><td>URL</td><td>Hyperlink</td><td>Yes</td><td>Site URL</td></tr>
+              <tr><td>URL</td><td>Hyperlink</td><td>Yes</td><td>Site URL (also accepts SiteUrl/Link field names)</td></tr>
               <tr><td>Description</td><td>Multiple lines of text</td><td>No</td><td>Site description</td></tr>
               <tr><td>Owner</td><td>Person or Text</td><td>No</td><td>Site owner information</td></tr>
-              <tr><td>Showcase</td><td>Single line of text or Choice</td><td>No</td><td>Column for marking favourites (e.g., value = &quot;Favorite&quot;)</td></tr>
+              <tr><td>Category</td><td>Choice</td><td>No</td><td>Optional category label</td></tr>
+              <tr><td>Showcase</td><td>Single line of text or Choice</td><td>Yes</td><td>Column for marking favourites (e.g., value = &quot;Favorite&quot;)</td></tr>
             </tbody>
           </table>
 

@@ -441,11 +441,49 @@ export default function MarketplaceWebPart() {
           <h3>List Requirements</h3>
 
           <p>
-            Marketplace works with any SharePoint list (BaseTemplate 100). There are no 
-            required columns — the web part discovers available fields automatically.
+            Marketplace works with any SharePoint list (BaseTemplate 100). The only required column is the
+            default <strong>Title</strong> field, which is used for item names and search.
           </p>
 
-          <h4>Recommended Columns</h4>
+          <h4>Minimum Columns</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Column</th>
+                <th>Type</th>
+                <th>Required</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Title</td>
+                <td>Single line of text</td>
+                <td>Yes</td>
+                <td>Used for item name and search filtering</td>
+              </tr>
+              <tr>
+                <td>Created</td>
+                <td>Date/Time</td>
+                <td>No</td>
+                <td>Available for sorting and display</td>
+              </tr>
+              <tr>
+                <td>Modified</td>
+                <td>Date/Time</td>
+                <td>No</td>
+                <td>Default sort field when no custom sort is set</td>
+              </tr>
+              <tr>
+                <td>Author</td>
+                <td>Person</td>
+                <td>No</td>
+                <td>Expanded to show display name when present</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Recommended Columns (Optional)</h4>
 
           <table>
             <thead>

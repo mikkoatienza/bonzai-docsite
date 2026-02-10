@@ -159,15 +159,23 @@ export default function LandingWebPart() {
 
           <h3>Required List Schema</h3>
           <p>Create a SharePoint list (default name: Bonzai_Landing) with these columns:</p>
+          <ol>
+            <li>Create a list named <strong>Bonzai_Landing</strong> (or select another list in the property pane).</li>
+            <li>Add required Title entries for each tile.</li>
+            <li>Add Image and LinkUrl columns for visuals and navigation.</li>
+            <li>Optional: add Description, SortOrder, OpenInNewWindow, and TargetAudience for richer behavior.</li>
+          </ol>
           <table>
-            <thead><tr><th>Column</th><th>Type</th><th>Description</th></tr></thead>
+            <thead><tr><th>Column</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
             <tbody>
-              <tr><td>Title</td><td>Single line of text</td><td>Tile title</td></tr>
-              <tr><td>Description</td><td>Multiple lines of text</td><td>Tile description (for Description template)</td></tr>
-              <tr><td>Image</td><td>Image (SharePoint Image column)</td><td>Tile background image (recommended, supports attachment payloads)</td></tr>
-              <tr><td>ImageUrl</td><td>Hyperlink or URL</td><td>Alternative image URL column</td></tr>
-              <tr><td>LinkUrl</td><td>Hyperlink or URL</td><td>Tile click destination</td></tr>
-              <tr><td>SortOrder</td><td>Number</td><td>Display order (optional)</td></tr>
+              <tr><td>Title</td><td>Single line of text</td><td>Yes</td><td>Tile title</td></tr>
+              <tr><td>Description</td><td>Multiple lines of text</td><td>No</td><td>Tile description (Description template; also accepts Body/Summary)</td></tr>
+              <tr><td>Image</td><td>Image (SharePoint Image column)</td><td>No</td><td>Tile background image (recommended, supports attachment payloads)</td></tr>
+              <tr><td>ImageUrl</td><td>Hyperlink or URL</td><td>No</td><td>Alternative image URL column</td></tr>
+              <tr><td>LinkUrl</td><td>Hyperlink or URL</td><td>No</td><td>Tile click destination</td></tr>
+              <tr><td>OpenInNewWindow</td><td>Yes/No</td><td>No</td><td>Open tile links in a new tab</td></tr>
+              <tr><td>SortOrder</td><td>Number</td><td>No</td><td>Display order (optional)</td></tr>
+              <tr><td>TargetAudience</td><td>Single line of text</td><td>No</td><td>Comma-separated SharePoint group names</td></tr>
             </tbody>
           </table>
 

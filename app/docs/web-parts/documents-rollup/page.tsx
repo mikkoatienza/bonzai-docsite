@@ -140,6 +140,29 @@ export default function DocumentsRollupWebPart() {
           <hr className="my-12" />
           <h2>Reference</h2>
 
+          <h3>Document Library Schema</h3>
+          <p>
+            Documents Rollup uses standard document library fields. No custom columns are required, but you can add
+            a Promoted/Featured column to mark promoted documents.
+          </p>
+          <ol>
+            <li>Select an existing document library with files.</li>
+            <li>Optional: add a <strong>Featured</strong> (Yes/No) or <strong>PromotedState</strong> (Number) field for promoted filtering.</li>
+            <li>If using promoted filtering, set the field value on documents you want to feature.</li>
+          </ol>
+          <table>
+            <thead><tr><th>Column</th><th>Type</th><th>Required</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Title</td><td>Single line of text</td><td>Yes</td><td>Default library field</td></tr>
+              <tr><td>FileLeafRef</td><td>Single line of text</td><td>Yes</td><td>File name (built-in)</td></tr>
+              <tr><td>FileRef</td><td>Hyperlink</td><td>Yes</td><td>Server-relative path (built-in)</td></tr>
+              <tr><td>Modified</td><td>Date/Time</td><td>Yes</td><td>Used for sorting</td></tr>
+              <tr><td>Created</td><td>Date/Time</td><td>No</td><td>Fallback sort</td></tr>
+              <tr><td>Featured</td><td>Yes/No</td><td>No</td><td>Optional promoted filter (PromotedState also supported)</td></tr>
+              <tr><td>PromotedState</td><td>Number</td><td>No</td><td>Optional promoted filter (SharePoint system field)</td></tr>
+            </tbody>
+          </table>
+
           <h3>Property Pane Configuration</h3>
 
           <h4>Title Settings</h4>

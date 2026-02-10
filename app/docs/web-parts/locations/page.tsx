@@ -146,16 +146,27 @@ export default function LocationsWebPart() {
 
           <h3>Locations List Schema</h3>
           <p>Create a SharePoint list with these columns:</p>
+          <ol>
+            <li>Create a list to store locations (any name).</li>
+            <li>Add required Title column entries for each location.</li>
+            <li>Add optional columns for address, contact, and map details.</li>
+          </ol>
           <table>
             <thead><tr><th>Column</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
             <tbody>
               <tr><td>Title</td><td>Single line of text</td><td>Yes</td><td>Office/location name</td></tr>
               <tr><td>Address</td><td>Multiple lines of text</td><td>No</td><td>Full street address</td></tr>
+              <tr><td>City</td><td>Single line of text</td><td>No</td><td>Used for search and display</td></tr>
+              <tr><td>State</td><td>Single line of text</td><td>No</td><td>Used for search and display</td></tr>
+              <tr><td>PostalCode</td><td>Single line of text</td><td>No</td><td>Postal/ZIP code</td></tr>
+              <tr><td>Country</td><td>Single line of text</td><td>No</td><td>Used for search and display</td></tr>
               <tr><td>Phone</td><td>Single line of text</td><td>No</td><td>Contact phone number</td></tr>
               <tr><td>Email</td><td>Single line of text</td><td>No</td><td>Contact email address</td></tr>
               <tr><td>Hours</td><td>Single line of text</td><td>No</td><td>Operating hours</td></tr>
               <tr><td>Image</td><td>Image or Hyperlink</td><td>No</td><td>Office photo URL</td></tr>
-              <tr><td>MapImage</td><td>Image or Hyperlink</td><td>No</td><td>Static map image URL</td></tr>
+              <tr><td>MapImageUrl</td><td>Image or Hyperlink</td><td>No</td><td>Static map image URL (MapImage also supported)</td></tr>
+              <tr><td>Latitude</td><td>Number</td><td>No</td><td>Optional coordinate for directions</td></tr>
+              <tr><td>Longitude</td><td>Number</td><td>No</td><td>Optional coordinate for directions</td></tr>
             </tbody>
           </table>
 

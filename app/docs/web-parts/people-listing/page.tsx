@@ -160,11 +160,23 @@ export default function PeopleListingWebPart() {
 
           <h3>People List Schema (for List mode)</h3>
           <p>When using SharePoint List mode, create a list with a Person/User column:</p>
+          <ol>
+            <li>Create a SharePoint list for curated people.</li>
+            <li>Add a Person/Group column and select it in the web part property pane.</li>
+            <li>Optional: add extra fields for external contacts or custom metadata.</li>
+          </ol>
           <table>
             <thead><tr><th>Column</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
             <tbody>
               <tr><td>Title</td><td>Single line of text</td><td>Yes</td><td>Entry title or name</td></tr>
               <tr><td>Person</td><td>Person or Group</td><td>Yes</td><td>The user column (configure via Person Column property)</td></tr>
+              <tr><td>External Name (configurable)</td><td>Single line of text</td><td>No</td><td>Optional for external contacts (map via External Name field)</td></tr>
+              <tr><td>External Email (configurable)</td><td>Single line of text</td><td>No</td><td>Map to email field for external contacts</td></tr>
+              <tr><td>External Job Title (configurable)</td><td>Single line of text</td><td>No</td><td>Map to job title field</td></tr>
+              <tr><td>External Department (configurable)</td><td>Single line of text</td><td>No</td><td>Map to department field</td></tr>
+              <tr><td>External Location (configurable)</td><td>Single line of text</td><td>No</td><td>Map to location field</td></tr>
+              <tr><td>External Phone (configurable)</td><td>Single line of text</td><td>No</td><td>Map to phone field</td></tr>
+              <tr><td>External Photo URL (configurable)</td><td>Hyperlink</td><td>No</td><td>Map to photo URL field</td></tr>
               <tr><td>(Additional)</td><td>Various</td><td>No</td><td>Custom columns for display (configure via Additional Columns property)</td></tr>
             </tbody>
           </table>
