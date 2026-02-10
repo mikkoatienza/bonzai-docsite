@@ -11,7 +11,7 @@ export default function TabbedWebPart() {
     <DocsPage>
       <DocsTitle>Tabbed</DocsTitle>
       <DocsDescription>
-        Organize content in tabs or accordion layouts with customizable styling and collapsible panels.
+        Organize content in accordion, tabs, or tiles layouts with configurable pagination and rich text content.
       </DocsDescription>
       <DocsBody>
         <div className="prose prose-gray dark:prose-invert max-w-none">
@@ -32,7 +32,7 @@ export default function TabbedWebPart() {
             ]}
             steps={[
               { title: 'Add the web part', description: 'Edit your page and add "Bonzai Tabbed" from the Bonzai category.' },
-              { title: 'Choose layout mode', description: 'Toggle "Accordion Mode" on or off to switch between accordion and tabs view.' },
+              { title: 'Choose layout mode', description: 'Select a Display Mode: Accordion, Tabs, or Tiles.' },
               { title: 'Configure tabs and items', description: 'Use "Manage Tabs" to create tabs, then "Manage Items" to add links/content to each tab.' },
             ]}
           />
@@ -62,8 +62,9 @@ export default function TabbedWebPart() {
 
           <h2>Layout Modes</h2>
           <ul>
-            <li><strong>Accordion Mode (On):</strong> Collapsible sections with expand/collapse icons (FAQ-style)</li>
-            <li><strong>Accordion Mode (Off):</strong> Horizontal tabs with content panels</li>
+            <li><strong>Accordion:</strong> Collapsible sections with expand/collapse icons (FAQ-style)</li>
+            <li><strong>Tabs:</strong> Horizontal tab navigation with content panels</li>
+            <li><strong>Tiles:</strong> Visual card grid of tab groups</li>
           </ul>
 
           <h2>Accordion Display Modes</h2>
@@ -85,7 +86,7 @@ export default function TabbedWebPart() {
               icon={<ChevronDown className="h-5 w-5" />}
               config={[
                 { property: 'title', value: 'FAQs' },
-                { property: 'accordionMode', value: 'On' },
+                { property: 'displayMode', value: 'Accordion' },
                 { property: 'accordionDisplayMode', value: 'Single' },
                 { property: 'collapsePanelsByDefault', value: 'On' },
               ]}
@@ -97,8 +98,8 @@ export default function TabbedWebPart() {
               icon={<LayoutList className="h-5 w-5" />}
               config={[
                 { property: 'title', value: 'My Apps & Documents' },
-                { property: 'accordionMode', value: 'On' },
-                { property: 'accordionDisplayMode', value: 'Multiple' },
+                { property: 'displayMode', value: 'Tabs' },
+                { property: 'tabsPerPage', value: 'Show All' },
                 { property: 'showPanelTitle', value: 'On' },
               ]}
             />
@@ -108,7 +109,7 @@ export default function TabbedWebPart() {
               useCase="Department page"
               icon={<Palette className="h-5 w-5" />}
               config={[
-                { property: 'accordionMode', value: 'On' },
+                { property: 'displayMode', value: 'Accordion' },
                 { property: 'accordionTextColour', value: '#333333' },
                 { property: 'accordionBackgroundColour', value: '#f5f5f5' },
                 { property: 'accordionBorderColour', value: '#70a7af' },
@@ -120,7 +121,7 @@ export default function TabbedWebPart() {
               useCase="Reference page"
               icon={<Settings className="h-5 w-5" />}
               config={[
-                { property: 'accordionMode', value: 'On' },
+                { property: 'displayMode', value: 'Accordion' },
                 { property: 'accordionDisplayMode', value: 'Multiple' },
                 { property: 'collapsePanelsByDefault', value: 'Off' },
               ]}
@@ -153,10 +154,15 @@ export default function TabbedWebPart() {
             <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
             <tbody>
               <tr><td><code>title</code></td><td>Text</td><td>Web part title (default: My Apps &amp; Documents)</td></tr>
-              <tr><td><code>accordionMode</code></td><td>Toggle</td><td>Enable accordion layout (default: On)</td></tr>
+              <tr><td><code>displayMode</code></td><td>Dropdown</td><td>Accordion, Tabs, or Tiles</td></tr>
               <tr><td><code>showPanelTitle</code></td><td>Toggle</td><td>Show panel titles (default: On)</td></tr>
               <tr><td><code>accordionDisplayMode</code></td><td>Dropdown</td><td>Single (one open) or Multiple (many open)</td></tr>
               <tr><td><code>collapsePanelsByDefault</code></td><td>Toggle</td><td>Start with panels collapsed (default: Off)</td></tr>
+              <tr><td><code>tilesPerRow</code></td><td>Dropdown</td><td>Tiles columns (Auto, 2-6)</td></tr>
+              <tr><td><code>tilesPerPage</code></td><td>Dropdown</td><td>Pagination for Tiles/Accordion (4-12 or Show All)</td></tr>
+              <tr><td><code>tabsPerPage</code></td><td>Dropdown</td><td>Tabs pagination (4-12 or Show All)</td></tr>
+              <tr><td><code>itemsPerRow</code></td><td>Dropdown</td><td>Content layout: List or 2-6 columns</td></tr>
+              <tr><td><code>itemsPerPage</code></td><td>Dropdown</td><td>Items pagination within tabs</td></tr>
             </tbody>
           </table>
 
@@ -185,6 +191,8 @@ export default function TabbedWebPart() {
             <tbody>
               <tr><td><code>title</code></td><td>Text</td><td>Tab title (required)</td></tr>
               <tr><td><code>icon</code></td><td>Dropdown</td><td>Fluent UI icon for the tab</td></tr>
+              <tr><td><code>contentType</code></td><td>Dropdown</td><td>Items/Links or Rich Text Article</td></tr>
+              <tr><td><code>richTextContent</code></td><td>Rich Text</td><td>HTML content when contentType is Rich Text</td></tr>
             </tbody>
           </table>
 
@@ -197,18 +205,20 @@ export default function TabbedWebPart() {
               <tr><td><code>url</code></td><td>Text</td><td>Link URL</td></tr>
               <tr><td><code>icon</code></td><td>Dropdown</td><td>Fluent UI icon for the item</td></tr>
               <tr><td><code>openInNewTab</code></td><td>Boolean</td><td>Open link in new tab</td></tr>
+              <tr><td><code>description</code></td><td>Rich Text</td><td>Item description (HTML)</td></tr>
             </tbody>
           </table>
 
           <h3>Features Checklist</h3>
           <ul>
-            <li>✅ Accordion and Tabs layout modes</li>
+            <li>✅ Accordion, Tabs, and Tiles layout modes</li>
             <li>✅ Single or Multiple panel display</li>
             <li>✅ Customizable colors (text, background, border)</li>
             <li>✅ Collapsible panels</li>
             <li>✅ Icon support for tabs and items</li>
             <li>✅ Open in new tab option</li>
             <li>✅ Collection-based configuration</li>
+            <li>✅ Rich text content tabs</li>
             <li>✅ Theme-aware styling</li>
           </ul>
         </div>

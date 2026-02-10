@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { Download, Package, Clock, CheckCircle, HelpCircle, ExternalLink, Shield, Globe, Monitor, Headphones } from 'lucide-react';
 
 export default function DownloadPage() {
-  const currentVersion = '1.0.221';
-  const releaseDate = 'February 2, 2026';
+  const currentVersion = '1.0.272';
+  const releaseDate = 'February 10, 2026';
   const packageSize = '~60 MB';
   const downloadUrl = '/downloads/Bonzai-2.0.sppkg';
 
@@ -108,7 +108,7 @@ export default function DownloadPage() {
                     </span>
                   </td>
                   <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Feb 2026</td>
-                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">News Rollup layout and pagination upgrades, Mega Menu branding + logo support, higher-res images across rollups, and Events Rollup UI/like count improvements</td>
+                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">News Rollup/Slider/Events search + filter UI, Theme Manager site-wide persistence, Mega Menu branding alignment, and new Footer extension</td>
                 </tr>
                 <tr>
                   <td className="px-4 py-3">

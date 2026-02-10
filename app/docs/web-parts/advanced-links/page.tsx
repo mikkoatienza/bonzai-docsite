@@ -11,7 +11,7 @@ export default function AdvancedLinksWebPart() {
     <DocsPage>
       <DocsTitle>Advanced Links</DocsTitle>
       <DocsDescription>
-        Display link collections with multiple display styles: list, tiles, descriptions, or text only.
+        Display link collections with multiple display styles: list, tiles, descriptions, text only, or image gallery.
       </DocsDescription>
       <DocsBody>
         <div className="prose prose-gray dark:prose-invert max-w-none">
@@ -29,12 +29,12 @@ export default function AdvancedLinksWebPart() {
             time="15-30 minutes"
             prerequisites={[
               'Bonzai 2 package installed on your site',
-              'A SharePoint list with links (Title, URL columns required)',
+              'Either a SharePoint list with links (Title, URL columns required) or Manual Links mode',
             ]}
             steps={[
-              { title: 'Create or use a links list', description: 'Create a list with Title, URL, Icon, and Description columns, or use an existing Links list.' },
+              { title: 'Choose your data source', description: 'Select SharePoint List or Manual Links mode in the property pane.' },
               { title: 'Add the web part', description: 'Edit your page and add "Bonzai Advanced Links" from the Bonzai category.' },
-              { title: 'Select list and configure', description: 'Choose your links list from the dropdown, select a display style, and publish.' },
+              { title: 'Configure and publish', description: 'Select a display style, configure pagination, and publish.' },
             ]}
           />
 
@@ -66,12 +66,32 @@ export default function AdvancedLinksWebPart() {
             <li><strong>Tiles:</strong> Icon tiles in a grid layout</li>
             <li><strong>Links with Descriptions:</strong> Detailed link cards with descriptions</li>
             <li><strong>Text Only:</strong> Simple text links without icons</li>
+            <li><strong>Image Gallery:</strong> Grid of image tiles with overlay text</li>
+          </ul>
+
+          <h2>Data Source Modes</h2>
+          <ul>
+            <li><strong>SharePoint List:</strong> Use a links list with Title and URL columns</li>
+            <li><strong>Manual Links:</strong> Add links directly in the web part settings</li>
+          </ul>
+
+          <h3>Manual Links Fields</h3>
+          <ul>
+            <li><strong>Type:</strong> Link or Divider</li>
+            <li><strong>Title:</strong> Display text</li>
+            <li><strong>URL:</strong> Link destination</li>
+            <li><strong>Description:</strong> Optional description</li>
+            <li><strong>Icon:</strong> Dropdown with auto-detect</li>
+            <li><strong>Image:</strong> File picker (stock, OneDrive, site files, upload)</li>
+            <li><strong>Open in New Tab:</strong> Toggle</li>
           </ul>
 
           <h2>Recent Updates</h2>
           <ul>
-            <li>Items to Show now paginates when more links exist (all display styles).</li>
-            <li>Tile mode supports a tile height control for consistent layouts.</li>
+            <li>Title icon now uses an icon picker with visual browsing.</li>
+            <li>New Manual Links mode for list-free configurations.</li>
+            <li>New Image Gallery display style.</li>
+            <li>Pagination now works across all display styles (showPaging + itemsPerPage).</li>
           </ul>
 
           {/* COMMON CONFIGURATIONS (RECIPES) */}
@@ -99,6 +119,8 @@ export default function AdvancedLinksWebPart() {
                 { property: 'title', value: 'Applications' },
                 { property: 'displayStyle', value: 'tile' },
                 { property: 'numberOfLinks', value: '4' },
+                { property: 'showPaging', value: 'On' },
+                { property: 'itemsPerPage', value: '12' },
                 { property: 'iconSize', value: 'large' },
               ]}
             />
@@ -112,6 +134,7 @@ export default function AdvancedLinksWebPart() {
                 { property: 'displayStyle', value: 'description' },
                 { property: 'numberOfLinks', value: '3' },
                 { property: 'showPaging', value: 'On' },
+                { property: 'itemsPerPage', value: '9' },
               ]}
             />
             <RecipeCard
@@ -121,7 +144,7 @@ export default function AdvancedLinksWebPart() {
               icon={<Link className="h-5 w-5" />}
               config={[
                 { property: 'displayStyle', value: 'text' },
-                { property: 'chromeType', value: 'none' },
+                { property: 'showPaging', value: 'Off' },
               ]}
             />
           </RecipeGrid>
@@ -129,6 +152,9 @@ export default function AdvancedLinksWebPart() {
           <h2>Best Practices</h2>
           <Callout type="tip" title="Use Fluent UI icons">
             The Icon column in your list should contain Fluent UI icon names (e.g., &quot;Home&quot;, &quot;Mail&quot;, &quot;Calendar&quot;).
+          </Callout>
+          <Callout type="tip" title="Use the title icon picker">
+            Title icons are selected via a visual picker. Use a custom icon URL only when necessary.
           </Callout>
           <Callout type="tip" title="Custom tile colors">
             In Tile mode, you can customize icon and tile background colors for branded navigation.
@@ -138,7 +164,7 @@ export default function AdvancedLinksWebPart() {
             items={[
               { problem: 'Links not appearing', solution: 'Verify the list has items and the correct list is selected. Check that the list is in the current site or specify the Site URL.' },
               { problem: 'Icons not showing', solution: 'Check icon names are valid Fluent UI icons in your list data.' },
-              { problem: 'Items per row not working', solution: 'Items per row only applies to Tile and Description display styles.' },
+              { problem: 'Items per row not working', solution: 'Items per row only applies to Tile, Description, and Image Gallery styles.' },
             ]}
           />
 
@@ -147,6 +173,9 @@ export default function AdvancedLinksWebPart() {
 
           <h3>Links List Schema</h3>
           <p>Create a SharePoint list with these columns:</p>
+          <Callout type="info" title="Manual Links mode bypasses the list">
+            If you choose Manual Links, you can skip list setup and define links directly in the web part.
+          </Callout>
           <table>
             <thead><tr><th>Column</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
             <tbody>
@@ -167,7 +196,7 @@ export default function AdvancedLinksWebPart() {
             <tbody>
               <tr><td><code>title</code></td><td>Text</td><td>Web part title (default: Links)</td></tr>
               <tr><td><code>titleUrl</code></td><td>Text</td><td>Optional URL to make the title clickable</td></tr>
-              <tr><td><code>titleIconName</code></td><td>Text</td><td>Fluent UI icon name (default: Link)</td></tr>
+              <tr><td><code>titleIconName</code></td><td>Icon Picker</td><td>Fluent UI icon picker (default: Link)</td></tr>
               <tr><td><code>titleIconUrl</code></td><td>Text</td><td>Custom icon URL (overrides icon name)</td></tr>
               <tr><td><code>description</code></td><td>Text (Multiline)</td><td>Optional description below the title</td></tr>
             </tbody>
@@ -177,9 +206,12 @@ export default function AdvancedLinksWebPart() {
           <table>
             <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
             <tbody>
-              <tr><td><code>siteUrl</code></td><td>Text</td><td>Site URL where the list is located (empty = current site)</td></tr>
-              <tr><td><code>listId</code></td><td>Dropdown</td><td>Links list (auto-loads available lists)</td></tr>
-              <tr><td><code>viewId</code></td><td>Dropdown</td><td>View to filter links</td></tr>
+              <tr><td><code>dataSourceMode</code></td><td>Dropdown</td><td>SharePoint List or Manual Links</td></tr>
+              <tr><td><code>siteSelectionMode</code></td><td>Dropdown</td><td>Select from available sites or enter site URL manually</td></tr>
+              <tr><td><code>sitePicker</code></td><td>Picker</td><td>Site dropdown (picker mode)</td></tr>
+              <tr><td><code>subsitePicker</code></td><td>Dropdown</td><td>Cascading subsite dropdown (picker mode)</td></tr>
+              <tr><td><code>siteUrl</code></td><td>Text</td><td>Manual site URL (manual mode)</td></tr>
+              <tr><td><code>listId</code></td><td>List Picker</td><td>Links list (updates based on selected site)</td></tr>
             </tbody>
           </table>
 
@@ -187,12 +219,11 @@ export default function AdvancedLinksWebPart() {
           <table>
             <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
             <tbody>
-              <tr><td><code>displayStyle</code></td><td>Dropdown</td><td>Display style: List with Icons, Tiles, Links with Descriptions, Text Only</td></tr>
+              <tr><td><code>displayStyle</code></td><td>Dropdown</td><td>Display style: List, Tiles, Descriptions, Text, Image Gallery</td></tr>
               <tr><td><code>iconSize</code></td><td>Dropdown</td><td>Icon size: Small, Medium, Large</td></tr>
               <tr><td><code>numberOfLinks</code></td><td>Dropdown</td><td>Items per row (1-6, for Tile and Description styles)</td></tr>
-              <tr><td><code>itemsToShow</code></td><td>Slider</td><td>Items to show per page (pagination appears when more exist)</td></tr>
-              <tr><td><code>chromeType</code></td><td>Dropdown</td><td>Chrome type: None, Title Only, Border Only, Title and Border</td></tr>
-              <tr><td><code>fixedHeight</code></td><td>Number</td><td>Fixed height in pixels (0 = auto)</td></tr>
+              <tr><td><code>showPaging</code></td><td>Toggle</td><td>Enable pagination</td></tr>
+              <tr><td><code>itemsPerPage</code></td><td>Slider (3-50)</td><td>Items per page when pagination is enabled</td></tr>
             </tbody>
           </table>
 
@@ -207,24 +238,22 @@ export default function AdvancedLinksWebPart() {
             </tbody>
           </table>
 
-          <h4>Description Options (Description display style only)</h4>
+          <h4>Gallery Options (Image Gallery display style only)</h4>
           <table>
             <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
             <tbody>
-              <tr><td><code>learnMoreText</code></td><td>Text</td><td>Text for the Learn More link (default: Learn More)</td></tr>
-              <tr><td><code>showPaging</code></td><td>Toggle</td><td>Enable pagination</td></tr>
-              <tr><td><code>itemsPerPage</code></td><td>Slider (3-50)</td><td>Items per page when pagination is enabled</td></tr>
+              <tr><td><code>galleryHeight</code></td><td>Slider</td><td>Gallery height in pixels</td></tr>
             </tbody>
           </table>
 
           <h3>Features Checklist</h3>
           <ul>
-            <li>✅ Four display styles (List, Tiles, Descriptions, Text)</li>
+            <li>✅ Five display styles (List, Tiles, Descriptions, Text, Image Gallery)</li>
             <li>✅ Configurable icon sizes</li>
             <li>✅ Custom tile colors</li>
-            <li>✅ Pagination support (Description mode)</li>
+            <li>✅ Pagination support across all styles</li>
+            <li>✅ Manual Links mode (no list required)</li>
             <li>✅ Auto-loading list picker</li>
-            <li>✅ View-based filtering</li>
             <li>✅ Custom title with icon and link</li>
           </ul>
         </div>

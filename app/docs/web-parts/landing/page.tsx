@@ -78,8 +78,9 @@ export default function LandingWebPart() {
 
           <h2>Recent Updates</h2>
           <ul>
-            <li>Supports SharePoint Image column values (modern Image field format).</li>
+            <li>Supports SharePoint Image column values (modern Image field format) including attachment payloads.</li>
             <li>Improved image parsing to avoid broken tile thumbnails.</li>
+            <li>Tiles now use a subtle 20% black overlay for better text contrast.</li>
           </ul>
 
           {/* COMMON CONFIGURATIONS (RECIPES) */}
@@ -146,6 +147,8 @@ export default function LandingWebPart() {
           <Troubleshooting
             items={[
               { problem: 'Tiles not showing images', solution: 'Use a SharePoint Image column (recommended) or a valid hyperlink URL column such as ImageUrl.' },
+              { problem: 'Tiles show but links do not work', solution: 'Ensure the list has a valid LinkUrl column (or equivalent). The service discovers link fields by name.' },
+              { problem: 'Targeted tiles aren’t appearing', solution: 'Ensure TargetAudience values match SharePoint group names the user belongs to.' },
               { problem: 'Grid layout looks uneven', solution: 'Use images with similar aspect ratios across all items.' },
               { problem: 'View picker is disabled', solution: 'Select a list first. The view picker depends on the selected list.' },
             ]}
@@ -161,7 +164,7 @@ export default function LandingWebPart() {
             <tbody>
               <tr><td>Title</td><td>Single line of text</td><td>Tile title</td></tr>
               <tr><td>Description</td><td>Multiple lines of text</td><td>Tile description (for Description template)</td></tr>
-              <tr><td>Image</td><td>Image (SharePoint Image column)</td><td>Tile background image (recommended)</td></tr>
+              <tr><td>Image</td><td>Image (SharePoint Image column)</td><td>Tile background image (recommended, supports attachment payloads)</td></tr>
               <tr><td>ImageUrl</td><td>Hyperlink or URL</td><td>Alternative image URL column</td></tr>
               <tr><td>LinkUrl</td><td>Hyperlink or URL</td><td>Tile click destination</td></tr>
               <tr><td>SortOrder</td><td>Number</td><td>Display order (optional)</td></tr>
@@ -190,7 +193,7 @@ export default function LandingWebPart() {
               <tr><td><code>siteUrl</code></td><td>Text</td><td>Site URL where the list is located (empty = current site)</td></tr>
               <tr><td><code>listId</code></td><td>List Picker</td><td>Source list for landing items (default: Bonzai_Landing)</td></tr>
               <tr><td><code>viewId</code></td><td>View Picker</td><td>View to filter items (depends on selected list)</td></tr>
-              <tr><td><code>enableContentTargeting</code></td><td>Toggle</td><td>Filter content by user profile attributes</td></tr>
+              <tr><td><code>enableContentTargeting</code></td><td>Toggle</td><td>Filter content by SharePoint group membership</td></tr>
             </tbody>
           </table>
 
@@ -217,9 +220,9 @@ export default function LandingWebPart() {
             <li>✅ Configurable items per row (1-6)</li>
             <li>✅ Image overlay with configurable font size</li>
             <li>✅ View-based filtering</li>
-            <li>✅ Content targeting</li>
+            <li>✅ Content targeting by SharePoint group</li>
             <li>✅ Fixed height option</li>
-            <li>✅ Custom title with link</li>
+            <li>✅ Custom title with link (blank title hides header row)</li>
           </ul>
         </div>
       </DocsBody>

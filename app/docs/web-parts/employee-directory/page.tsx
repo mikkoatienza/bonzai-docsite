@@ -12,7 +12,7 @@ export default function EmployeeDirectoryWebPart() {
     <DocsPage>
       <DocsTitle>Employee Directory</DocsTitle>
       <DocsDescription>
-        Employee search with A-Z filtering, profile photos, and contact information.
+        Employee directory with search mode and pinned employee mode.
       </DocsDescription>
       <DocsBody>
         <div className="prose prose-gray dark:prose-invert max-w-none">
@@ -39,12 +39,12 @@ export default function EmployeeDirectoryWebPart() {
                 description: 'Edit the page, click +, search for "Employee Directory", and add it to a section.',
               },
               {
-                title: 'Enable search and alphabetical filter',
-                description: 'Open the property pane and toggle on "Show Search" and "Show A-Z Filter".',
+                title: 'Choose display mode',
+                description: 'Select Search Directory (default) or Pinned Employees in the Display Mode section.',
               },
               {
-                title: 'Configure display options and publish',
-                description: 'Set items per page, enable profile photos, and publish your page.',
+                title: 'Configure fields and publish',
+                description: 'Use Configure Fields to choose which properties show, then publish your page.',
               },
             ]}
           />
@@ -57,6 +57,7 @@ export default function EmployeeDirectoryWebPart() {
               'Display contact information for employees',
               'Link to user profiles in SharePoint/Delve',
               'Browse employees alphabetically',
+              'Show pinned employees on a team page',
             ]}
             bestFor={[
               'People page — dedicated employee directory',
@@ -74,6 +75,19 @@ export default function EmployeeDirectoryWebPart() {
               { name: 'Locations', when: 'office locations with contacts' },
             ]}
           />
+
+          <h2>Display Modes</h2>
+          <ul>
+            <li><strong>Search Directory:</strong> Full directory with search and A–Z filtering</li>
+            <li><strong>Pinned Employees:</strong> Curated people list (by individuals or criteria)</li>
+          </ul>
+
+          <h2>Configure Fields</h2>
+          <ul>
+            <li>Enable/disable fields, reorder, and choose managed properties</li>
+            <li>Select display type per field (Text, Email Link, Phone Link, Link, Icon + Text, Image)</li>
+            <li>Reset to default if needed</li>
+          </ul>
 
           {/* STEP-BY-STEP CONFIGURATION */}
           <StepGuide
@@ -97,20 +111,20 @@ export default function EmployeeDirectoryWebPart() {
                 tip: 'Leave blank for a cleaner look if the page title already indicates the purpose.',
               },
               {
-                title: 'Configure search placeholder',
-                description: 'Set the "Search Text" to customize the placeholder text in the search box (e.g., "Search employees...").',
+                title: 'Select display mode',
+                description: 'Choose Search Directory (default) or Pinned Employees in the Display Mode section.',
               },
               {
-                title: 'Configure alphabetical filter field',
-                description: 'Set "Alphabetical Filter Field" to the property to use for A-Z filtering (default: PreferredName).',
+                title: 'Configure pinned options (if used)',
+                description: 'Pick employees directly or filter by criteria, then set pinned layout (items per row/page).',
               },
               {
                 title: 'Set items per page',
                 description: 'Configure how many employees display per page using the slider. 20-28 is typical for a grid layout.',
               },
               {
-                title: 'Configure display options',
-                description: 'Toggle "Show Picture", "Show Role", and "Show Location" to control what information is displayed for each employee.',
+                title: 'Configure fields',
+                description: 'Use Configure Fields to enable/disable fields, change order, and select managed properties.',
               },
               {
                 title: 'Publish and test',
@@ -132,9 +146,7 @@ export default function EmployeeDirectoryWebPart() {
               config={[
                 { property: 'title', value: 'Employee Directory' },
                 { property: 'itemsPerPage', value: '28' },
-                { property: 'showPicture', value: 'On' },
-                { property: 'showRole', value: 'On' },
-                { property: 'showLocationResult', value: 'On' },
+                { property: 'displayMode', value: 'Search Directory' },
                 { property: 'enableWildcardSearch', value: 'On' },
               ]}
             />
@@ -145,10 +157,10 @@ export default function EmployeeDirectoryWebPart() {
               icon={<Building2 className="h-5 w-5" />}
               config={[
                 { property: 'title', value: 'Our Team' },
-                { property: 'itemsPerPage', value: '12' },
-                { property: 'showPicture', value: 'On' },
-                { property: 'showRole', value: 'On' },
-                { property: 'showLocationResult', value: 'Off' },
+                { property: 'displayMode', value: 'Pinned Employees' },
+                { property: 'pinnedSelectionMode', value: 'Select Individuals' },
+                { property: 'pinnedItemsPerRow', value: '4' },
+                { property: 'pinnedItemsPerPage', value: '12' },
               ]}
             />
             <RecipeCard
@@ -160,8 +172,7 @@ export default function EmployeeDirectoryWebPart() {
                 { property: 'title', value: 'Find a Colleague' },
                 { property: 'searchText', value: 'Search employees...' },
                 { property: 'itemsPerPage', value: '8' },
-                { property: 'showPicture', value: 'On' },
-                { property: 'showRole', value: 'Off' },
+                { property: 'displayMode', value: 'Search Directory' },
               ]}
             />
             <RecipeCard
@@ -173,8 +184,8 @@ export default function EmployeeDirectoryWebPart() {
                 { property: 'title', value: 'Staff Directory' },
                 { property: 'alphabeticalFilterField', value: 'PreferredName' },
                 { property: 'itemsPerPage', value: '20' },
-                { property: 'showRole', value: 'On' },
-                { property: 'showLocationResult', value: 'On' },
+                { property: 'displayMode', value: 'Search Directory' },
+                { property: 'Configure Fields', value: 'Role, Location' },
               ]}
             />
           </RecipeGrid>
@@ -254,8 +265,8 @@ export default function EmployeeDirectoryWebPart() {
               </tr>
               <tr>
                 <td><code>titleIconName</code></td>
-                <td>Text</td>
-                <td>Fluent UI icon name (default: ContactCard)</td>
+                <td>Icon Picker</td>
+                <td>Fluent UI icon picker (default: ContactCard)</td>
               </tr>
               <tr>
                 <td><code>titleIconUrl</code></td>
@@ -264,8 +275,8 @@ export default function EmployeeDirectoryWebPart() {
               </tr>
               <tr>
                 <td><code>resultSource</code></td>
-                <td>Text</td>
-                <td>SharePoint Search result source (default: Local People Results)</td>
+                <td>Dropdown</td>
+                <td>SharePoint Search result source (with Custom GUID option)</td>
               </tr>
               <tr>
                 <td><code>searchText</code></td>
@@ -281,6 +292,67 @@ export default function EmployeeDirectoryWebPart() {
                 <td><code>itemsPerPage</code></td>
                 <td>Slider (4-100)</td>
                 <td>Results displayed per page (step: 4, default: 28)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Display Mode</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>displayMode</code></td>
+                <td>Choice</td>
+                <td>Search Directory (default) or Pinned Employees</td>
+              </tr>
+              <tr>
+                <td><code>pinnedSelectionMode</code></td>
+                <td>Choice</td>
+                <td>Select Individual Employees or Filter by Criteria</td>
+              </tr>
+              <tr>
+                <td><code>pinnedEmployees</code></td>
+                <td>People Picker</td>
+                <td>Multi-select people (individual mode only)</td>
+              </tr>
+              <tr>
+                <td><code>pinnedCriteriaField</code></td>
+                <td>Dropdown</td>
+                <td>Managed property to filter by (criteria mode)</td>
+              </tr>
+              <tr>
+                <td><code>pinnedCriteriaValue</code></td>
+                <td>Dropdown</td>
+                <td>Value for the selected criteria field</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Pinned Layout</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>pinnedItemsPerRow</code></td>
+                <td>Slider (1-6)</td>
+                <td>Number of employee cards per row (default: 4)</td>
+              </tr>
+              <tr>
+                <td><code>pinnedItemsPerPage</code></td>
+                <td>Slider (1-50)</td>
+                <td>Employees per page (default: 12)</td>
               </tr>
             </tbody>
           </table>
@@ -319,19 +391,9 @@ export default function EmployeeDirectoryWebPart() {
             </thead>
             <tbody>
               <tr>
-                <td><code>showPicture</code></td>
-                <td>Toggle</td>
-                <td>Display user profile photos (default: On)</td>
-              </tr>
-              <tr>
-                <td><code>showRole</code></td>
-                <td>Toggle</td>
-                <td>Display job title (default: On)</td>
-              </tr>
-              <tr>
-                <td><code>showLocationResult</code></td>
-                <td>Toggle</td>
-                <td>Display location/office in results (default: On)</td>
+                <td><code>configureFields</code></td>
+                <td>Collection</td>
+                <td>Enable/disable fields, reorder, and map managed properties</td>
               </tr>
             </tbody>
           </table>
@@ -368,6 +430,8 @@ export default function EmployeeDirectoryWebPart() {
             <li>✅ Contact information</li>
             <li>✅ Profile links to Delve/SharePoint</li>
             <li>✅ Pagination</li>
+            <li>✅ Pinned Employees mode</li>
+            <li>✅ Configurable field mapping</li>
             <li>✅ Responsive grid layout</li>
           </ul>
 

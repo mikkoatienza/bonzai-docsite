@@ -30,12 +30,12 @@ export default function SliderWebPart() {
             prerequisites={[
               'Bonzai 2 package installed on your site',
               'Site Pages with banner images',
-              'A view to filter slider items (e.g., TodayAndBeforeFeaturedNews)',
+              'Pages tagged with Showcase (or Featured) = "Slider"',
             ]}
             steps={[
               { title: 'Add the web part', description: 'Edit your page and add "Bonzai Slider" to a full-width section.' },
-              { title: 'Configure data source', description: 'Set the list name (default: Site Pages) and view name to filter which pages appear.' },
-              { title: 'Configure animation and auto-play', description: 'Choose a transition animation, enable auto-play, and set the rotation interval.' },
+              { title: 'Choose your data source', description: 'Select a site and list, then set the Showcase value (default: Slider). Optionally pre-filter by tags.' },
+              { title: 'Configure animation and display', description: 'Choose a transition animation, enable auto-play, and set overlay/metadata options.' },
             ]}
           />
 
@@ -80,8 +80,9 @@ export default function SliderWebPart() {
 
           <h2>Recent Updates</h2>
           <ul>
-            <li>Text overlay size can be scaled with the Text Scale setting.</li>
-            <li>Image sourcing prefers higher-resolution page images when available.</li>
+            <li>Site picker, list picker, and title icon picker.</li>
+            <li>Showcase selector + tag multi-select for curated slides.</li>
+            <li>Search and filter UI with metadata toggles (date/author/tags).</li>
           </ul>
 
           {/* COMMON CONFIGURATIONS (RECIPES) */}
@@ -95,8 +96,8 @@ export default function SliderWebPart() {
               useCase="Homepage"
               icon={<Play className="h-5 w-5" />}
               config={[
-                { property: 'listName', value: 'Site Pages' },
-                { property: 'viewName', value: 'Featured' },
+                { property: 'List', value: 'Site Pages' },
+                { property: 'Showcase Value', value: 'Slider' },
                 { property: 'autoPlay', value: 'On' },
                 { property: 'autoPlayInterval', value: '5' },
                 { property: 'transitionAnimation', value: 'fade' },
@@ -125,14 +126,14 @@ export default function SliderWebPart() {
               ]}
             />
             <RecipeCard
-              title="Featured News"
-              description="Promoted items only"
+              title="Tagged Highlights"
+              description="Curated slider items by tag"
               useCase="News center"
               icon={<Sparkles className="h-5 w-5" />}
               config={[
-                { property: 'showPromotedItems', value: 'On' },
-                { property: 'showCommentCount', value: 'On' },
-                { property: 'enableContentTargeting', value: 'On' },
+                { property: 'Showcase Value', value: 'Slider' },
+                { property: 'Filter Tags', value: 'Leadership, Featured' },
+                { property: 'Show Tags', value: 'On' },
               ]}
             />
           </RecipeGrid>
@@ -148,9 +149,9 @@ export default function SliderWebPart() {
 
           <Troubleshooting
             items={[
-              { problem: 'Slider is empty', solution: 'Ensure the view returns published pages with banner images. Check the listName and viewName settings.' },
+              { problem: 'Slider is empty', solution: 'Ensure pages are tagged with Showcase = "Slider" and have banner images. Check site/list selection.' },
               { problem: 'Auto-play not working', solution: 'Check "Auto Play" toggle is enabled in property pane and interval is set.' },
-              { problem: 'Wrong pages appearing', solution: 'Create and select a specific view to filter which pages appear in the slider.' },
+              { problem: 'Wrong pages appearing', solution: 'Verify Showcase value and any selected tag filters in the property pane.' },
             ]}
           />
 
@@ -163,10 +164,16 @@ export default function SliderWebPart() {
           <table>
             <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
             <tbody>
-              <tr><td><code>title</code></td><td>Text</td><td>Web part title</td></tr>
-              <tr><td><code>siteUrl</code></td><td>Text</td><td>Site URL (empty = auto-detect from current site)</td></tr>
-              <tr><td><code>listName</code></td><td>Text</td><td>Source list name (default: Site Pages)</td></tr>
-              <tr><td><code>viewName</code></td><td>Text</td><td>View to filter slides (default: TodayAndBeforeFeaturedNews)</td></tr>
+              <tr><td><code>title</code></td><td>Text</td><td>Web part title (blank hides header row)</td></tr>
+              <tr><td><code>titleIconName</code></td><td>Icon Picker</td><td>Fluent UI icon for the header</td></tr>
+              <tr><td><code>titleIconUrl</code></td><td>Text</td><td>Custom icon URL (overrides icon name)</td></tr>
+              <tr><td><code>titleUrl</code></td><td>Text</td><td>Optional title link URL</td></tr>
+              <tr><td><code>siteUrlMode</code></td><td>Dropdown</td><td>Pick a site or enter a manual URL</td></tr>
+              <tr><td><code>selectedSites</code></td><td>Site Picker</td><td>Selected site when using Site Picker</td></tr>
+              <tr><td><code>siteUrl</code></td><td>Text</td><td>Manual site URL when Site Selection Mode = manual</td></tr>
+              <tr><td><code>listId</code></td><td>List Picker</td><td>Source list (Site Pages) from the selected site</td></tr>
+              <tr><td><code>showcaseValue</code></td><td>Dropdown</td><td>Showcase/Featured value used to include items (default: Slider)</td></tr>
+              <tr><td><code>selectedTags</code></td><td>Multi-select</td><td>Pre-filter by tags (optional)</td></tr>
               <tr><td><code>transitionAnimation</code></td><td>Dropdown</td><td>Animation: Fade, Slide, Flip X, Flip Y, Rotate</td></tr>
               <tr><td><code>transitionDuration</code></td><td>Text (Number)</td><td>Transition duration in seconds (1-10)</td></tr>
               <tr><td><code>fixedHeight</code></td><td>Slider (200-800)</td><td>Slider height in pixels (default: 500)</td></tr>
@@ -174,9 +181,15 @@ export default function SliderWebPart() {
               <tr><td><code>autoPlay</code></td><td>Toggle</td><td>Enable auto-rotation (default: On)</td></tr>
               <tr><td><code>autoPlayInterval</code></td><td>Slider (2-30)</td><td>Seconds between slides (default: 5)</td></tr>
               <tr><td><code>showOverlay</code></td><td>Toggle</td><td>Show dark overlay for text readability (default: On)</td></tr>
-              <tr><td><code>showCommentCount</code></td><td>Toggle</td><td>Show comment count on slides (default: On)</td></tr>
-              <tr><td><code>showPromotedItems</code></td><td>Toggle</td><td>Show only promoted/featured items (default: On)</td></tr>
-              <tr><td><code>enableContentTargeting</code></td><td>Toggle</td><td>Filter content by user profile attributes</td></tr>
+              <tr><td><code>showDate</code></td><td>Toggle</td><td>Show published/modified date</td></tr>
+              <tr><td><code>showAuthor</code></td><td>Toggle</td><td>Show author</td></tr>
+              <tr><td><code>showCategory</code></td><td>Toggle</td><td>Show category label when the field exists</td></tr>
+              <tr><td><code>showTags</code></td><td>Toggle</td><td>Show tags when available</td></tr>
+              <tr><td><code>showExcerpt</code></td><td>Toggle</td><td>Show excerpt/description</td></tr>
+              <tr><td><code>showLikes</code></td><td>Toggle</td><td>Show likes count when available</td></tr>
+              <tr><td><code>showComments</code></td><td>Toggle</td><td>Show comments count when available</td></tr>
+              <tr><td><code>enableSearch</code></td><td>Toggle</td><td>Show search box</td></tr>
+              <tr><td><code>enableFilters</code></td><td>Toggle</td><td>Show filter controls (tags, page type, date range)</td></tr>
             </tbody>
           </table>
 
@@ -197,10 +210,9 @@ export default function SliderWebPart() {
             <li>✅ Pause on hover</li>
             <li>✅ Navigation controls (dots and arrows)</li>
             <li>✅ Dark overlay option</li>
-            <li>✅ Comment count display</li>
-            <li>✅ Promoted items filtering</li>
-            <li>✅ Content targeting</li>
-            <li>✅ View-based filtering</li>
+            <li>✅ Showcase-based curation + optional tag pre-filter</li>
+            <li>✅ Search and filter UI (search, tags, page type, date range)</li>
+            <li>✅ Metadata toggles (date, author, tags, likes, comments)</li>
             <li>✅ Configurable height</li>
           </ul>
         </div>

@@ -88,6 +88,7 @@ export const pageTree: PageTree.Root = {
       children: [
         { type: 'page', name: 'Overview', url: '/docs/extensions' },
         { type: 'page', name: 'Mega Menu', url: '/docs/extensions/mega-menu' },
+        { type: 'page', name: 'Footer', url: '/docs/extensions/footer' },
       ],
     },
     {

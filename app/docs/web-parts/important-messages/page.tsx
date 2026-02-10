@@ -44,7 +44,7 @@ export default function ImportantMessagesWebPart() {
               },
               {
                 title: 'Select your list and configure',
-                description: 'Open the property pane, select your list from the dropdown, optionally select a view, and publish.',
+                description: 'Open the property pane, select your list from the dropdown, configure options, and publish.',
               },
             ]}
           />
@@ -148,7 +148,7 @@ export default function ImportantMessagesWebPart() {
               },
               {
                 title: 'Enable content targeting (optional)',
-                description: 'Toggle on Content Targeting to show different messages to different user groups based on department, location, or role.',
+                description: 'Toggle on Content Targeting and set TargetAudience values to SharePoint group names.',
               },
               {
                 title: 'Publish and test',
@@ -182,7 +182,7 @@ export default function ImportantMessagesWebPart() {
               config={[
                 { property: 'Title', value: 'HR Updates' },
                 { property: 'Content Targeting', value: 'Enabled' },
-                { property: 'View', value: 'HR Messages' },
+                { property: 'Target Audience', value: 'HR Team (SharePoint group)' },
                 { property: 'Max Messages to Show', value: '5' },
               ]}
             />
@@ -193,7 +193,7 @@ export default function ImportantMessagesWebPart() {
               icon={<AlertCircle className="h-5 w-5" />}
               config={[
                 { property: 'Title', value: '⚠️ Alert' },
-                { property: 'View', value: 'Error Only' },
+                { property: 'Category', value: 'Error' },
                 { property: 'Max Messages to Show', value: '1' },
                 { property: 'Fixed Height', value: '150' },
               ]}
@@ -225,9 +225,13 @@ export default function ImportantMessagesWebPart() {
             Save red styling for genuine urgent situations only.
           </Callout>
 
-          <Callout type="pro" title="Create views for different contexts">
-            Create SharePoint views like "Homepage Messages", "HR Only", "IT Alerts" and use the View picker 
-            in the property pane to display context-appropriate messages on different pages.
+          <Callout type="tip" title="Blank titles hide the header row">
+            If you leave the Title field blank, the header row (title + icon) is hidden for a cleaner banner.
+          </Callout>
+
+          <Callout type="pro" title="Use targeting or separate lists for contexts">
+            Use TargetAudience values (SharePoint group names) for audience-specific messages, or create
+            separate lists per department when you need completely different message sets.
           </Callout>
 
           <Callout type="warning" title="Always set end dates">
@@ -251,11 +255,11 @@ export default function ImportantMessagesWebPart() {
               },
               {
                 problem: 'Dismissed messages keep reappearing',
-                solution: 'Dismissal data is stored in browser local storage. Clearing browser data resets dismissals. This is expected behavior.',
+                solution: 'Dismissal data is stored in the user profile property "ImportantMessagesDismissed" and falls back to session storage if the User Profile Service is unavailable.',
               },
               {
                 problem: 'Content targeting not working',
-                solution: 'Ensure Content Targeting is enabled on the web part and that messages have TargetAudience values. Verify user profiles have the required attributes in Azure AD.',
+                solution: 'Ensure Content Targeting is enabled and that TargetAudience values match SharePoint group names the user belongs to.',
               },
               {
                 problem: 'Styling looks wrong or colors are off',
@@ -307,19 +311,13 @@ export default function ImportantMessagesWebPart() {
                 <td><code>listId</code></td>
                 <td>List Picker</td>
                 <td>Yes</td>
-                <td>SharePoint list containing messages</td>
-              </tr>
-              <tr>
-                <td><code>viewId</code></td>
-                <td>View Picker</td>
-                <td>No</td>
-                <td>SharePoint view to filter messages</td>
+                <td>SharePoint list containing messages (list ID is used so renames do not break)</td>
               </tr>
               <tr>
                 <td><code>enableContentTargeting</code></td>
                 <td>Toggle</td>
                 <td>No</td>
-                <td>Filter messages by user profile attributes (TargetAudience field)</td>
+                <td>Filter messages by SharePoint group membership (TargetAudience field)</td>
               </tr>
               <tr>
                 <td><code>maxMessagesToShow</code></td>
@@ -416,9 +414,9 @@ export default function ImportantMessagesWebPart() {
             <li>✅ Four message categories with distinct styling (Info, Warning, Error, Success)</li>
             <li>✅ Date-based activation (StartDate/EndDate)</li>
             <li>✅ Per-message dismissal control (AllowDismissal field)</li>
-            <li>✅ Dismissal state stored in browser local storage</li>
+            <li>✅ Dismissal state stored in user profile property with session fallback</li>
             <li>✅ Content targeting by user groups (TargetAudience field)</li>
-            <li>✅ Dynamic list and view pickers in property pane</li>
+            <li>✅ Dynamic list picker in property pane</li>
             <li>✅ Configurable max messages (1-10)</li>
             <li>✅ Fixed height option for consistent layouts</li>
             <li>✅ Theme Manager integration</li>
@@ -450,7 +448,7 @@ export default function ImportantMessagesWebPart() {
               <tr>
                 <td>Dismissal Storage</td>
                 <td>Property bags</td>
-                <td>Browser Local Storage</td>
+                <td>User Profile Service property with session fallback</td>
               </tr>
               <tr>
                 <td>Date Filtering</td>
@@ -465,7 +463,7 @@ export default function ImportantMessagesWebPart() {
               <tr>
                 <td>View Selection</td>
                 <td>Manual view name entry</td>
-                <td>Visual View Picker dropdown</td>
+                <td>Not available (view filtering not implemented)</td>
               </tr>
             </tbody>
           </table>

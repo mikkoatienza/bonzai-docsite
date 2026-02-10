@@ -12,7 +12,7 @@ export default function EventsRollupWebPart() {
     <DocsPage>
       <DocsTitle>Events Rollup</DocsTitle>
       <DocsDescription>
-        Display events from Site Pages with list and tile layouts, promoted item highlighting, and pagination.
+        Display events with list and tile layouts, search and filters, metadata toggles, and RSVP support.
       </DocsDescription>
       <DocsBody>
         <div className="prose prose-gray dark:prose-invert max-w-none">
@@ -32,6 +32,7 @@ export default function EventsRollupWebPart() {
             prerequisites={[
               'Bonzai 2 package installed on your site',
               'Site Pages library with event pages',
+              'Optional for RSVP: EventAttendees list with required columns',
             ]}
             steps={[
               {
@@ -40,11 +41,11 @@ export default function EventsRollupWebPart() {
               },
               {
                 title: 'Select your list and template',
-                description: 'Open the property pane, select your Site Pages list, and choose List or Tile template.',
+                description: 'Open the property pane, select a site and list, then choose List or Tile template.',
               },
               {
-                title: 'Configure items and publish',
-                description: 'Set items per page, optionally enable pagination, and publish.',
+                title: 'Configure options and publish',
+                description: 'Set paging, metadata toggles, and optional search/filters, then publish.',
               },
             ]}
           />
@@ -55,8 +56,8 @@ export default function EventsRollupWebPart() {
               'Display upcoming company events on the homepage',
               'Show event listings from Site Pages',
               'Create paginated event listings',
-              'Highlight promoted/featured events',
-              'Display events with comments',
+              'Highlight featured or promoted events',
+              'Allow users to RSVP to events',
             ]}
             bestFor={[
               'Homepage — upcoming events section',
@@ -66,7 +67,7 @@ export default function EventsRollupWebPart() {
             notFor={[
               'Simple announcements without dates — use Important Messages',
               'News articles — use News Rollup',
-              'RSVP/registration functionality — requires custom solution',
+              'Complex registration workflows — use a dedicated registration system',
             ]}
             alternatives={[
               { name: 'News Rollup', when: 'news articles from Site Pages' },
@@ -99,10 +100,11 @@ export default function EventsRollupWebPart() {
 
           <h2>Recent Updates</h2>
           <ul>
-            <li>Event items resolve click URLs from Event URL fields or page FileRef fallback.</li>
-            <li>Like counts are pulled from linked pages; the heart icon hides when unavailable.</li>
-            <li>Tile images use page image extraction to improve quality and avoid broken previews.</li>
-            <li>List view styling aligned to a more compact legacy layout.</li>
+            <li>Search and filter UI (page type, category, tags, date range).</li>
+            <li>Metadata toggles (date, time, author, category, tags, likes).</li>
+            <li>Icon picker, site picker, and list picker improvements.</li>
+            <li>Event URL field is preferred when present, with FileRef fallback.</li>
+            <li>Progressive REST fallbacks to avoid 400 errors on schema differences.</li>
           </ul>
 
           {/* STEP-BY-STEP CONFIGURATION */}
@@ -127,12 +129,16 @@ export default function EventsRollupWebPart() {
                 description: 'Select List for compact display or Tile for image grid. For Tile, configure items per row (1-6).',
               },
               {
-                title: 'Select your data source',
-                description: 'Choose the Site Pages list from the dropdown. Optionally select a view to filter events.',
+                title: 'Select your site and list',
+                description: 'Use Site Selection Mode (picker or manual URL), then choose the list with the List Picker.',
               },
               {
-                title: 'Configure display options',
-                description: 'Enable "Show Promoted Items" to highlight featured events. Enable "Show Comment Count" to display comments.',
+                title: 'Configure filters and metadata',
+                description: 'Set category/tag filters, toggle Search/Filters, and choose which metadata to show (date, time, author, tags, likes).',
+              },
+              {
+                title: 'Enable RSVP (optional)',
+                description: 'Create the EventAttendees list with required fields and verify permissions so users can RSVP.',
               },
               {
                 title: 'Set up pagination (optional)',
@@ -144,6 +150,12 @@ export default function EventsRollupWebPart() {
               },
             ]}
           />
+
+          <Callout type="info" title="RSVP prerequisites (EventAttendees list)">
+            RSVP relies on a list named <code>EventAttendees</code> (or <code>Event Attendees</code>) with
+            fields for EventPageItemId, UserId, and IsAttending. The service auto-discovers field names,
+            but the list and write permissions must exist.
+          </Callout>
 
           {/* COMMON CONFIGURATIONS (RECIPES) */}
           <h2>Common Configurations</h2>
@@ -159,7 +171,7 @@ export default function EventsRollupWebPart() {
                 { property: 'Template', value: 'List' },
                 { property: 'Show Paging', value: 'No' },
                 { property: 'Items per Page', value: '5' },
-                { property: 'Show Comment Count', value: 'No' },
+                { property: 'Show Date', value: 'Yes' },
               ]}
             />
             <RecipeCard
@@ -173,6 +185,8 @@ export default function EventsRollupWebPart() {
                 { property: 'Items per Row', value: '3' },
                 { property: 'Show Paging', value: 'Yes' },
                 { property: 'Items per Page', value: '12' },
+                { property: 'Enable Search', value: 'On' },
+                { property: 'Enable Filters', value: 'On' },
               ]}
             />
             <RecipeCard
@@ -206,9 +220,8 @@ export default function EventsRollupWebPart() {
           {/* BEST PRACTICES */}
           <h2>Best Practices</h2>
 
-          <Callout type="tip" title="Use SharePoint views for filtering">
-            Create SharePoint views on your Site Pages library to filter events by category, 
-            date, or other criteria. Select the view in the property pane.
+          <Callout type="tip" title="Use categories and tags for filtering">
+            Add Category and Tags fields to your events, then enable Filters so users can narrow results.
           </Callout>
 
           <Callout type="tip" title="Include event images">
@@ -216,9 +229,8 @@ export default function EventsRollupWebPart() {
             Add banner images to your event pages for visual appeal.
           </Callout>
 
-          <Callout type="pro" title="Use promoted items for featured events">
-            Mark important events as "Promoted" using SharePoint's Promote feature. 
-            Enable "Show Promoted Items" to highlight these in the rollup.
+          <Callout type="pro" title="Enable RSVP only when the list is ready">
+            RSVP requires an EventAttendees list and write permissions. Add it before enabling RSVP in production.
           </Callout>
 
           <Callout type="info" title="Configure items per row for Tile template">
@@ -231,11 +243,11 @@ export default function EventsRollupWebPart() {
             items={[
               {
                 problem: 'Events not appearing',
-                solution: 'Verify the list is selected in the property pane. Check that event pages are published (not drafts).',
+                solution: 'Verify the site/list selection and that event pages are published (not drafts).',
               },
               {
                 problem: 'Wrong events showing',
-                solution: 'Select a SharePoint view in the property pane to filter events. Create a view that filters by Category = "Events".',
+                solution: 'Use Category/Tags filters or enable Search/Filters to narrow results.',
               },
               {
                 problem: 'Pagination not working',
@@ -246,8 +258,9 @@ export default function EventsRollupWebPart() {
                 solution: 'Adjust "Items per Row" setting. Fewer items per row work better for narrow sections.',
               },
               {
-                problem: 'Comment count not showing',
-                solution: 'Enable "Show Comment Count" in the property pane. Comments must exist on the page.',
+                problem: 'RSVP buttons not working',
+                solution: 'Confirm the EventAttendees list exists and that users have Contribute permissions.',
+                details: 'The list name is detected automatically (EventAttendees or Event Attendees). Required fields are auto-discovered by the service.',
               },
               {
                 problem: 'Like count not showing',
@@ -268,17 +281,29 @@ export default function EventsRollupWebPart() {
               <tr><th>Property</th><th>Type</th><th>Group</th><th>Description</th></tr>
             </thead>
             <tbody>
-              <tr><td><code>title</code></td><td>Text</td><td>Title & Navigation</td><td>Web part title</td></tr>
+              <tr><td><code>title</code></td><td>Text</td><td>Title & Navigation</td><td>Web part title (blank hides header row)</td></tr>
+              <tr><td><code>titleIconName</code></td><td>Icon Picker</td><td>Title & Navigation</td><td>Fluent UI icon for the header</td></tr>
+              <tr><td><code>titleIconUrl</code></td><td>Text</td><td>Title & Navigation</td><td>Custom icon URL (overrides icon name)</td></tr>
               <tr><td><code>titleUrl</code></td><td>Text</td><td>Title & Navigation</td><td>Make title a link</td></tr>
               <tr><td><code>showMoreText</code></td><td>Text</td><td>Title & Navigation</td><td>"View More" link text</td></tr>
               <tr><td><code>showMoreUrl</code></td><td>Text</td><td>Title & Navigation</td><td>"View More" link URL</td></tr>
-              <tr><td><code>templateName</code></td><td>Dropdown</td><td>Display Options</td><td>list or tile</td></tr>
+              <tr><td><code>templateName</code></td><td>Dropdown</td><td>Display Options</td><td>List or Tile</td></tr>
               <tr><td><code>itemsPerRow</code></td><td>Dropdown</td><td>Display Options</td><td>1-6 (tile only)</td></tr>
-              <tr><td><code>showPromotedItems</code></td><td>Toggle</td><td>Display Options</td><td>Highlight promoted</td></tr>
-              <tr><td><code>showCommentCount</code></td><td>Toggle</td><td>Display Options</td><td>Show comments</td></tr>
-              <tr><td><code>siteUrl</code></td><td>Text</td><td>Data Source</td><td>Source site URL</td></tr>
+              <tr><td><code>showPromotedItems</code></td><td>Toggle</td><td>Display Options</td><td>Sort promoted items first</td></tr>
+              <tr><td><code>showDate</code></td><td>Toggle</td><td>Display Options</td><td>Show date</td></tr>
+              <tr><td><code>showTime</code></td><td>Toggle</td><td>Display Options</td><td>Show time</td></tr>
+              <tr><td><code>showAuthor</code></td><td>Toggle</td><td>Display Options</td><td>Show author</td></tr>
+              <tr><td><code>showCategory</code></td><td>Toggle</td><td>Display Options</td><td>Show category label</td></tr>
+              <tr><td><code>showTags</code></td><td>Toggle</td><td>Display Options</td><td>Show tags</td></tr>
+              <tr><td><code>showLikes</code></td><td>Toggle</td><td>Display Options</td><td>Show likes count when available</td></tr>
+              <tr><td><code>enableSearch</code></td><td>Toggle</td><td>Display Options</td><td>Show search box</td></tr>
+              <tr><td><code>enableFilters</code></td><td>Toggle</td><td>Display Options</td><td>Show filter controls (page type, category, tags, date range)</td></tr>
+              <tr><td><code>siteUrlMode</code></td><td>Dropdown</td><td>Data Source</td><td>Pick a site or enter a manual URL</td></tr>
+              <tr><td><code>selectedSites</code></td><td>Site Picker</td><td>Data Source</td><td>Selected site when using Site Picker</td></tr>
+              <tr><td><code>siteUrl</code></td><td>Text</td><td>Data Source</td><td>Manual site URL when Site Selection Mode = manual</td></tr>
               <tr><td><code>listId</code></td><td>List Picker</td><td>Data Source</td><td>Source list</td></tr>
-              <tr><td><code>viewId</code></td><td>View Picker</td><td>Data Source</td><td>Filter view</td></tr>
+              <tr><td><code>selectedCategories</code></td><td>Multi-select</td><td>Data Source</td><td>Pre-filter categories (optional)</td></tr>
+              <tr><td><code>selectedTags</code></td><td>Multi-select</td><td>Data Source</td><td>Pre-filter tags (optional)</td></tr>
             </tbody>
           </table>
 
@@ -291,7 +316,7 @@ export default function EventsRollupWebPart() {
               <tr><td><code>showPaging</code></td><td>Toggle</td><td>Pagination</td><td>Enable pagination</td></tr>
               <tr><td><code>itemsPerPage</code></td><td>Slider (1-50)</td><td>Pagination</td><td>Items per page</td></tr>
               <tr><td><code>fixedHeight</code></td><td>Slider (0-1000)</td><td>Layout</td><td>Fixed height in px</td></tr>
-              <tr><td><code>enableContentTargeting</code></td><td>Toggle</td><td>Advanced</td><td>Content targeting</td></tr>
+              <tr><td><code>enableContentTargeting</code></td><td>Toggle</td><td>Advanced</td><td>Content targeting by SharePoint group</td></tr>
               <tr><td><code>description</code></td><td>Text (multiline)</td><td>Advanced</td><td>Web part description</td></tr>
               <tr><td><code>helpUrl</code></td><td>Text</td><td>Advanced</td><td>Help documentation URL</td></tr>
             </tbody>
@@ -299,9 +324,9 @@ export default function EventsRollupWebPart() {
 
           <h3>Data Source</h3>
           <p>
-            Events Rollup reads from the Site Pages library (default: "Pages"). 
-            Events are standard SharePoint pages. Use the <strong>View Picker</strong> to 
-            filter by category or date using a SharePoint view.
+            Events Rollup reads from Site Pages by default and supports list selection by ID for rename resilience.
+            If no list is selected, it tries <code>Pages</code>, <code>SitePages</code>, and <code>Site Pages</code>.
+            Event URLs prefer an explicit URL field when present, with FileRef fallback.
           </p>
 
           <h3>Features Checklist</h3>
@@ -309,17 +334,18 @@ export default function EventsRollupWebPart() {
             <li>✅ Two display templates (List, Tile)</li>
             <li>✅ Configurable grid layout (1-6 items per row)</li>
             <li>✅ Pagination with configurable page size</li>
-            <li>✅ Promoted/featured item highlighting</li>
-            <li>✅ Comment count display</li>
+            <li>✅ Promoted/featured item sorting</li>
+            <li>✅ Search and filter UI (page type, category, tags, date range)</li>
+            <li>✅ Metadata toggles (date, time, author, category, tags, likes)</li>
             <li>✅ Like count display (when available from linked page)</li>
             <li>✅ Event URL resolution from URL fields or page FileRef</li>
             <li>✅ Tile image extraction from page content</li>
             <li>✅ "View More" link configuration</li>
-            <li>✅ List and View pickers</li>
-            <li>✅ Content targeting</li>
+            <li>✅ Site picker and list picker</li>
+            <li>✅ Content targeting (SharePoint groups)</li>
             <li>✅ Fixed height option</li>
             <li>✅ Cross-site data source</li>
-            <li>❌ RSVP/registration (not implemented)</li>
+            <li>✅ RSVP/attendance (EventAttendees list required)</li>
             <li>❌ Calendar view (not implemented)</li>
           </ul>
 
@@ -329,11 +355,11 @@ export default function EventsRollupWebPart() {
               <tr><th>Classic Feature</th><th>Modern Equivalent</th><th>Notes</th></tr>
             </thead>
             <tbody>
-              <tr><td>RSVP functionality</td><td>Not available</td><td>Requires custom solution</td></tr>
+              <tr><td>RSVP functionality</td><td>Available</td><td>Requires EventAttendees list + permissions</td></tr>
               <tr><td>Calendar view</td><td>Not available</td><td>Use SharePoint calendar</td></tr>
-              <tr><td>Attendance tracking</td><td>Not available</td><td>Requires custom solution</td></tr>
+              <tr><td>Attendance tracking</td><td>Available</td><td>Stored in EventAttendees list</td></tr>
               <tr><td>Display templates</td><td>List, Tile</td><td>2 templates available</td></tr>
-              <tr><td>View filtering</td><td>View Picker</td><td>Visual picker</td></tr>
+              <tr><td>View filtering</td><td>Not available</td><td>Use category/tags filters instead</td></tr>
             </tbody>
           </table>
         </div>

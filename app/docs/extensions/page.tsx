@@ -9,6 +9,12 @@ const extensions = [
     description: '3-level hierarchical navigation with desktop mega menu panels and mobile drawer.',
     icon: Menu,
   },
+  {
+    name: 'Footer',
+    slug: 'footer',
+    description: 'List-driven site footer with navigation, feedback, and branding.',
+    icon: Layers,
+  },
 ];
 
 export default function ExtensionsOverview() {
@@ -98,7 +104,7 @@ export default function ExtensionsOverview() {
           <h2>Bonzai 2 Extensions</h2>
 
           <p>
-            Bonzai 2 currently includes one extension. More may be added in future releases.
+            Bonzai 2 includes multiple extensions. More may be added in future releases.
           </p>
 
           <div className="not-prose grid gap-4">

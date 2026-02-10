@@ -38,6 +38,11 @@ export default function MegaMenuExtension() {
           Site Contents → New → App → Bonzai 2.
           </Callout>
 
+          <Callout type="info" title="License banner awareness">
+            If a license warning or expired banner appears, Mega Menu may still render while web parts are gated.
+            Contact support if the banner persists after activation.
+          </Callout>
+
           <Callout type="info" title="Legacy package note">
             If your tenant previously deployed the separate <strong>bonzai-mega-menu</strong> package,
             remove that app from Site Contents after upgrading to the consolidated Bonzai 2 package
@@ -137,8 +142,9 @@ Web Template / List Template / Host Properties: leave blank`}</code></pre>
           <h2>Branding and Logo</h2>
           <ul>
             <li>Mega Menu reserves a logo slot on the left for desktop and mobile layouts.</li>
-            <li>Set Mega Menu background and text colors using the Theme Manager web part.</li>
+            <li>Set Mega Menu background and text colors in Theme Manager → Mega Menu Branding.</li>
             <li>Provide an absolute PNG logo URL in Theme Manager to display the logo.</li>
+            <li>Accent and hover colors are derived from the Mega Menu Branding foreground color.</li>
           </ul>
 
           {/* NAVIGATION HIERARCHY VISUAL */}
@@ -268,10 +274,10 @@ Web Template / List Template / Host Properties: leave blank`}</code></pre>
               </tr>
               <tr>
                 <td>Parent</td>
-                <td><code>ParentId</code></td>
+                <td><code>Auto-detected</code></td>
                 <td>Lookup (to same list)</td>
                 <td>No</td>
-                <td>Parent item for hierarchy. Empty = root level.</td>
+                <td>Parent item for hierarchy. Internal name varies; Mega Menu auto-detects.</td>
               </tr>
               <tr>
                 <td>Sort Order</td>
@@ -306,7 +312,8 @@ Web Template / List Template / Host Properties: leave blank`}</code></pre>
 
           <Callout type="tip" title="Create the Parent lookup column">
             When creating the Parent column, set it as a Lookup to the same list 
-            (MegaMenuNavigation), using the Title column as the display field.
+            (MegaMenuNavigation), using the Title column as the display field. The internal
+            name varies by tenant, and Mega Menu auto-detects it.
           </Callout>
 
           {/* STEP-BY-STEP CONFIGURATION */}
@@ -328,7 +335,7 @@ Web Template / List Template / Host Properties: leave blank`}</code></pre>
               {
                 title: 'Add the Parent lookup column',
                 description: 'Add a column: Name = "Parent", Type = Lookup. Select "MegaMenuNavigation" as the source list, "Title" as the display column.',
-                tip: 'This creates the ParentId field that Mega Menu uses for hierarchy.',
+                tip: 'SharePoint generates the internal name automatically; Mega Menu auto-detects it.',
               },
               {
                 title: 'Add optional columns',
@@ -449,13 +456,13 @@ Web Template / List Template / Host Properties: leave blank`}</code></pre>
               },
               {
                 problem: 'Navigation items not loading',
-                solution: 'Verify the "MegaMenuNavigation" list exists and has items. Check that column names match exactly (case-sensitive).',
-                details: 'The default list name is "MegaMenuNavigation". If using a different name, the extension properties must be configured.',
+                solution: 'Verify the "MegaMenuNavigation" list exists and has items. Check that required fields (Title, URL, SortOrder) are present.',
+                details: 'Parent lookup internal names vary; Mega Menu auto-detects them. If using a different list name, update the extension properties.',
               },
               {
                 problem: 'Hierarchy not working (all items at root)',
                 solution: 'Check that the Parent column is a Lookup to the same list. Items need ParentId values set to create hierarchy.',
-                details: 'SharePoint creates "ParentId" automatically when you create a lookup column named "Parent".',
+                details: 'Ensure the Parent lookup values are set for child items; Mega Menu detects the internal field automatically.',
               },
               {
                 problem: 'Items appearing in wrong order',
@@ -533,8 +540,8 @@ Web Template / List Template / Host Properties: leave blank`}</code></pre>
           <h3>CSS Customization</h3>
 
           <p>
-            Mega Menu inherits colors from the Bonzai Theme Manager. If Theme Manager is 
-            configured on your site, menu colors will automatically match your brand.
+            Mega Menu uses Theme Manager branding variables (background, foreground, logo) and derives accent colors
+            from the Mega Menu foreground color for hover/active states.
           </p>
 
           <h3>Keyboard Navigation</h3>

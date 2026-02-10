@@ -32,8 +32,8 @@ export default function NewsRollupWebPart() {
             prerequisites={[
               'Bonzai 2 package installed on your site',
               'Site Pages library with news articles',
-              'Site Pages library has a "Category" column (text or choice)',
-              'News pages tagged with Showcase = "News Rollup"',
+              'News pages tagged with Showcase (or Featured) = "News Rollup"',
+              'Optional: Category and Tags fields if you want metadata or filters',
             ]}
             steps={[
               {
@@ -41,12 +41,12 @@ export default function NewsRollupWebPart() {
                 description: 'Edit the page, click the + button, and search for "News Rollup" in the Bonzai category.',
               },
               {
-                title: 'Select your display template',
-                description: 'Open the property pane and choose List, Tile, or Card layout.',
+                title: 'Choose your data source',
+                description: 'Select a site (picker or manual URL), choose your list, and set the Showcase value.',
               },
               {
-                title: 'Set items to show and publish',
-                description: 'Configure how many articles to show per page (1-20). Pagination appears automatically when more items exist.',
+                title: 'Configure display and publish',
+                description: 'Pick a template, set items to show, enable search/filters if needed, then publish.',
               },
             ]}
           />
@@ -57,8 +57,8 @@ export default function NewsRollupWebPart() {
               'Display company news and announcements on the homepage',
               'Show department-specific news on team pages',
               'Create a news archive or news center page',
-              'Highlight promoted/featured news stories',
-              'Display news filtered by category (e.g., HR, IT, Finance)',
+              'Highlight curated news using a Showcase value',
+              'Filter by tags or page type (News vs Page)',
             ]}
             bestFor={[
               'Homepage — main news feed in prominent position',
@@ -110,9 +110,10 @@ export default function NewsRollupWebPart() {
 
           <h2>Recent Updates</h2>
           <ul>
-            <li>Pagination now appears automatically when total items exceed the Items to Show setting.</li>
-            <li>Tile and Card templates include size, max columns, and featured-first controls.</li>
-            <li>Image sourcing prefers higher-resolution page images to avoid low-res thumbnails.</li>
+            <li>Search and filter UI (search box, tag filter, page type filter, date range).</li>
+            <li>Showcase selector + tag multi-select in the property pane.</li>
+            <li>Metadata toggles (date, category, tags, likes, comments, excerpt).</li>
+            <li>Site picker, list picker, and title icon picker options.</li>
           </ul>
 
           {/* STEP-BY-STEP CONFIGURATION */}
@@ -133,33 +134,32 @@ export default function NewsRollupWebPart() {
                 description: 'Click the pencil icon on the web part to open the property pane on the right side of the screen.',
               },
               {
-                title: 'Set the title',
-                description: 'Enter a descriptive title like "Company News", "Latest Updates", or "Department Announcements". The title appears above the news list.',
-                tip: 'Leave the title empty if you want a cleaner look without a header.',
+                title: 'Set the title (optional)',
+                description: 'Enter a descriptive title like "Company News" or "Latest Updates". Leave it blank to hide the header row.',
               },
               {
                 title: 'Choose a display template',
                 description: 'Select from: List (compact rows), Tile (image grid), or Card (rich cards with metadata).',
               },
               {
-                title: 'Configure the data source',
-                description: 'By default, News Rollup reads from the current site\'s Site Pages library. To pull news from another site, enter that site\'s URL in the Site URL field.',
+                title: 'Select your site and list',
+                description: 'Use Site Selection Mode (picker or manual URL), then choose the list with the List Picker.',
               },
               {
-                title: 'Tag pages for News Rollup',
-                description: 'In the Site Pages library, set the "Showcase" column to "News Rollup" for each page you want to display.',
+                title: 'Set Showcase value and tags',
+                description: 'Choose the Showcase value (default: "News Rollup") and optionally pre-filter by tags.',
               },
               {
-                title: 'Filter by category (optional)',
-                description: 'Use the Category dropdown to show only news from a specific category. Categories are auto-discovered from your pages.',
+                title: 'Configure display options',
+                description: 'Set Items to Show, tile/card size, max columns, and featured-first options for visual layouts.',
               },
               {
-                title: 'Configure display settings',
-                description: 'Set "Items to Show" (page size), then adjust tile/card size, max columns, and featured-first options for visual layouts.',
+                title: 'Set metadata + filters',
+                description: 'Toggle metadata (date, category, tags, likes, comments, excerpt) and enable Search/Filters if you want user-facing filters.',
               },
               {
                 title: 'Enable content targeting (optional)',
-                description: 'Toggle on Content Targeting to show different news to different audiences based on their profile attributes like department or location.',
+                description: 'Toggle on Content Targeting and set TargetAudience values to SharePoint group names.',
               },
               {
                 title: 'Save and publish',
@@ -184,8 +184,9 @@ export default function NewsRollupWebPart() {
                 { property: 'Title', value: 'Company News' },
                 { property: 'Display Template', value: 'List' },
                 { property: 'Items to Show', value: '5' },
-                { property: 'Show Promoted Items', value: 'Yes' },
-                { property: 'Show Comment Count', value: 'Yes' },
+                { property: 'Showcase Value', value: 'News Rollup' },
+                { property: 'Show Date', value: 'On' },
+                { property: 'Show Comments', value: 'On' },
               ]}
             />
             <RecipeCard
@@ -196,9 +197,11 @@ export default function NewsRollupWebPart() {
               config={[
                 { property: 'Title', value: 'HR News' },
                 { property: 'Display Template', value: 'Card' },
-                { property: 'Category', value: 'HR (from dropdown)' },
+                { property: 'Showcase Value', value: 'News Rollup' },
+                { property: 'Filter Tags', value: 'HR, Benefits' },
+                { property: 'Enable Filters', value: 'On' },
                 { property: 'Items to Show', value: '6' },
-                { property: 'Content Targeting', value: 'Enabled' },
+                { property: 'Content Targeting', value: 'Enabled (SharePoint groups)' },
               ]}
             />
             <RecipeCard
@@ -211,7 +214,8 @@ export default function NewsRollupWebPart() {
                 { property: 'Display Template', value: 'List' },
                 { property: 'Items to Show', value: '3' },
                 { property: 'Fixed Height', value: '300' },
-                { property: 'Show Comment Count', value: 'No' },
+                { property: 'Show Excerpt', value: 'Off' },
+                { property: 'Show Tags', value: 'Off' },
               ]}
             />
             <RecipeCard
@@ -223,6 +227,8 @@ export default function NewsRollupWebPart() {
                 { property: 'Title', value: 'All News' },
                 { property: 'Display Template', value: 'Tile' },
                 { property: 'Items to Show', value: '10' },
+                { property: 'Enable Search', value: 'On' },
+                { property: 'Enable Filters', value: 'On' },
               ]}
             />
           </RecipeGrid>
@@ -230,9 +236,8 @@ export default function NewsRollupWebPart() {
           {/* BEST PRACTICES */}
           <h2>Best Practices</h2>
 
-          <Callout type="tip" title="Use promoted items strategically">
-            Mark important news articles as "Promoted" using SharePoint's Promote feature or the PromotedState page property. 
-            Enable "Show Promoted Items" to highlight these articles.
+          <Callout type="tip" title="Curate with the Showcase value">
+            Set the Showcase (or Featured) field on pages to <strong>News Rollup</strong> so only curated items appear.
           </Callout>
 
           <Callout type="tip" title="Optimize images for faster loading">
@@ -240,14 +245,12 @@ export default function NewsRollupWebPart() {
             Larger images slow down page load times, especially when displaying multiple articles.
           </Callout>
 
-          <Callout type="pro" title="Use content targeting for personalization">
-            Enable Content Targeting to show different news to different user groups. 
-            For example, show US office news only to US employees, or IT-specific news only to the IT department.
+          <Callout type="pro" title="Use tags and filters intentionally">
+            Add tags to your pages and enable Filters so users can narrow results by tag or page type.
           </Callout>
 
-          <Callout type="info" title="Category column is required">
-            News Rollup queries the Category field even if you don\'t filter. 
-            Add a "Category" column to your Site Pages library (text or choice) to avoid load errors.
+          <Callout type="info" title="Category and Tags are optional">
+            Category and Tags are optional metadata. If the fields don’t exist, those labels and filters won’t appear.
           </Callout>
 
           {/* TROUBLESHOOTING */}
@@ -255,18 +258,17 @@ export default function NewsRollupWebPart() {
             items={[
               {
                 problem: 'News articles are not appearing',
-                solution: 'Check that the Site URL is correct and that you have permission to access the source site. Verify that news pages exist in the Site Pages library and that Showcase is set to "News Rollup".',
+                solution: 'Check that the Site URL is correct and that you have permission to access the source site. Verify that news pages exist and that Showcase is set to "News Rollup".',
                 details: 'If using a cross-site URL, ensure the news pages are published (not drafts) and that your account has at least Read permission on the source site.',
               },
               {
-                problem: 'Site Pages exists but the web part says "List not found"',
-                solution: 'Add a "Category" column to the Site Pages library (text or choice).',
-                details: 'News Rollup queries the Category field during load; if it\'s missing, SharePoint returns a 400 error that appears as "list not found."',
+                problem: 'Tags dropdown is empty',
+                solution: 'Ensure your list has a Tags/Keywords field and that items have tags assigned.',
+                details: 'The tag picker only shows values discovered from the selected list schema.',
               },
               {
-                problem: 'Category dropdown is empty',
-                solution: 'Add a "Category" column to your Site Pages library and populate it on your news pages. The dropdown auto-discovers categories from existing pages.',
-                details: 'The web part queries up to 1000 items to discover unique category values.',
+                problem: 'Filters are not showing',
+                solution: 'Enable the Filters toggle in the property pane and publish the page.',
               },
               {
                 problem: 'Images are not displaying',
@@ -275,15 +277,15 @@ export default function NewsRollupWebPart() {
               },
               {
                 problem: 'Wrong articles appearing',
-                solution: 'Check your Category selection in the property pane. Select "All Categories" to show all news.',
+                solution: 'Check the Showcase value and any selected Tags. Remove pre-filters to show all news.',
               },
               {
                 problem: 'Content targeting not working',
-                solution: 'Ensure Content Targeting is enabled on the web part. User profile attributes must be populated in Azure AD.',
+                solution: 'Ensure Content Targeting is enabled and that TargetAudience values match SharePoint group names.',
               },
               {
-                problem: 'Comment count not showing',
-                solution: 'Enable "Show Comment Count" toggle in the property pane. Comments are only visible if the page has comments.',
+                problem: 'Comments or likes not showing',
+                solution: 'Enable the Show Comments/Show Likes toggles. Counts appear only when data is available from the page.',
               },
             ]}
           />
@@ -311,25 +313,61 @@ export default function NewsRollupWebPart() {
                 <td><code>title</code></td>
                 <td>Text</td>
                 <td>No</td>
-                <td>Web part title (default: "News")</td>
+                <td>Web part title (blank hides header row)</td>
+              </tr>
+              <tr>
+                <td><code>titleIconName</code></td>
+                <td>Icon Picker</td>
+                <td>No</td>
+                <td>Fluent UI icon for the header</td>
+              </tr>
+              <tr>
+                <td><code>titleIconUrl</code></td>
+                <td>Text</td>
+                <td>No</td>
+                <td>Custom icon URL (overrides icon name)</td>
+              </tr>
+              <tr>
+                <td><code>titleUrl</code></td>
+                <td>Text</td>
+                <td>No</td>
+                <td>Optional title link URL</td>
+              </tr>
+              <tr>
+                <td><code>siteUrlMode</code></td>
+                <td>Dropdown</td>
+                <td>No</td>
+                <td>Pick a site or enter a manual URL</td>
+              </tr>
+              <tr>
+                <td><code>selectedSites</code></td>
+                <td>Site Picker</td>
+                <td>No</td>
+                <td>Selected site when using Site Picker</td>
               </tr>
               <tr>
                 <td><code>siteUrl</code></td>
                 <td>Text</td>
                 <td>No</td>
-                <td>Source site URL. Leave empty for current site.</td>
+                <td>Manual site URL when Site Selection Mode = manual</td>
               </tr>
               <tr>
-                <td><code>listName</code></td>
-                <td>Text</td>
+                <td><code>listId</code></td>
+                <td>List Picker</td>
                 <td>No</td>
-                <td>Source list name (default: "Site Pages")</td>
+                <td>Source list (Site Pages) from the selected site</td>
               </tr>
               <tr>
-                <td><code>viewName</code></td>
+                <td><code>showcaseValue</code></td>
                 <td>Dropdown</td>
                 <td>No</td>
-                <td>Category filter (auto-discovered from pages)</td>
+                <td>Showcase/Featured value used to include items (default: News Rollup)</td>
+              </tr>
+              <tr>
+                <td><code>selectedTags</code></td>
+                <td>Multi-select</td>
+                <td>No</td>
+                <td>Pre-filter by tags (optional)</td>
               </tr>
               <tr>
                 <td><code>displayTemplate</code></td>
@@ -386,22 +424,64 @@ export default function NewsRollupWebPart() {
                 <td>Fixed height in pixels. 0 = auto height.</td>
               </tr>
               <tr>
-                <td><code>showCommentCount</code></td>
+                <td><code>showDate</code></td>
                 <td>Toggle</td>
                 <td>No</td>
-                <td>Show comment count on articles (default: true)</td>
+                <td>Show published/modified date</td>
+              </tr>
+              <tr>
+                <td><code>showCategory</code></td>
+                <td>Toggle</td>
+                <td>No</td>
+                <td>Show Category label when the field exists</td>
+              </tr>
+              <tr>
+                <td><code>showTags</code></td>
+                <td>Toggle</td>
+                <td>No</td>
+                <td>Show tags when available</td>
+              </tr>
+              <tr>
+                <td><code>showExcerpt</code></td>
+                <td>Toggle</td>
+                <td>No</td>
+                <td>Show excerpt/description on cards</td>
+              </tr>
+              <tr>
+                <td><code>showLikes</code></td>
+                <td>Toggle</td>
+                <td>No</td>
+                <td>Show likes count when available</td>
+              </tr>
+              <tr>
+                <td><code>showComments</code></td>
+                <td>Toggle</td>
+                <td>No</td>
+                <td>Show comments count when available</td>
+              </tr>
+              <tr>
+                <td><code>enableSearch</code></td>
+                <td>Toggle</td>
+                <td>No</td>
+                <td>Show search box</td>
+              </tr>
+              <tr>
+                <td><code>enableFilters</code></td>
+                <td>Toggle</td>
+                <td>No</td>
+                <td>Show filter controls (tags, page type, date range)</td>
               </tr>
               <tr>
                 <td><code>showPromotedItems</code></td>
                 <td>Toggle</td>
                 <td>No</td>
-                <td>Highlight promoted/featured articles</td>
+                <td>Legacy toggle; Showcase value controls curation</td>
               </tr>
               <tr>
                 <td><code>enableContentTargeting</code></td>
                 <td>Toggle</td>
                 <td>No</td>
-                <td>Filter by user profile attributes</td>
+                <td>Filter by SharePoint group membership (TargetAudience field)</td>
               </tr>
             </tbody>
           </table>
@@ -417,21 +497,22 @@ export default function NewsRollupWebPart() {
           <ul>
             <li><strong>Title:</strong> Article headline</li>
             <li><strong>Banner Image:</strong> Featured image for the article</li>
-            <li><strong>Category:</strong> Required column for filtering and load stability</li>
-            <li><strong>Showcase:</strong> Set to <strong>News Rollup</strong> for items to appear</li>
+            <li><strong>Showcase/Featured:</strong> Set to <strong>News Rollup</strong> for items to appear</li>
+            <li><strong>Category:</strong> Optional label if you want category metadata</li>
+            <li><strong>Tags:</strong> Optional field for tag filters</li>
             <li><strong>Author:</strong> Article author</li>
             <li><strong>First Published:</strong> Publication date</li>
-            <li><strong>PromotedState:</strong> Mark as promoted/featured</li>
+            <li><strong>PromotedState:</strong> Used to infer page type (News vs Page)</li>
           </ul>
 
           <h3>Features Checklist</h3>
 
           <ul>
             <li>✅ Three display templates (List, Tile, Card)</li>
-            <li>✅ Category filtering (auto-discovered dropdown)</li>
-            <li>✅ Content targeting by user profile</li>
-            <li>✅ Promoted/featured article highlighting</li>
-            <li>✅ Comment count display</li>
+            <li>✅ Showcase-based curation + optional tag pre-filter</li>
+            <li>✅ Search and filter UI (search, tags, page type, date range)</li>
+            <li>✅ Metadata toggles (date, category, tags, likes, comments, excerpt)</li>
+            <li>✅ Content targeting by SharePoint group</li>
             <li>✅ Pagination based on Items to Show</li>
             <li>✅ Fixed height option</li>
             <li>✅ Cross-site news aggregation</li>
@@ -457,19 +538,19 @@ export default function NewsRollupWebPart() {
                 <td>3 templates: List, Tile, Card</td>
               </tr>
               <tr>
-                <td>Category dropdown</td>
-                <td><code>viewName</code> dropdown</td>
-                <td>Auto-discovered from pages</td>
+                <td>Showcase + Tags</td>
+                <td>Showcase value + tag filters</td>
+                <td>Showcase marks items; tags refine filters</td>
               </tr>
               <tr>
                 <td>Content targeting</td>
                 <td><code>enableContentTargeting</code> toggle</td>
-                <td>Uses Azure AD attributes</td>
+                <td>Uses SharePoint group membership</td>
               </tr>
               <tr>
                 <td>View name text field</td>
-                <td>Category dropdown</td>
-                <td>Visual picker replaces text entry</td>
+                <td>Showcase + filters</td>
+                <td>Legacy viewName is retained but not used</td>
               </tr>
               <tr>
                 <td>Brick theme colors</td>

@@ -39,7 +39,7 @@ export default function ThemeManagerWebPart() {
               },
               {
                 title: 'Publish — changes apply instantly',
-                description: 'Save and publish. Theme changes apply immediately to all Bonzai web parts.',
+                description: 'Save and publish. Theme changes apply immediately and can persist site-wide.',
               },
             ]}
           />
@@ -76,11 +76,11 @@ export default function ThemeManagerWebPart() {
             ]}
           />
 
-          <h2>Mega Menu Branding</h2>
+          <h2>Mega Menu and Footer Branding</h2>
           <ul>
-            <li>Set Mega Menu background and text colors in the Mega Menu Branding section.</li>
-            <li>Provide a logo URL (absolute https URL, PNG format) to display in the Mega Menu logo slot.</li>
-            <li>Logo is applied via theme variables and updates immediately.</li>
+            <li>Set Mega Menu background/text colors and logo URL in the Mega Menu Branding section.</li>
+            <li>Set Footer background/text colors and logo URL in the Footer Branding section.</li>
+            <li>Branding changes apply instantly via CSS custom properties.</li>
           </ul>
 
           {/* STEP-BY-STEP CONFIGURATION */}
@@ -114,7 +114,7 @@ export default function ThemeManagerWebPart() {
               },
               {
                 title: 'Save your theme',
-                description: 'Click "Save Theme" to persist your settings. Theme is stored in browser localStorage.',
+                description: 'Click "Save Theme" to persist your settings site-wide (requires Site Owner permissions). Local storage is used as a fallback.',
               },
               {
                 title: 'Publish the page',
@@ -189,6 +189,10 @@ export default function ThemeManagerWebPart() {
             regular users. Only editors will see it when editing.
           </Callout>
 
+          <Callout type="info" title="Site-wide persistence requires permissions">
+            Saving for all users writes to the site property bag. Site Owners (or higher) are required.
+          </Callout>
+
           <Callout type="pro" title="Test contrast for accessibility">
             Ensure your color choices meet WCAG accessibility guidelines. 
             Text should have a contrast ratio of at least 4.5:1 with the background.
@@ -204,11 +208,11 @@ export default function ThemeManagerWebPart() {
             items={[
               {
                 problem: 'Theme changes not appearing',
-                solution: 'Clear browser cache and refresh. Ensure the page with Theme Manager is published. Click "Save Theme" to persist changes.',
+                solution: 'Ensure the page with Theme Manager is published. Click "Save Theme" and verify you have Site Owner permissions.',
               },
               {
                 problem: 'Theme not persisting after page reload',
-                solution: 'Click "Save Theme" to save to localStorage. Ensure browser local storage is enabled and not blocked.',
+                solution: 'Confirm "Persist to Site" is enabled and you have permission to write site properties. Local storage is used only as a fallback.',
               },
               {
                 problem: 'Colors look wrong on some pages',
@@ -235,7 +239,7 @@ export default function ThemeManagerWebPart() {
             <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
             <tbody>
               <tr><td><code>showInEditMode</code></td><td>Toggle</td><td>Only show Theme Manager when page is in edit mode (default: On)</td></tr>
-              <tr><td><code>persistToSite</code></td><td>Toggle</td><td>Save theme to site-level storage (future feature, currently disabled)</td></tr>
+              <tr><td><code>persistToSite</code></td><td>Toggle</td><td>Save theme to site-level storage for all users (default: On)</td></tr>
             </tbody>
           </table>
 
