@@ -12,7 +12,7 @@ export default function SpotlightRollupWebPart() {
     <DocsPage>
       <DocsTitle>Spotlight Rollup</DocsTitle>
       <DocsDescription>
-        Feature employees or content with image-focused card or image layouts, supporting comments, likes, and content targeting.
+        Feature employees or content with image-focused card or image layouts, supporting comments and likes.
       </DocsDescription>
       <DocsBody>
         <div className="prose prose-gray dark:prose-invert max-w-none">
@@ -173,7 +173,6 @@ export default function SpotlightRollupWebPart() {
                 { property: 'title', value: 'Featured Projects' },
                 { property: 'itemsPerPage', value: '4' },
                 { property: 'itemsPerRow', value: '2' },
-                { property: 'enableContentTargeting', value: 'On' },
               ]}
             />
           </RecipeGrid>

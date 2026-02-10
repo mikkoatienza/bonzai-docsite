@@ -11,7 +11,7 @@ export default function PagesRollupWebPart() {
     <DocsPage>
       <DocsTitle>Pages Rollup</DocsTitle>
       <DocsDescription>
-        Display SharePoint pages with sorting, filtering, multiple templates (Default and Card), comments, likes, and content targeting.
+        Display SharePoint pages with sorting, filtering, multiple templates (Default and Card), comments, and likes.
       </DocsDescription>
       <DocsBody>
         <div className="prose prose-gray dark:prose-invert max-w-none">
@@ -180,7 +180,6 @@ export default function PagesRollupWebPart() {
               <tr><td><code>showPromotedOnly</code></td><td>Toggle</td><td>Show only promoted/featured pages</td></tr>
               <tr><td><code>showComments</code></td><td>Toggle</td><td>Show comment count (default: On)</td></tr>
               <tr><td><code>showLikes</code></td><td>Toggle</td><td>Show like count (default: On)</td></tr>
-              <tr><td><code>enableContentTargeting</code></td><td>Toggle</td><td>Filter content by user profile attributes</td></tr>
             </tbody>
           </table>
 
@@ -192,7 +191,6 @@ export default function PagesRollupWebPart() {
             <li>✅ Pagination support</li>
             <li>✅ Promoted pages filtering</li>
             <li>✅ Comments and likes display</li>
-            <li>✅ Content targeting</li>
             <li>✅ Configurable items per row (Card template)</li>
             <li>✅ Custom title with icon and link</li>
             <li>✅ Show more link</li>

@@ -33,7 +33,8 @@ export default function NewsRollupWebPart() {
               'Bonzai 2 package installed on your site',
               'Site Pages library with news articles',
               'News pages tagged with Showcase (or Featured) = "News Rollup"',
-              'Optional: Category and Tags fields if you want metadata or filters',
+              'Required: Category field on Site Pages (prevents REST errors)',
+              'Optional: Tags field if you want tag filters',
             ]}
             steps={[
               {
@@ -249,8 +250,9 @@ export default function NewsRollupWebPart() {
             Add tags to your pages and enable Filters so users can narrow results by tag or page type.
           </Callout>
 
-          <Callout type="info" title="Category and Tags are optional">
-            Category and Tags are optional metadata. If the fields don’t exist, those labels and filters won’t appear.
+          <Callout type="warning" title="Category is required">
+            The News Rollup REST queries expect a Category field on Site Pages. Add the Category column to avoid 400 errors.
+            Tags are optional and only used for tag filters.
           </Callout>
 
           {/* TROUBLESHOOTING */}
@@ -498,8 +500,8 @@ export default function NewsRollupWebPart() {
             <li><strong>Title:</strong> Article headline</li>
             <li><strong>Banner Image:</strong> Featured image for the article</li>
             <li><strong>Showcase/Featured:</strong> Set to <strong>News Rollup</strong> for items to appear</li>
-            <li><strong>Category:</strong> Optional label if you want category metadata</li>
-            <li><strong>Tags:</strong> Optional field for tag filters</li>
+              <li><strong>Category:</strong> Required field (prevents REST errors and enables category metadata)</li>
+              <li><strong>Tags:</strong> Optional field for tag filters</li>
             <li><strong>Author:</strong> Article author</li>
             <li><strong>First Published:</strong> Publication date</li>
             <li><strong>PromotedState:</strong> Used to infer page type (News vs Page)</li>
