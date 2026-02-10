@@ -235,7 +235,7 @@ export default function DownloadPage() {
                   3
                 </span>
                 <span className="text-gray-600 dark:text-gray-400">
-                  Add the Bonzai 2 app to each site to activate Mega Menu and place Bonzai web parts on pages
+                  Add the Bonzai 2 app to each site to activate Mega Menu and Footer, then place Bonzai web parts on pages
                 </span>
               </li>
             </ol>
