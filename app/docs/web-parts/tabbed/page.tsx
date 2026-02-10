@@ -160,7 +160,6 @@ export default function TabbedWebPart() {
               <tr><td><code>collapsePanelsByDefault</code></td><td>Toggle</td><td>Start with panels collapsed (default: Off)</td></tr>
               <tr><td><code>tilesPerRow</code></td><td>Dropdown</td><td>Tiles columns (Auto, 2-6)</td></tr>
               <tr><td><code>tilesPerPage</code></td><td>Dropdown</td><td>Pagination for Tiles/Accordion (4-12 or Show All)</td></tr>
-              <tr><td><code>tabsPerPage</code></td><td>Dropdown</td><td>Tabs pagination (4-12 or Show All)</td></tr>
               <tr><td><code>itemsPerRow</code></td><td>Dropdown</td><td>Content layout: List or 2-6 columns</td></tr>
               <tr><td><code>itemsPerPage</code></td><td>Dropdown</td><td>Items pagination within tabs</td></tr>
             </tbody>

@@ -258,7 +258,6 @@ export default function SpotlightRollupWebPart() {
               <tr><td><code>itemsPerPage</code></td><td>Slider (1-20)</td><td>Number of items to display</td></tr>
               <tr><td><code>showComments</code></td><td>Toggle</td><td>Show comment count (default: On)</td></tr>
               <tr><td><code>showLikes</code></td><td>Toggle</td><td>Show like count (default: On)</td></tr>
-              <tr><td><code>enableContentTargeting</code></td><td>Toggle</td><td>Filter content by user profile attributes</td></tr>
               <tr><td><code>fixedHeight</code></td><td>Slider (0-800)</td><td>Fixed height in pixels (0 = auto)</td></tr>
               <tr><td><code>chromeType</code></td><td>Dropdown</td><td>Chrome type: None, Title Only, Border Only, Title and Border</td></tr>
             </tbody>

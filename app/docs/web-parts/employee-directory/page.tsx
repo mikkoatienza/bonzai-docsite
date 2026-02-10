@@ -391,7 +391,7 @@ export default function EmployeeDirectoryWebPart() {
             </thead>
             <tbody>
               <tr>
-                <td><code>configureFields</code></td>
+                <td><code>fieldConfigJson</code></td>
                 <td>Collection</td>
                 <td>Enable/disable fields, reorder, and map managed properties</td>
               </tr>
