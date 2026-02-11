@@ -3,9 +3,12 @@ import Link from 'next/link';
 import { Download, Package, Clock, CheckCircle, HelpCircle, ExternalLink, Shield, Globe, Monitor, Headphones } from 'lucide-react';
 
 export default function DownloadPage() {
-  const currentVersion = '1.0.278';
-  const releaseDate = 'January 26, 2026';
-  const packageSize = '~60 MB';
+  // Note: SharePoint's App Catalog shows the version embedded in the .sppkg (AppManifest.xml),
+  // which may differ from our human-facing release version.
+  const releaseVersion = '1.0.285';
+  const appCatalogVersion = '1.0.0.282';
+  const publishedDate = 'February 11, 2026';
+  const packageSize = '~100 MB';
   const downloadUrl = '/downloads/Bonzai-2.0.sppkg';
 
   return (
@@ -27,7 +30,7 @@ export default function DownloadPage() {
                 Bonzai 2 for SharePoint Online
               </h2>
               <p className="mb-1 text-sm text-gray-600 dark:text-gray-400">
-                Version {currentVersion} • Released {releaseDate} • {packageSize}
+                Version {releaseVersion} (App Catalog: {appCatalogVersion}) • Published {publishedDate} • {packageSize}
               </p>
               <p className="mb-6 text-sm text-gray-500 dark:text-gray-500">
                 Bonzai-2.0.sppkg
@@ -101,13 +104,13 @@ export default function DownloadPage() {
                 <tr className="bg-bonzai-50/50 dark:bg-bonzai-950/30">
                   <td className="px-4 py-3">
                     <span className="inline-flex items-center gap-1.5 font-medium text-bonzai-700 dark:text-bonzai-400">
-                      {currentVersion}
+                      {releaseVersion}
                       <span className="rounded bg-bonzai-100 px-1.5 py-0.5 text-xs font-semibold text-bonzai-700 dark:bg-bonzai-900 dark:text-bonzai-300">
                         Latest
                       </span>
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Jan 2026</td>
+                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Feb 2026</td>
                   <td className="px-4 py-3 text-gray-600 dark:text-gray-400">News Rollup/Slider/Events search + filter UI, Theme Manager site-wide persistence, Mega Menu branding alignment, and new Footer extension</td>
                 </tr>
                 <tr>
