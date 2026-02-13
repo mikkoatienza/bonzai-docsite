@@ -5,10 +5,10 @@ import { Download, Package, Clock, CheckCircle, HelpCircle, ExternalLink, Shield
 export default function DownloadPage() {
   // Note: SharePoint's App Catalog shows the version embedded in the .sppkg (AppManifest.xml),
   // which may differ from our human-facing release version.
-  const releaseVersion = '1.0.285';
-  const appCatalogVersion = '1.0.0.282';
-  const publishedDate = 'February 11, 2026';
-  const packageSize = '~100 MB';
+  const releaseVersion = '1.0.297';
+  const appCatalogVersion = '1.0.0.294';
+  const publishedDate = 'February 14, 2026';
+  const packageSize = '~5 MB';
   const downloadUrl = '/downloads/Bonzai-2.0.sppkg';
 
   return (
