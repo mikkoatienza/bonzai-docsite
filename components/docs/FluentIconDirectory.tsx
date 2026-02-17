@@ -78,50 +78,64 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
       const padding = Math.round(downloadSize * 0.12);
       const maxDim = downloadSize - padding * 2;
 
-      let fontPx = Math.round(downloadSize * 0.9);
-      let fontSpec = `${fontPx}px "${fontFamily}"`;
+      const _scanBBox = () => {
+        const w = canvas.width;
+        const h = canvas.height;
+        const data = ctx.getImageData(0, 0, w, h).data;
+        let minX = w;
+        let minY = h;
+        let maxX = -1;
+        let maxY = -1;
 
-      // Measure once and scale down if needed so the glyph fills the canvas nicely.
-      ctx.font = fontSpec;
-      let metrics = ctx.measureText(glyph);
-      const width = metrics.width || 0;
-      const left = (metrics as any).actualBoundingBoxLeft || 0;
-      const right = (metrics as any).actualBoundingBoxRight || 0;
-      const ascent = (metrics as any).actualBoundingBoxAscent || 0;
-      const descent = (metrics as any).actualBoundingBoxDescent || 0;
+        // Step a bit for large canvases to keep this fast.
+        const step = w >= 1024 ? 2 : 1;
+        for (let y = 0; y < h; y += step) {
+          for (let x = 0; x < w; x += step) {
+            const a = data[(y * w + x) * 4 + 3];
+            if (a > 0) {
+              if (x < minX) minX = x;
+              if (x > maxX) maxX = x;
+              if (y < minY) minY = y;
+              if (y > maxY) maxY = y;
+            }
+          }
+        }
 
-      const bboxW = left + right || width || fontPx;
-      const bboxH = ascent + descent || fontPx;
+        if (maxX < 0 || maxY < 0) return null;
+        const width = maxX - minX + 1;
+        const height = maxY - minY + 1;
+        return { minX, minY, maxX, maxY, width, height, cx: (minX + maxX) / 2, cy: (minY + maxY) / 2 };
+      };
 
-      // Some browsers/fonts can report 0 for ascent/descent on icon glyphs.
-      // Use safe fallbacks so we always scale the glyph to fit the canvas.
-      const scaleRaw = Math.min(maxDim / bboxW, maxDim / bboxH, 1);
-      const scale = Math.min(1, scaleRaw * 0.95); // small safety margin to avoid clipping
-      if (scale < 1) {
-        fontPx = Math.max(1, Math.floor(fontPx * scale));
-        fontSpec = `${fontPx}px "${fontFamily}"`;
-        ctx.font = fontSpec;
-        metrics = ctx.measureText(glyph);
-      }
+      const _drawCentered = (fontPx: number, dx = 0, dy = 0) => {
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = downloadColor === 'white' ? '#ffffff' : '#000000';
+        ctx.font = `normal ${fontPx}px "${fontFamily}"`;
+        ctx.fillText(glyph, canvas.width / 2 + dx, canvas.height / 2 + dy);
+      };
 
+      // Start large, then compute actual pixel bounds to scale/re-center reliably.
+      const initialFontPx = Math.round(downloadSize * 0.9);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillStyle = downloadColor === 'white' ? '#ffffff' : '#000000';
-      ctx.font = fontSpec;
-      // Center using bounding box when available (handles asymmetric glyph metrics).
-      const width2 = metrics.width || 0;
-      const left2 = (metrics as any).actualBoundingBoxLeft || 0;
-      const right2 = (metrics as any).actualBoundingBoxRight || 0;
-      const ascent2 = (metrics as any).actualBoundingBoxAscent || 0;
-      const descent2 = (metrics as any).actualBoundingBoxDescent || 0;
+      _drawCentered(initialFontPx);
+      const bbox1 = _scanBBox();
+      if (!bbox1) return;
 
-      const bboxW2 = left2 + right2 || width2 || fontPx;
-      const bboxH2 = ascent2 + descent2 || fontPx;
+      const scaleRaw = Math.min(maxDim / bbox1.width, maxDim / bbox1.height);
+      const scale = Math.min(1, scaleRaw * 0.98); // safety margin to avoid clipping strokes
+      const fittedFontPx = Math.max(1, Math.floor(initialFontPx * scale));
 
-      const x = bboxW2 ? canvas.width / 2 + (left2 - right2) / 2 : canvas.width / 2;
-      const y = bboxH2 ? canvas.height / 2 + (ascent2 - descent2) / 2 : canvas.height / 2;
-      ctx.fillText(glyph, x, y);
+      // Draw at fitted size, then re-center based on pixel bounds.
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      _drawCentered(fittedFontPx);
+      const bbox2 = _scanBBox();
+      if (!bbox2) return;
+
+      const dx = canvas.width / 2 - bbox2.cx;
+      const dy = canvas.height / 2 - bbox2.cy;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      _drawCentered(fittedFontPx, dx, dy);
 
       const url = canvas.toDataURL('image/png');
       const anchor = document.createElement('a');
@@ -254,7 +268,7 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    void _downloadIconPng(name);
+                    _downloadIconPng(name);
                   }}
                   className="flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-900 dark:hover:text-gray-100"
                   title={`Download ${name} as PNG`}
