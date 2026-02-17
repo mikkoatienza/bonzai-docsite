@@ -26,6 +26,9 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
     initializeIcons(undefined, { disableWarnings: true });
     // Trigger a re-render so previews compute after registration.
     setIconsReady(true);
+    // Don't block downloads on font preload detection. If previews are visible,
+    // the font is effectively available even if the Font Loading API is unsupported.
+    setFontLoaded(true);
 
     // Preload the MDL2 icon font so canvas exports render correctly on first click.
     // (If the font isn't loaded yet, canvas may render tofu/missing-glyph boxes.)
@@ -44,15 +47,14 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
             await fonts.ready;
           }
         }
-        setFontLoaded(true);
       } catch {
-        // If font preloading fails, leave fontLoaded false; downloads remain disabled.
+        // Ignore preload failures; downloads remain available.
       }
     })();
   }, []);
 
   const _downloadIconPng = async (iconName: string) => {
-    if (!iconsReady || !fontLoaded) return;
+    if (!iconsReady) return;
 
     const record = getIcon(iconName);
     if (!record || !record.code || typeof record.code !== 'string') return;
@@ -241,7 +243,7 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
                   }}
                   className="flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-900 dark:hover:text-gray-100"
                   title={`Download ${name} as PNG`}
-                  disabled={!iconsReady || !fontLoaded}
+                  disabled={!iconsReady}
                 >
                   <Download className="h-3.5 w-3.5" />
                   PNG
