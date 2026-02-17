@@ -16,6 +16,7 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
   const [query, setQuery] = useState(defaultQuery);
   const [copiedName, setCopiedName] = useState<string | null>(null);
   const [iconsReady, setIconsReady] = useState(false);
+  const [fontLoaded, setFontLoaded] = useState(false);
   const [downloadSize, setDownloadSize] = useState<number>(512);
   const [downloadColor, setDownloadColor] = useState<'black' | 'white'>('black');
 
@@ -25,10 +26,33 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
     initializeIcons(undefined, { disableWarnings: true });
     // Trigger a re-render so previews compute after registration.
     setIconsReady(true);
+
+    // Preload the MDL2 icon font so canvas exports render correctly on first click.
+    // (If the font isn't loaded yet, canvas may render tofu/missing-glyph boxes.)
+    void (async () => {
+      try {
+        const sample = getIcon('PageLink');
+        const glyph = sample && typeof sample.code === 'string' ? sample.code : '';
+        const family =
+          sample && sample.subset && sample.subset.fontFace ? sample.subset.fontFace.fontFamily : undefined;
+        if (!glyph || !family) return;
+
+        const fonts: any = (document as any).fonts;
+        if (fonts && typeof fonts.load === 'function') {
+          await fonts.load(`16px \"${family}\"`, glyph);
+          if (fonts.ready) {
+            await fonts.ready;
+          }
+        }
+        setFontLoaded(true);
+      } catch {
+        // If font preloading fails, leave fontLoaded false; downloads remain disabled.
+      }
+    })();
   }, []);
 
   const _downloadIconPng = async (iconName: string) => {
-    if (!iconsReady) return;
+    if (!iconsReady || !fontLoaded) return;
 
     const record = getIcon(iconName);
     if (!record || !record.code || typeof record.code !== 'string') return;
@@ -217,7 +241,7 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
                   }}
                   className="flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-900 dark:hover:text-gray-100"
                   title={`Download ${name} as PNG`}
-                  disabled={!iconsReady}
+                  disabled={!iconsReady || !fontLoaded}
                 >
                   <Download className="h-3.5 w-3.5" />
                   PNG
