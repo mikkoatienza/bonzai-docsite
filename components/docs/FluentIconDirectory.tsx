@@ -15,11 +15,14 @@ interface FluentIconDirectoryProps {
 export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIconDirectoryProps) {
   const [query, setQuery] = useState(defaultQuery);
   const [copiedName, setCopiedName] = useState<string | null>(null);
+  const [iconsReady, setIconsReady] = useState(false);
 
   useEffect(() => {
     // Registers FabricMDL2 icon subsets and injects the font-face rules.
     // (Safe to call more than once; we suppress duplicate warnings.)
     initializeIcons(undefined, { disableWarnings: true });
+    // Trigger a re-render so previews compute after registration.
+    setIconsReady(true);
   }, []);
 
   const filtered = useMemo(() => {
@@ -71,7 +74,7 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {filtered.map((name) => {
           const isCopied = copiedName === name;
-          const iconClass = getIconClassName(name);
+          const iconClass = iconsReady ? getIconClassName(name) : '';
 
           return (
             <button
