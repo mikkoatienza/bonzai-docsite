@@ -43,16 +43,12 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Ensure the font is loaded before drawing.
+    // IMPORTANT:
+    // Keep the download flow synchronous to avoid browsers blocking downloads
+    // after an awaited promise breaks the user-gesture call stack.
     try {
       const fontPx = Math.round(downloadSize * 0.72);
       const fontSpec = `${fontPx}px "${fontFamily}"`;
-      if ((document as any).fonts && typeof (document as any).fonts.load === 'function') {
-        await (document as any).fonts.load(fontSpec, glyph);
-        if ((document as any).fonts.ready) {
-          await (document as any).fonts.ready;
-        }
-      }
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.textAlign = 'center';
@@ -61,17 +57,13 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
       ctx.font = fontSpec;
       ctx.fillText(glyph, canvas.width / 2, canvas.height / 2);
 
-      const blob: Blob | null = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
-      if (!blob) return;
-
-      const url = URL.createObjectURL(blob);
+      const url = canvas.toDataURL('image/png');
       const a = document.createElement('a');
       a.href = url;
       a.download = `${iconName}-${downloadSize}px.png`;
       document.body.appendChild(a);
       a.click();
       a.remove();
-      URL.revokeObjectURL(url);
     } catch {
       // If canvas/font load fails, do nothing (user can still copy the icon name).
     }
@@ -158,12 +150,12 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
           return (
             <div
               key={name}
-              className="group flex w-full items-center gap-3 rounded-xl border border-gray-200 bg-white p-3 text-left shadow-sm transition hover:border-bonzai-300 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 dark:hover:border-bonzai-700"
+              className="group w-full rounded-xl border border-gray-200 bg-white p-3 text-left shadow-sm transition hover:border-bonzai-300 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 dark:hover:border-bonzai-700"
             >
               <button
                 type="button"
                 onClick={() => copy(name)}
-                className="flex flex-1 items-center gap-3 text-left"
+                className="flex w-full items-center gap-3 text-left"
                 title={`Click to copy: ${name}`}
               >
                 <span
@@ -179,9 +171,16 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
                   <div className="truncate text-sm font-semibold text-gray-900 dark:text-white">{name}</div>
                   <div className="truncate text-xs text-gray-500 dark:text-gray-400">Click to copy</div>
                 </span>
+
+                {isCopied ? (
+                  <span className="inline-flex items-center gap-1 rounded-md bg-green-50 px-2 py-1 text-xs font-semibold text-green-700 dark:bg-green-900/30 dark:text-green-300">
+                    <Check className="h-3.5 w-3.5" />
+                    Copied
+                  </span>
+                ) : null}
               </button>
 
-              <div className="flex items-center gap-2">
+              <div className="mt-2 flex items-center justify-end gap-2">
                 <button
                   type="button"
                   onClick={(e) => {
@@ -196,11 +195,6 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
                   <Download className="h-3.5 w-3.5" />
                   PNG
                 </button>
-
-                <span className="flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-gray-500 group-hover:bg-gray-50 group-hover:text-gray-700 dark:text-gray-300 dark:group-hover:bg-gray-900 dark:group-hover:text-gray-100">
-                  {isCopied ? <Check className="h-3.5 w-3.5 text-green-500" /> : <Copy className="h-3.5 w-3.5" />}
-                  {isCopied ? 'Copied' : 'Copy'}
-                </span>
               </div>
             </div>
           );
