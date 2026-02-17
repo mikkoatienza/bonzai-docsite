@@ -256,7 +256,7 @@ Web Template / List Template / Host Properties: leave blank`}</code></pre>
               <div className="text-sm text-amber-700 dark:text-amber-300">
                 <strong>Solutions:</strong>
                 <ul className="mt-2 space-y-1">
-                  <li>Check file size is reasonable (~60MB for current version)</li>
+                  <li>Check file size is reasonable (~5MB for current version)</li>
                   <li>Verify you have App Catalog admin rights</li>
                   <li>Re-download the package if corrupted</li>
                   <li>Try a different browser (Chrome/Edge recommended)</li>
