@@ -99,7 +99,7 @@ export default function TabbedWebPart() {
               config={[
                 { property: 'title', value: 'My Apps & Documents' },
                 { property: 'displayMode', value: 'Tabs' },
-                { property: 'tabsPerPage', value: 'Show All' },
+                { property: 'tilesPerPage', value: 'Show All' },
                 { property: 'showPanelTitle', value: 'On' },
               ]}
             />
@@ -154,12 +154,14 @@ export default function TabbedWebPart() {
             <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
             <tbody>
               <tr><td><code>title</code></td><td>Text</td><td>Web part title (default: My Apps &amp; Documents)</td></tr>
+              <tr><td><code>titleIconOption</code></td><td>Dropdown</td><td>Title icon mode: Custom or None</td></tr>
+              <tr><td><code>titleIconName</code></td><td>Icon Picker</td><td>Fluent UI icon picker (default: Sections)</td></tr>
               <tr><td><code>displayMode</code></td><td>Dropdown</td><td>Accordion, Tabs, or Tiles</td></tr>
               <tr><td><code>showPanelTitle</code></td><td>Toggle</td><td>Show panel titles (default: On)</td></tr>
               <tr><td><code>accordionDisplayMode</code></td><td>Dropdown</td><td>Single (one open) or Multiple (many open)</td></tr>
               <tr><td><code>collapsePanelsByDefault</code></td><td>Toggle</td><td>Start with panels collapsed (default: Off)</td></tr>
               <tr><td><code>tilesPerRow</code></td><td>Dropdown</td><td>Tiles columns (Auto, 2-6)</td></tr>
-              <tr><td><code>tilesPerPage</code></td><td>Dropdown</td><td>Pagination for Tiles/Accordion (4-12 or Show All)</td></tr>
+              <tr><td><code>tilesPerPage</code></td><td>Dropdown</td><td>Pagination for Tiles and Accordion (also labeled “Tabs per page” in Accordion mode)</td></tr>
               <tr><td><code>itemsPerRow</code></td><td>Dropdown</td><td>Content layout: List or 2-6 columns</td></tr>
               <tr><td><code>itemsPerPage</code></td><td>Dropdown</td><td>Items pagination within tabs</td></tr>
             </tbody>

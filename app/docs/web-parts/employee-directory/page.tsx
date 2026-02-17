@@ -264,6 +264,11 @@ export default function EmployeeDirectoryWebPart() {
                 <td>Web part title (default: Employee Directory)</td>
               </tr>
               <tr>
+                <td><code>titleIconOption</code></td>
+                <td>Dropdown</td>
+                <td>Title icon mode: Custom or None</td>
+              </tr>
+              <tr>
                 <td><code>titleIconName</code></td>
                 <td>Icon Picker</td>
                 <td>Fluent UI icon picker (default: ContactCard)</td>

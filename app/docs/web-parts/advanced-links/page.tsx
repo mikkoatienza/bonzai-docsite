@@ -203,6 +203,7 @@ export default function AdvancedLinksWebPart() {
             <tbody>
               <tr><td><code>title</code></td><td>Text</td><td>Web part title (default: Links)</td></tr>
               <tr><td><code>titleUrl</code></td><td>Text</td><td>Optional URL to make the title clickable</td></tr>
+              <tr><td><code>titleIconOption</code></td><td>Dropdown</td><td>Title icon mode: Custom or None</td></tr>
               <tr><td><code>titleIconName</code></td><td>Icon Picker</td><td>Fluent UI icon picker (default: Link)</td></tr>
               <tr><td><code>titleIconUrl</code></td><td>Text</td><td>Custom icon URL (overrides icon name)</td></tr>
               <tr><td><code>description</code></td><td>Text (Multiline)</td><td>Optional description below the title</td></tr>
@@ -215,10 +216,11 @@ export default function AdvancedLinksWebPart() {
             <tbody>
               <tr><td><code>dataSourceMode</code></td><td>Dropdown</td><td>SharePoint List or Manual Links</td></tr>
               <tr><td><code>siteSelectionMode</code></td><td>Dropdown</td><td>Select from available sites or enter site URL manually</td></tr>
-              <tr><td><code>sitePicker</code></td><td>Picker</td><td>Site dropdown (picker mode)</td></tr>
-              <tr><td><code>subsitePicker</code></td><td>Dropdown</td><td>Cascading subsite dropdown (picker mode)</td></tr>
+              <tr><td><code>selectedSiteUrl</code></td><td>Dropdown</td><td>Site dropdown (picker mode)</td></tr>
+              <tr><td><code>selectedSubsiteUrl</code></td><td>Dropdown</td><td>Cascading subsite dropdown (picker mode, optional)</td></tr>
               <tr><td><code>siteUrl</code></td><td>Text</td><td>Manual site URL (manual mode)</td></tr>
               <tr><td><code>listId</code></td><td>List Picker</td><td>Links list (updates based on selected site)</td></tr>
+              <tr><td><code>manualLinksCollection</code></td><td>Collection Data</td><td>Manual link items (manual mode only)</td></tr>
             </tbody>
           </table>
 
@@ -228,7 +230,7 @@ export default function AdvancedLinksWebPart() {
             <tbody>
               <tr><td><code>displayStyle</code></td><td>Dropdown</td><td>Display style: List, Tiles, Descriptions, Text, Image Gallery</td></tr>
               <tr><td><code>iconSize</code></td><td>Dropdown</td><td>Icon size: Small, Medium, Large</td></tr>
-              <tr><td><code>numberOfLinks</code></td><td>Dropdown</td><td>Items per row (1-6, for Tile and Description styles)</td></tr>
+              <tr><td><code>numberOfLinks</code></td><td>Dropdown</td><td>Items per row (1-6, for Tile, Description, and Image Gallery styles)</td></tr>
               <tr><td><code>showPaging</code></td><td>Toggle</td><td>Enable pagination</td></tr>
               <tr><td><code>itemsPerPage</code></td><td>Slider (3-50)</td><td>Items per page when pagination is enabled</td></tr>
             </tbody>
