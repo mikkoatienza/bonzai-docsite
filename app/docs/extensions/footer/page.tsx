@@ -29,6 +29,12 @@ export default function FooterExtension() {
             once activated, it appears on every page in your site collection.
           </Callout>
 
+          <Callout type="info" title="Footer is hidden on Site Contents and list/library admin pages">
+            Footer intentionally does <strong>not</strong> render on SharePoint system surfaces like{' '}
+            <strong>Site Contents</strong> and modern list/library experiences (including list settings / list editor views).
+            This prevents layout issues in administrative and shell pages.
+          </Callout>
+
           <Callout type="warning" title="Two-step activation required">
             After uploading the Bonzai 2 package to your App Catalog, you must also add the Bonzai app
             to each site where you want to use Footer. Go to Site Contents → New → App → Bonzai 2.
