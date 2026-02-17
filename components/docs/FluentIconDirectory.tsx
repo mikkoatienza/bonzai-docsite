@@ -16,7 +16,7 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
   const [query, setQuery] = useState(defaultQuery);
   const [copiedName, setCopiedName] = useState<string | null>(null);
   const [iconsReady, setIconsReady] = useState(false);
-  const [downloadSize, setDownloadSize] = useState<number>(256);
+  const [downloadSize, setDownloadSize] = useState<number>(512);
   const [downloadColor, setDownloadColor] = useState<'black' | 'white'>('black');
 
   useEffect(() => {
@@ -47,23 +47,48 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
     // Keep the download flow synchronous to avoid browsers blocking downloads
     // after an awaited promise breaks the user-gesture call stack.
     try {
-      const fontPx = Math.round(downloadSize * 0.72);
-      const fontSpec = `${fontPx}px "${fontFamily}"`;
+      const padding = Math.round(downloadSize * 0.1);
+      const maxDim = downloadSize - padding * 2;
+
+      let fontPx = Math.round(downloadSize * 0.9);
+      let fontSpec = `${fontPx}px "${fontFamily}"`;
+
+      // Measure once and scale down if needed so the glyph fills the canvas nicely.
+      ctx.font = fontSpec;
+      let metrics = ctx.measureText(glyph);
+      const ascent = (metrics as any).actualBoundingBoxAscent || 0;
+      const descent = (metrics as any).actualBoundingBoxDescent || 0;
+      const height = ascent + descent;
+      const width = metrics.width || 0;
+
+      if (width > 0 && height > 0) {
+        const scale = Math.min(maxDim / width, maxDim / height, 1);
+        if (scale < 1) {
+          fontPx = Math.max(1, Math.floor(fontPx * scale));
+          fontSpec = `${fontPx}px "${fontFamily}"`;
+          ctx.font = fontSpec;
+          metrics = ctx.measureText(glyph);
+        }
+      }
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = downloadColor === 'white' ? '#ffffff' : '#000000';
       ctx.font = fontSpec;
-      ctx.fillText(glyph, canvas.width / 2, canvas.height / 2);
+      // Center vertically using ascent/descent when available.
+      const ascent2 = (metrics as any).actualBoundingBoxAscent || 0;
+      const descent2 = (metrics as any).actualBoundingBoxDescent || 0;
+      const y = descent2 || ascent2 ? (canvas.height + (ascent2 - descent2)) / 2 : canvas.height / 2;
+      ctx.fillText(glyph, canvas.width / 2, y);
 
       const url = canvas.toDataURL('image/png');
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${iconName}-${downloadSize}px.png`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      anchor.download = `${iconName}-${downloadSize}px.png`;
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
     } catch {
       // If canvas/font load fails, do nothing (user can still copy the icon name).
     }
@@ -115,6 +140,8 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
               <option value={64}>64px</option>
               <option value={128}>128px</option>
               <option value={256}>256px</option>
+              <option value={512}>512px</option>
+              <option value={1024}>1024px</option>
             </select>
           </div>
 
