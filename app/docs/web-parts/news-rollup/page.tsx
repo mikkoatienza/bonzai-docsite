@@ -159,10 +159,6 @@ export default function NewsRollupWebPart() {
                 description: 'Toggle metadata (date, category, tags, likes, comments, excerpt) and enable Search/Filters if you want user-facing filters.',
               },
               {
-                title: 'Enable content targeting (optional)',
-                description: 'Toggle on Content Targeting and set TargetAudience values to SharePoint group names.',
-              },
-              {
                 title: 'Save and publish',
                 description: 'Click outside the property pane, then save and publish your page. Your news feed is now live!',
               },
@@ -202,7 +198,7 @@ export default function NewsRollupWebPart() {
                 { property: 'Filter Tags', value: 'HR, Benefits' },
                 { property: 'Enable Filters', value: 'On' },
                 { property: 'Items to Show', value: '6' },
-                { property: 'Content Targeting', value: 'Enabled (SharePoint groups)' },
+                { property: 'Category', value: 'HR (required field on Site Pages)' },
               ]}
             />
             <RecipeCard
@@ -282,8 +278,8 @@ export default function NewsRollupWebPart() {
                 solution: 'Check the Showcase value and any selected Tags. Remove pre-filters to show all news.',
               },
               {
-                problem: 'Content targeting not working',
-                solution: 'Ensure Content Targeting is enabled and that TargetAudience values match SharePoint group names.',
+                problem: 'Items are not filtering as expected',
+                solution: 'Verify Showcase value, tags, and any selected category filters. Remove pre-filters to confirm the baseline query.',
               },
               {
                 problem: 'Comments or likes not showing',
@@ -340,6 +336,12 @@ export default function NewsRollupWebPart() {
                 <td>Text</td>
                 <td>No</td>
                 <td>Web part title (blank hides header row)</td>
+              </tr>
+              <tr>
+                <td><code>titleIconOption</code></td>
+                <td>Dropdown</td>
+                <td>No</td>
+                <td>Title icon mode: Custom or None</td>
               </tr>
               <tr>
                 <td><code>titleIconName</code></td>
@@ -503,12 +505,6 @@ export default function NewsRollupWebPart() {
                 <td>No</td>
                 <td>Legacy toggle; Showcase value controls curation</td>
               </tr>
-              <tr>
-                <td><code>enableContentTargeting</code></td>
-                <td>Toggle</td>
-                <td>No</td>
-                <td>Filter by SharePoint group membership (TargetAudience field)</td>
-              </tr>
             </tbody>
           </table>
 
@@ -538,7 +534,6 @@ export default function NewsRollupWebPart() {
             <li>✅ Showcase-based curation + optional tag pre-filter</li>
             <li>✅ Search and filter UI (search, tags, page type, date range)</li>
             <li>✅ Metadata toggles (date, category, tags, likes, comments, excerpt)</li>
-            <li>✅ Content targeting by SharePoint group</li>
             <li>✅ Pagination based on Items to Show</li>
             <li>✅ Fixed height option</li>
             <li>✅ Cross-site news aggregation</li>
@@ -567,11 +562,6 @@ export default function NewsRollupWebPart() {
                 <td>Showcase + Tags</td>
                 <td>Showcase value + tag filters</td>
                 <td>Showcase marks items; tags refine filters</td>
-              </tr>
-              <tr>
-                <td>Content targeting</td>
-                <td><code>enableContentTargeting</code> toggle</td>
-                <td>Uses SharePoint group membership</td>
               </tr>
               <tr>
                 <td>View name text field</td>

@@ -220,6 +220,7 @@ export default function AdvancedLinksWebPart() {
               <tr><td><code>selectedSubsiteUrl</code></td><td>Dropdown</td><td>Cascading subsite dropdown (picker mode, optional)</td></tr>
               <tr><td><code>siteUrl</code></td><td>Text</td><td>Manual site URL (manual mode)</td></tr>
               <tr><td><code>listId</code></td><td>List Picker</td><td>Links list (updates based on selected site)</td></tr>
+              <tr><td><code>viewId</code></td><td>View Picker</td><td>Optional view to filter links (depends on selected list)</td></tr>
               <tr><td><code>manualLinksCollection</code></td><td>Collection Data</td><td>Manual link items (manual mode only)</td></tr>
             </tbody>
           </table>

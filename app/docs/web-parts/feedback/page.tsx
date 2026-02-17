@@ -263,7 +263,8 @@ export default function FeedbackWebPart() {
             <tbody>
               <tr><td><code>title</code></td><td>Text</td><td>Title & Navigation</td><td>Web part title</td></tr>
               <tr><td><code>titleUrl</code></td><td>Text</td><td>Title & Navigation</td><td>Make title a link</td></tr>
-              <tr><td><code>titleIconName</code></td><td>Text</td><td>Title & Navigation</td><td>Fluent UI icon name</td></tr>
+              <tr><td><code>titleIconOption</code></td><td>Dropdown</td><td>Title & Navigation</td><td>Title icon mode: Custom or None</td></tr>
+              <tr><td><code>titleIconName</code></td><td>Icon Picker</td><td>Title & Navigation</td><td>Fluent UI icon picker</td></tr>
               <tr><td><code>description</code></td><td>Text</td><td>Title & Navigation</td><td>Description below title</td></tr>
               <tr><td><code>showMoreUrl</code></td><td>Text</td><td>Title & Navigation</td><td>"View All" link URL</td></tr>
               <tr><td><code>showMoreText</code></td><td>Text</td><td>Title & Navigation</td><td>"View All" link text</td></tr>

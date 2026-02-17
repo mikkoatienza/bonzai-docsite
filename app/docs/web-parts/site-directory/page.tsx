@@ -154,7 +154,8 @@ export default function SiteDirectoryWebPart() {
             <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
             <tbody>
               <tr><td><code>title</code></td><td>Text</td><td>Web part title (default: Site Directory)</td></tr>
-              <tr><td><code>titleIconName</code></td><td>Text</td><td>Fluent UI icon name (default: SharepointLogo)</td></tr>
+              <tr><td><code>titleIconOption</code></td><td>Dropdown</td><td>Title icon mode: Custom or None</td></tr>
+              <tr><td><code>titleIconName</code></td><td>Icon Picker</td><td>Fluent UI icon picker (default: SharepointLogo)</td></tr>
               <tr><td><code>titleIconUrl</code></td><td>Text</td><td>Custom icon URL (overrides icon name)</td></tr>
             </tbody>
           </table>

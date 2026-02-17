@@ -268,6 +268,34 @@ export default function DocumentPortalWebPart() {
 
           <h3>Property Pane Configuration</h3>
 
+          <h4>Site Selection</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>siteSelectionMode</code></td>
+                <td>Dropdown</td>
+                <td>Select from available sites (picker) or enter a site URL manually</td>
+              </tr>
+              <tr>
+                <td><code>selectedSiteUrl</code></td>
+                <td>Dropdown</td>
+                <td>Site dropdown (picker mode, loaded via Microsoft Graph)</td>
+              </tr>
+              <tr>
+                <td><code>siteUrl</code></td>
+                <td>Text</td>
+                <td>Manual site URL (manual mode, optional)</td>
+              </tr>
+            </tbody>
+          </table>
+
           <h4>Search Settings</h4>
           <table>
             <thead>
@@ -281,12 +309,17 @@ export default function DocumentPortalWebPart() {
               <tr>
                 <td><code>resultSource</code></td>
                 <td>Text</td>
-                <td>SharePoint Search result source name/ID</td>
+                <td>SharePoint Search result source name/ID (optional)</td>
+              </tr>
+              <tr>
+                <td><code>searchLabelOption</code></td>
+                <td>Dropdown</td>
+                <td>Preset search placeholder option (or Custom)</td>
               </tr>
               <tr>
                 <td><code>searchLabel</code></td>
                 <td>Text</td>
-                <td>Search box placeholder text</td>
+                <td>Custom placeholder text (used when searchLabelOption = custom)</td>
               </tr>
               <tr>
                 <td><code>enableWildcardSearch</code></td>
@@ -294,14 +327,24 @@ export default function DocumentPortalWebPart() {
                 <td>Enable wildcard search (*term*)</td>
               </tr>
               <tr>
+                <td><code>typeaheadFields</code></td>
+                <td>Multi-select</td>
+                <td>Managed properties shown in typeahead suggestions</td>
+              </tr>
+              <tr>
                 <td><code>typeaheadDisplayFields</code></td>
                 <td>Text (Multiline)</td>
-                <td>Fields for typeahead suggestions. Format: &quot;Label:ManagedProperty;Label2:Property2&quot;</td>
+                <td>Legacy/fallback format: &quot;Label:ManagedProperty;Label2:Property2&quot;</td>
+              </tr>
+              <tr>
+                <td><code>searchFilterFields</code></td>
+                <td>Multi-select</td>
+                <td>Managed properties available as filters/refiners</td>
               </tr>
               <tr>
                 <td><code>searchFilters</code></td>
                 <td>Text (Multiline)</td>
-                <td>Additional search filters</td>
+                <td>Legacy/fallback filter configuration</td>
               </tr>
               <tr>
                 <td><code>itemsPerPage</code></td>
@@ -327,14 +370,34 @@ export default function DocumentPortalWebPart() {
                 <td>Default view mode: List or Grid</td>
               </tr>
               <tr>
+                <td><code>listViewColumns</code></td>
+                <td>Multi-select</td>
+                <td>Managed properties shown as columns in List view</td>
+              </tr>
+              <tr>
                 <td><code>listViewDisplayProperties</code></td>
                 <td>Text (Multiline)</td>
-                <td>Columns for list view. Format: &quot;Label:ManagedProperty;...&quot;</td>
+                <td>Legacy/fallback list columns format: &quot;Label:ManagedProperty;...&quot;</td>
+              </tr>
+              <tr>
+                <td><code>gridViewColumns</code></td>
+                <td>Multi-select</td>
+                <td>Managed properties shown as fields in Grid view</td>
               </tr>
               <tr>
                 <td><code>gridViewDisplayProperties</code></td>
                 <td>Text (Multiline)</td>
-                <td>Properties for grid view. Format: &quot;Label:ManagedProperty;...&quot;</td>
+                <td>Legacy/fallback grid format: &quot;Label:ManagedProperty;...&quot;</td>
+              </tr>
+              <tr>
+                <td><code>visibleMetadataFields</code></td>
+                <td>Multi-select</td>
+                <td>Which metadata fields appear on each result</td>
+              </tr>
+              <tr>
+                <td><code>showMetadataChips</code></td>
+                <td>Toggle</td>
+                <td>Show metadata chips on results</td>
               </tr>
               <tr>
                 <td><code>showSortDropDown</code></td>
@@ -345,6 +408,16 @@ export default function DocumentPortalWebPart() {
                 <td><code>sortOrder</code></td>
                 <td>Dropdown</td>
                 <td>Default sort: Relevance, Date, or Name</td>
+              </tr>
+              <tr>
+                <td><code>showViewToggle</code></td>
+                <td>Toggle</td>
+                <td>Show the List/Grid view toggle (disabled in Search-only mode)</td>
+              </tr>
+              <tr>
+                <td><code>showFiltersPanel</code></td>
+                <td>Toggle</td>
+                <td>Show the filters panel when refiners exist (disabled in Search-only mode)</td>
               </tr>
               <tr>
                 <td><code>trimDuplicates</code></td>
@@ -365,6 +438,11 @@ export default function DocumentPortalWebPart() {
             </thead>
             <tbody>
               <tr>
+                <td><code>searchOnlyMode</code></td>
+                <td>Toggle</td>
+                <td>Minimal UI preset (hides some end-user controls)</td>
+              </tr>
+              <tr>
                 <td><code>showResults</code></td>
                 <td>Toggle</td>
                 <td>Show search results section</td>
@@ -383,6 +461,21 @@ export default function DocumentPortalWebPart() {
                 <td><code>favouriteDocumentsLabel</code></td>
                 <td>Text</td>
                 <td>Label for the favourites section</td>
+              </tr>
+              <tr>
+                <td><code>showCustomDocumentLinks</code></td>
+                <td>Toggle</td>
+                <td>Show a custom links section above/beside results</td>
+              </tr>
+              <tr>
+                <td><code>customDocumentLinksLabel</code></td>
+                <td>Text</td>
+                <td>Label for the custom links section</td>
+              </tr>
+              <tr>
+                <td><code>customDocumentLinks</code></td>
+                <td>Collection Data</td>
+                <td>Manually managed custom document links</td>
               </tr>
               <tr>
                 <td><code>showDocumentPreviews</code></td>
@@ -413,9 +506,14 @@ export default function DocumentPortalWebPart() {
                 <td>URL to make the title clickable</td>
               </tr>
               <tr>
+                <td><code>titleIconOption</code></td>
+                <td>Dropdown</td>
+                <td>Title icon mode: Select Icon or None</td>
+              </tr>
+              <tr>
                 <td><code>titleIconName</code></td>
-                <td>Text</td>
-                <td>Fluent UI icon name (e.g., DocumentSearch)</td>
+                <td>Icon Picker</td>
+                <td>Fluent UI icon picker (default: DocumentSearch)</td>
               </tr>
               <tr>
                 <td><code>titleIconUrl</code></td>

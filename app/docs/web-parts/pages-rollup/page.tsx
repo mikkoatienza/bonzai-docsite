@@ -170,7 +170,8 @@ export default function PagesRollupWebPart() {
             <tbody>
               <tr><td><code>title</code></td><td>Text</td><td>Web part title displayed above the content</td></tr>
               <tr><td><code>titleUrl</code></td><td>Text</td><td>Optional URL to make the title clickable</td></tr>
-              <tr><td><code>titleIconName</code></td><td>Text</td><td>Fluent UI icon name (default: Page)</td></tr>
+              <tr><td><code>titleIconOption</code></td><td>Dropdown</td><td>Title icon mode: Custom or None</td></tr>
+              <tr><td><code>titleIconName</code></td><td>Icon Picker</td><td>Fluent UI icon picker (default: Page)</td></tr>
               <tr><td><code>titleIconUrl</code></td><td>Text</td><td>Custom icon URL (overrides icon name)</td></tr>
               <tr><td><code>description</code></td><td>Text (Multiline)</td><td>Optional description below the title</td></tr>
               <tr><td><code>showMoreText</code></td><td>Text</td><td>Text for the &quot;Show More&quot; link (default: See all pages)</td></tr>

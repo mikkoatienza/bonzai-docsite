@@ -325,6 +325,7 @@ export default function EventsRollupWebPart() {
             </thead>
             <tbody>
               <tr><td><code>title</code></td><td>Text</td><td>Title & Navigation</td><td>Web part title (blank hides header row)</td></tr>
+              <tr><td><code>titleIconOption</code></td><td>Dropdown</td><td>Title & Navigation</td><td>Title icon mode: Custom or None</td></tr>
               <tr><td><code>titleIconName</code></td><td>Icon Picker</td><td>Title & Navigation</td><td>Fluent UI icon for the header</td></tr>
               <tr><td><code>titleIconUrl</code></td><td>Text</td><td>Title & Navigation</td><td>Custom icon URL (overrides icon name)</td></tr>
               <tr><td><code>titleUrl</code></td><td>Text</td><td>Title & Navigation</td><td>Make title a link</td></tr>
@@ -345,6 +346,7 @@ export default function EventsRollupWebPart() {
               <tr><td><code>selectedSites</code></td><td>Site Picker</td><td>Data Source</td><td>Selected site when using Site Picker</td></tr>
               <tr><td><code>siteUrl</code></td><td>Text</td><td>Data Source</td><td>Manual site URL when Site Selection Mode = manual</td></tr>
               <tr><td><code>listId</code></td><td>List Picker</td><td>Data Source</td><td>Source list</td></tr>
+              <tr><td><code>viewId</code></td><td>View Picker</td><td>Data Source</td><td>Optional view to filter items (depends on selected list)</td></tr>
               <tr><td><code>selectedCategories</code></td><td>Multi-select</td><td>Data Source</td><td>Pre-filter categories (optional)</td></tr>
               <tr><td><code>selectedTags</code></td><td>Multi-select</td><td>Data Source</td><td>Pre-filter tags (optional)</td></tr>
             </tbody>
