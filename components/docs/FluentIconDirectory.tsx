@@ -40,9 +40,10 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
           sample && sample.subset && sample.subset.fontFace ? sample.subset.fontFace.fontFamily : undefined;
         if (!glyph || !family) return;
 
+        const normalizedFamily = family.replace(/^['"]+|['"]+$/g, '').trim();
         const fonts: any = (document as any).fonts;
         if (fonts && typeof fonts.load === 'function') {
-          await fonts.load(`16px \"${family}\"`, glyph);
+          await fonts.load(`16px \"${normalizedFamily}\"`, glyph);
           if (fonts.ready) {
             await fonts.ready;
           }
@@ -60,7 +61,8 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
     if (!record || !record.code || typeof record.code !== 'string') return;
 
     const glyph = record.code;
-    const fontFamily = record.subset && record.subset.fontFace ? record.subset.fontFace.fontFamily : undefined;
+    const fontFamilyRaw = record.subset && record.subset.fontFace ? record.subset.fontFace.fontFamily : undefined;
+    const fontFamily = fontFamilyRaw ? fontFamilyRaw.replace(/^['"]+|['"]+$/g, '').trim() : undefined;
     if (!fontFamily) return;
 
     const canvas = document.createElement('canvas');
