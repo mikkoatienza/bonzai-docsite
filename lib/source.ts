@@ -110,5 +110,12 @@ export const pageTree: PageTree.Root = {
         { type: 'page', name: 'Theming', url: '/docs/administration/theming' },
       ],
     },
+    {
+      type: 'folder',
+      name: 'Resources',
+      children: [
+        { type: 'page', name: 'Fluent Icon Directory', url: '/docs/resources/fluent-icons' },
+      ],
+    },
   ],
 };
