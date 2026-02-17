@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { Copy, Check, Search } from 'lucide-react';
+import { Copy, Check, Search, Download } from 'lucide-react';
 import clsx from 'clsx';
 
 import { initializeIcons } from '@fluentui/font-icons-mdl2';
-import { getIconClassName } from '@fluentui/style-utilities';
+import { getIcon, getIconClassName } from '@fluentui/style-utilities';
 
 interface FluentIconDirectoryProps {
   iconNames: string[];
@@ -16,6 +16,8 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
   const [query, setQuery] = useState(defaultQuery);
   const [copiedName, setCopiedName] = useState<string | null>(null);
   const [iconsReady, setIconsReady] = useState(false);
+  const [downloadSize, setDownloadSize] = useState<number>(256);
+  const [downloadColor, setDownloadColor] = useState<'black' | 'white'>('black');
 
   useEffect(() => {
     // Registers FabricMDL2 icon subsets and injects the font-face rules.
@@ -24,6 +26,56 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
     // Trigger a re-render so previews compute after registration.
     setIconsReady(true);
   }, []);
+
+  const _downloadIconPng = async (iconName: string) => {
+    if (!iconsReady) return;
+
+    const record = getIcon(iconName);
+    if (!record || !record.code || typeof record.code !== 'string') return;
+
+    const glyph = record.code;
+    const fontFamily = record.subset && record.subset.fontFace ? record.subset.fontFace.fontFamily : undefined;
+    if (!fontFamily) return;
+
+    const canvas = document.createElement('canvas');
+    canvas.width = downloadSize;
+    canvas.height = downloadSize;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Ensure the font is loaded before drawing.
+    try {
+      const fontPx = Math.round(downloadSize * 0.72);
+      const fontSpec = `${fontPx}px "${fontFamily}"`;
+      if ((document as any).fonts && typeof (document as any).fonts.load === 'function') {
+        await (document as any).fonts.load(fontSpec, glyph);
+        if ((document as any).fonts.ready) {
+          await (document as any).fonts.ready;
+        }
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = downloadColor === 'white' ? '#ffffff' : '#000000';
+      ctx.font = fontSpec;
+      ctx.fillText(glyph, canvas.width / 2, canvas.height / 2);
+
+      const blob: Blob | null = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
+      if (!blob) return;
+
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${iconName}-${downloadSize}px.png`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch {
+      // If canvas/font load fails, do nothing (user can still copy the icon name).
+    }
+  };
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -60,14 +112,41 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
           ) : null}
         </div>
 
-        <div className="relative w-full sm:w-96">
-          <Search className="pointer-events-none absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search icon names (e.g., Document, News, MapPin)..."
-            className="w-full rounded-lg border border-gray-200 bg-white py-2 pl-9 pr-3 text-sm text-gray-900 shadow-sm outline-none focus:border-bonzai-400 focus:ring-2 focus:ring-bonzai-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:focus:border-bonzai-500 dark:focus:ring-bonzai-900/40"
-          />
+        <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
+          <div className="flex items-center gap-2">
+            <label className="text-xs font-medium text-gray-600 dark:text-gray-300">PNG size</label>
+            <select
+              value={downloadSize}
+              onChange={(e) => setDownloadSize(Number(e.target.value))}
+              className="rounded-md border border-gray-200 bg-white px-2 py-1 text-xs text-gray-900 shadow-sm outline-none focus:border-bonzai-400 focus:ring-2 focus:ring-bonzai-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:focus:border-bonzai-500 dark:focus:ring-bonzai-900/40"
+            >
+              <option value={64}>64px</option>
+              <option value={128}>128px</option>
+              <option value={256}>256px</option>
+            </select>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <label className="text-xs font-medium text-gray-600 dark:text-gray-300">PNG color</label>
+            <select
+              value={downloadColor}
+              onChange={(e) => setDownloadColor(e.target.value as 'black' | 'white')}
+              className="rounded-md border border-gray-200 bg-white px-2 py-1 text-xs text-gray-900 shadow-sm outline-none focus:border-bonzai-400 focus:ring-2 focus:ring-bonzai-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:focus:border-bonzai-500 dark:focus:ring-bonzai-900/40"
+            >
+              <option value="black">Black</option>
+              <option value="white">White</option>
+            </select>
+          </div>
+
+          <div className="relative w-full sm:w-96">
+            <Search className="pointer-events-none absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search icon names (e.g., Document, News, MapPin)..."
+              className="w-full rounded-lg border border-gray-200 bg-white py-2 pl-9 pr-3 text-sm text-gray-900 shadow-sm outline-none focus:border-bonzai-400 focus:ring-2 focus:ring-bonzai-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:focus:border-bonzai-500 dark:focus:ring-bonzai-900/40"
+            />
+          </div>
         </div>
       </div>
 
@@ -77,32 +156,53 @@ export function FluentIconDirectory({ iconNames, defaultQuery = '' }: FluentIcon
           const iconClass = iconsReady ? getIconClassName(name) : '';
 
           return (
-            <button
+            <div
               key={name}
-              type="button"
-              onClick={() => copy(name)}
               className="group flex w-full items-center gap-3 rounded-xl border border-gray-200 bg-white p-3 text-left shadow-sm transition hover:border-bonzai-300 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 dark:hover:border-bonzai-700"
-              title={`Click to copy: ${name}`}
             >
-              <span
-                className={clsx(
-                  'flex h-10 w-10 items-center justify-center rounded-lg bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100',
-                  iconClass
-                )}
-                aria-hidden="true"
-                style={{ fontSize: 18 }}
-              />
+              <button
+                type="button"
+                onClick={() => copy(name)}
+                className="flex flex-1 items-center gap-3 text-left"
+                title={`Click to copy: ${name}`}
+              >
+                <span
+                  className={clsx(
+                    'flex h-10 w-10 items-center justify-center rounded-lg bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100',
+                    iconClass
+                  )}
+                  aria-hidden="true"
+                  style={{ fontSize: 18 }}
+                />
 
-              <span className="min-w-0 flex-1">
-                <div className="truncate text-sm font-semibold text-gray-900 dark:text-white">{name}</div>
-                <div className="truncate text-xs text-gray-500 dark:text-gray-400">Click to copy</div>
-              </span>
+                <span className="min-w-0 flex-1">
+                  <div className="truncate text-sm font-semibold text-gray-900 dark:text-white">{name}</div>
+                  <div className="truncate text-xs text-gray-500 dark:text-gray-400">Click to copy</div>
+                </span>
+              </button>
 
-              <span className="flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-gray-500 group-hover:bg-gray-50 group-hover:text-gray-700 dark:text-gray-300 dark:group-hover:bg-gray-900 dark:group-hover:text-gray-100">
-                {isCopied ? <Check className="h-3.5 w-3.5 text-green-500" /> : <Copy className="h-3.5 w-3.5" />}
-                {isCopied ? 'Copied' : 'Copy'}
-              </span>
-            </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    void _downloadIconPng(name);
+                  }}
+                  className="flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-900 dark:hover:text-gray-100"
+                  title={`Download ${name} as PNG`}
+                  disabled={!iconsReady}
+                >
+                  <Download className="h-3.5 w-3.5" />
+                  PNG
+                </button>
+
+                <span className="flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-gray-500 group-hover:bg-gray-50 group-hover:text-gray-700 dark:text-gray-300 dark:group-hover:bg-gray-900 dark:group-hover:text-gray-100">
+                  {isCopied ? <Check className="h-3.5 w-3.5 text-green-500" /> : <Copy className="h-3.5 w-3.5" />}
+                  {isCopied ? 'Copied' : 'Copy'}
+                </span>
+              </div>
+            </div>
           );
         })}
       </div>
