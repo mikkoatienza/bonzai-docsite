@@ -9,12 +9,19 @@ This file summarizes the recent documentation updates applied to the Bonzai docs
 
 ### Package published (hosted on docsite)
 
-- **Release version:** `1.0.331`
-- **App Catalog version (embedded in .sppkg):** `1.0.0.328`
+- **Release version:** `1.0.355`
+- **App Catalog version (embedded in .sppkg):** `1.0.0.352`
 
 ---
 
 ## Summary of changes
+
+### Package refresh (this release)
+
+- Updated the Download page metadata to match the newly hosted package:
+  - Release version `1.0.355`
+  - App Catalog version `1.0.0.352`
+- Continued aligning docs with recent upgrade work (News Rollup reliability + footer behavior on SharePoint shell/admin surfaces).
 
 ### Document Portal (web part)
 

@@ -5,9 +5,9 @@ import { Download, Package, Clock, CheckCircle, HelpCircle, ExternalLink, Shield
 export default function DownloadPage() {
   // Note: SharePoint's App Catalog shows the version embedded in the .sppkg (AppManifest.xml),
   // which may differ from our human-facing release version.
-  const releaseVersion = '1.0.331';
-  const appCatalogVersion = '1.0.0.328';
-  const publishedDate = 'February 17, 2026';
+  const releaseVersion = '1.0.355';
+  const appCatalogVersion = '1.0.0.352';
+  const publishedDate = 'February 19, 2026';
   const packageSize = '~5 MB';
   const downloadUrl = '/downloads/Bonzai-2.0.sppkg';
 
@@ -65,7 +65,7 @@ export default function DownloadPage() {
                 <Shield className="h-5 w-5 text-bonzai-600 dark:text-bonzai-400" />
                 <div>
                   <h4 className="font-semibold text-gray-900 dark:text-white">Framework</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">SPFx 1.18.x</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">SPFx 1.21.1</p>
                 </div>
               </div>
             </div>
@@ -111,7 +111,7 @@ export default function DownloadPage() {
                     </span>
                   </td>
                   <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Feb 2026</td>
-                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">News Rollup/Slider/Events search + filter UI, Theme Manager site-wide persistence, Mega Menu branding alignment, and new Footer extension</td>
+                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">News Rollup cross-site reliability + field discovery, Footer placement hardening on SharePoint shell pages, and theming/branding alignment improvements</td>
                 </tr>
                 <tr>
                   <td className="px-4 py-3">
